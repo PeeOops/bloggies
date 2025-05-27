@@ -13,5 +13,7 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost',  // Proxy requests to the Laravel API
     },
+    allowedHosts: true
   },
+
 })

@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "good-timing";
+  src: url(assets/fonts/goodtiming.otf);
+}
+
+body{
+  font-family: "good-timing", sans-serif;
+}
