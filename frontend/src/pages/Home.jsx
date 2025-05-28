@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TopBackground from "../assets/images/background.jpg"
 import Thumbnail from "../assets/images/thumbnails/mirage.png"
 import Navigation from "../components/Navigation";
-import { faAngleRight, faAnglesRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAnglesRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../components/Footer";
 
 const Home = () => {
@@ -40,23 +40,23 @@ const Home = () => {
                     <div className="flex flex-col gap-4 p-2 bg-emerald-950 border-1 border-white shadow-white shadow-md">
                         <h1 className="border-b-2">Categories</h1>
                         <div className="flex flex-col gap-2 text-sm">
-                            <div className="flex flex-row justify-between">
+                            <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
                                 <p>Game Releases & Updates</p>
                                 <p>20</p>
                             </div>
-                            <div className="flex flex-row justify-between">
+                            <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
                                 <p>Reviews and Critiques</p>
                                 <p>20</p>
                             </div>
-                            <div className="flex flex-row justify-between">
+                            <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
                                 <p>eSports & Competition</p>
                                 <p>20</p>
                             </div>
-                            <div className="flex flex-row justify-between">
+                            <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
                                 <p>Guides & Tips</p>
                                 <p>20</p>
                             </div>
-                            <div className="flex flex-row justify-between">
+                            <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
                                 <p>Hardware & Accessories</p>
                                 <p>20</p>
                             </div>
@@ -67,31 +67,31 @@ const Home = () => {
                     <div className="flex flex-col gap-4 p-2 bg-emerald-950 border-1 border-white shadow-white shadow-md">
                         <h1 className="border-b-2">Tags</h1>
                         <div className="flex flex-wrap gap-2 text-sm">
-                            <span className="p-2 bg-gray-600 rounded-sm">Action</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Adventure</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">RPG</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">MMO</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">FPS</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Fighting</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Strategy</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Simulation</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Sports</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Racing</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Horror</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Sandbox</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Survival</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Platformer</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Stealth</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Puzzle</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Rhythm</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Battle Royale</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Idle</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Visual Novel</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Card</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">MOBA</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">VR</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Tactical Shooter</span>
-                            <span className="p-2 bg-gray-600 rounded-sm">Interactive</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Action</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Adventure</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">RPG</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">MMO</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">FPS</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Fighting</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Strategy</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Simulation</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Sports</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Racing</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Horror</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Sandbox</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Survival</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Platformer</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Stealth</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Puzzle</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Rhythm</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Battle Royale</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Idle</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Visual Novel</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Card</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">MOBA</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">VR</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Tactical Shooter</span>
+                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Interactive</span>
                         </div>
                     </div>
                 </div>
