@@ -3,6 +3,7 @@ import TopBackground from "../assets/images/background.jpg"
 import Thumbnail from "../assets/images/thumbnails/mirage.png"
 import Navigation from "../components/Navigation";
 import { faAngleRight, faAnglesRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
+import Footer from "../components/Footer";
 
 const Home = () => {
     return (
@@ -204,12 +205,13 @@ const Home = () => {
                         </div>
                     </div>
                     {/* Paginations */}
-                    <div className="flex flex-row items-center justify-between text-white">
+                    <div className="flex flex-row items-center justify-between text-white mb-4">
                         <button>Prev</button>
                         <button>Next</button>
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
         
     );
