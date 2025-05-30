@@ -6,7 +6,7 @@ const Register = () => {
         <>
             <div className="flex flex-col md:flex-row md:h-screen">
                 <div className="flex flex-col justify-between  md:justify-evenly w-full md:w-1/2 h-64 md:h-full rounded-bl-4xl rounded-br-4xl md:rounded-bl-none md:rounded-br-4xl md:rounded-tr-4xl p-8 text-white" style={{ backgroundImage: `url(${TopBackground})` }}>
-                    <h1 className="text-xl md:text-3xl">Bloggies</h1>
+                    <Link to="/" className="text-xl md:text-3xl">Bloggies</Link>
                     <p className="md:text-2xl">Discover the latest in gaming news and articles.</p>
                 </div>
                 <div className="flex flex-col md:w-1/2 md:justify-center md:items-center py-8 px-12 gap-2 md:gap-4">

@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 
 const Footer = () => {
@@ -10,7 +11,7 @@ const Footer = () => {
             <div className="flex flex-col justify-center items-center gap-4">
                 <div className="flex flex-col items-center gap-2">
                     <p>Get our latest gaming news</p>
-                    <button className="p-1 bg-white text-emerald-950 rounded-sm w-fit">Register Now</button>
+                    <Link to="/register" className="p-1 bg-white text-emerald-950 rounded-sm w-fit">Register Now</Link>
                 </div>
                 {/* Links */}
                 <div className="flex flex-wrap text-gray-400 gap-2">
