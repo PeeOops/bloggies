@@ -99,7 +99,7 @@ const Home = () => {
                 {/* Right main */}
                 <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
-                        <div className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md">
+                        <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
                             <img src={Thumbnail} alt="" className="w-full h-48 object-cover" />
                             <div className="p-6">
                                 {/* Published date and author */}
@@ -125,7 +125,7 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md">
+                        <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
                             <img src={Thumbnail} alt="" className="w-full h-48 object-cover" />
                             <div className="p-6">
                                 {/* Published date and author */}
@@ -151,7 +151,7 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md">
+                        <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
                             <img src={Thumbnail} alt="" className="w-full h-48 object-cover" />
                             <div className="p-6">
                                 {/* Published date and author */}
@@ -177,7 +177,7 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md">
+                        <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
                             <img src={Thumbnail} alt="" className="w-full h-48 object-cover" />
                             <div className="p-6">
                                 {/* Published date and author */}
@@ -207,6 +207,12 @@ const Home = () => {
                     {/* Paginations */}
                     <div className="flex flex-row items-center justify-between text-white mb-4">
                         <button>Prev</button>
+                        <ul className="flex flex-row items-center gap-1">
+                            <li role="button" className="border-1 py-1 px-2 bg-white border-emerald-950 text-emerald-950 ">1</li>
+                            <li role="button" className="border-1 py-1 px-2">2</li>
+                            <li role="button" className="border-1 py-1 px-2">...</li>
+                            <li role="button" className="border-1 py-1 px-2">15</li>
+                        </ul>
                         <button>Next</button>
                     </div>
                 </div>
