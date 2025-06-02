@@ -27,7 +27,7 @@ const Home = () => {
                 </section>
             </div>
             {/* Articles */}
-            <div className="flex flex-col md:grid md:grid-cols-[1fr_3fr] bg-emerald-950 border-t-2 border-white gap-16   px-4 md:px-24 pt-8 md:pb-16 md:pt-16">
+            <div className="flex flex-col md:grid md:grid-cols-[1fr_3fr] bg-emerald-950 border-t-2 border-white gap-16 px-4 md:px-24 pt-8 md:pb-16 md:pt-16">
                 {/* Left main */}
                 <div className="flex flex-col gap-6 text-white">
                     <h1 className="text-lg md:hidden">Filters:</h1>
