@@ -17,7 +17,6 @@ const Footer = () => {
                 <div className="flex flex-wrap text-gray-400 gap-2">
                     <p role="button">News</p>
                     <p role="button">Blogs</p>
-                    <p role="button">Contact</p>
                 </div>
                 {/* Social media icons */}
                 <div className="flex flex-wrap gap-2">

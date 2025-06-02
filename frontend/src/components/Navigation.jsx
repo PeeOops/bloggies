@@ -25,8 +25,6 @@ const Navigation = () => {
                     <li role="button" className="cursor-pointer">News</li>
                     <span className="border-1 w-full md:border-0"></span>
                     <li role="button" className="cursor-pointer">Blogs</li>
-                    <span className="border-1 w-full md:border-0"></span>
-                    <li role="button" className="cursor-pointer pb-2 md:pb-0">Contact</li>
                     
                     </ul>
                     <ul className="flex flex-col md:flex-row items-start md:items-center gap-4 bg-green-900 md:bg-transparent text-white p-2 border-white border-1 md:border-0 rounded-md shadow-white shadow-md md:rounded-none md:shadow-none">
