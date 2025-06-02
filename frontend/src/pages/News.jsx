@@ -162,6 +162,13 @@ const News = () => {
                 </div>
             </div>
             {/* Popular News */}
+            <div className="flex flex-row gap-4 bg-emerald-950">
+                <div className="bg-cover bg-center w-36 h-36 z-1" style={{backgroundImage: `url(${Thumbnail})`}}>
+                    <div className="bg-black w-36 h-36 absolute opacity-30 z-[-1]"></div>
+                    <p className="text-white">tes</p>
+
+                </div>
+            </div>
             {/* Top Rated News */}
             {/* Footer */}
             <Footer />

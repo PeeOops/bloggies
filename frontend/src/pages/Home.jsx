@@ -22,8 +22,8 @@ const Home = () => {
 
                 {/* Hero Section */}
                 <section className="relative z-10 text-center text-white py-32">
-                <h1 className="text-2xl md:text-4xl font-bold mb-4">Welcome to Bloggies</h1>
-                <p className="text-md md:text-lg">Discover the latest in gaming news and articles.</p>
+                    <h1 className="text-2xl md:text-4xl font-bold mb-4">Welcome to Bloggies</h1>
+                    <p className="text-md md:text-lg">Discover the latest in gaming news and articles.</p>
                 </section>
             </div>
             {/* Articles */}
