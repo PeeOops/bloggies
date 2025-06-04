@@ -206,23 +206,35 @@ const News = () => {
                         <p role="button" className="text-white text-end cursor-pointer">Show more...</p>
                     </div>
                     
-                    <div className="flex flex-col gap-2">
-                        <h1 className="text-xl md:text-xl">Follow Us</h1>
+                    <div className="flex flex-col gap-4">
+                        <h1 className="text-xl md:text-xl mt-6">Follow Us</h1>
                         <div className="flex flex-row justify-between md:gap-8 p-4 border-2 border-white text-xl rounded-md md:text-2xl w-full">
-                            <FontAwesomeIcon role="button" icon={faFacebook} />
-                            <FontAwesomeIcon role="button" icon={faInstagram} />
-                            <FontAwesomeIcon role="button" icon={faTwitter} />
-                            <FontAwesomeIcon role="button" icon={faTwitch} />
-                            <FontAwesomeIcon role="button" icon={faReddit} />
-                            <FontAwesomeIcon role="button" icon={faYoutube} />
-                            <FontAwesomeIcon role="button" icon={faTiktok} />
+                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faFacebook} /></a>
+                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faInstagram} /></a>
+                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitter} /></a>
+                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitch} /></a>
+                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faReddit} /></a>
+                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faYoutube} /></a>
+                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTiktok} /></a>
                         </div>
+                        <h1 className="text-xl md:text-xl mt-6 border-l-4 border-white pl-4">Highlights</h1>
+                        <ol className="flex flex-col gap-4 list-decimal pl-4">
+                            <li role="button" className="line-clamps-3 border-b-1 border-gray-400 pb-4">PlayStation Announces A State Of Play Will Air Tomorrow, June 4</li>
+                            <li role="button" className="border-b-1 border-gray-400 pb-4">IO Interactive Announces Its First Showcase Featuring Hitman, 007 First Light, and MindsEye</li>
+                            <li role="button" className="border-b-1 border-gray-400 pb-4">World of Warcraft: The Legacy of Arathor Update to Arrive Mid-June</li>
+                            <li role="button" className="border-b-1 border-gray-400 pb-4">Assassin's Creed Statue Makers May Have Leaked Existence Of Assassin's Creed 4: Black Flag Remake</li>
+                            <li role="button" className="border-b-1 border-gray-400 pb-4">Assassin's Creed Statue Makers May Have Leaked Existence Of Assassin's Creed 4: Black Flag Remake</li>
+                            <li role="button">Forza Horizon Founder New Studio is Working on a “AAA” Racing Game</li>
+                        </ol>
                     </div>
                 </div>
                
                 
             </div>
             {/* Top Rated News */}
+            <div className="flex flex-col gap-4 bg-emerald-950 py-8 px-4 md:px-24 text-white">
+                <h1 className="text-xl md:text-3xl">Top Rated News</h1>
+            </div>
             {/* Footer */}
             <Footer />
         </>
