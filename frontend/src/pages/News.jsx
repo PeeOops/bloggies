@@ -2,7 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TopBackground from "../assets/images/background.jpg"
 import Thumbnail from "../assets/images/thumbnails/mirage.png"
 import Navigation from "../components/Navigation";
-import { faAnglesRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAnglesRight, faArrowRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Footer from "../components/Footer";
 
 const News = () => {
@@ -22,7 +23,7 @@ const News = () => {
 
             </div>
             {/* Recent News */}
-            <div className="flex flex-col gap-4 bg-emerald-950 py-8 px-4 md:px-12">
+            <div className="flex flex-col gap-4 bg-emerald-950 py-8 px-4 md:px-24">
                 <h1 className="text-xl md:text-3xl text-white">Recent News</h1>
                 <div className="flex flex-col md:grid md:grid-cols-[2fr_3fr] gap-4">
                     {/* Newest */}
@@ -48,7 +49,7 @@ const News = () => {
                             {/* Read more button */}
                             <div className="flex flex-row gap-2 items-center text-xs mt-2">
                                 <FontAwesomeIcon icon={faAnglesRight} />
-                                <p className="text-sm md:text-md">Read more</p>
+                                <p className="text-sm md:text-xl">Read more</p>
                             </div>
                         </div>
                     </div>
@@ -160,14 +161,66 @@ const News = () => {
                         </div>
                     </div>
                 </div>
+                <p role="button" className="text-white text-end cursor-pointer">Show more...</p>
             </div>
             {/* Popular News */}
-            <div className="flex flex-row gap-4 bg-emerald-950">
-                <div className="bg-cover bg-center w-36 h-36 z-1" style={{backgroundImage: `url(${Thumbnail})`}}>
-                    <div className="bg-black w-36 h-36 absolute opacity-30 z-[-1]"></div>
-                    <p className="text-white">tes</p>
-
+            <div className="flex flex-col gap-4 bg-emerald-950 py-8 px-4 md:px-24 text-white">
+                <h1 className="text-xl md:text-3xl">Popular News</h1>
+                <div className="flex flex-col md:grid md:grid-cols-[3fr_2fr] gap-16">
+                    <div className="flex flex-col gap-4">
+                        <div role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
+                            <img src={Thumbnail} alt="" className="w-36 md:w-64 h-auto rounded-md" />
+                            <div className="flex flex-col justify-between">
+                                <h1 className="text-sm md:text-xl">One of the best steam games in 2025</h1>
+                                <p className="text-xs md:text-lg text-gray-400">Survival, Apocalypse</p>
+                            </div>
+                        </div>
+                        <div role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
+                            <img src={Thumbnail} alt="" className="w-36 md:w-64 h-auto rounded-md" />
+                            <div className="flex flex-col justify-between">
+                                <h1 className="text-sm md:text-xl">One of the best steam games in 2025</h1>
+                                <p className="text-xs md:text-lg text-gray-400">Survival, Apocalypse</p>
+                            </div>
+                        </div>
+                        <div role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
+                            <img src={Thumbnail} alt="" className="w-36 md:w-64 h-auto rounded-md" />
+                            <div className="flex flex-col justify-between">
+                                <h1 className="text-sm md:text-xl">One of the best steam games in 2025</h1>
+                                <p className="text-xs md:text-lg text-gray-400">Survival, Apocalypse</p>
+                            </div>
+                        </div>
+                        <div role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
+                            <img src={Thumbnail} alt="" className="w-36 md:w-64 h-auto rounded-md" />
+                            <div className="flex flex-col justify-between">
+                                <h1 className="text-sm md:text-xl">One of the best steam games in 2025</h1>
+                                <p className="text-xs md:text-lg text-gray-400">Survival, Apocalypse</p>
+                            </div>
+                        </div>
+                        <div role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
+                            <img src={Thumbnail} alt="" className="w-36 md:w-64 h-auto rounded-md" />
+                            <div className="flex flex-col justify-between">
+                                <h1 className="text-sm md:text-xl">One of the best steam games in 2025</h1>
+                                <p className="text-xs md:text-lg text-gray-400">Survival, Apocalypse</p>
+                            </div>
+                        </div>
+                        <p role="button" className="text-white text-end cursor-pointer">Show more...</p>
+                    </div>
+                    
+                    <div className="flex flex-col gap-2">
+                        <h1 className="text-xl md:text-xl">Follow Us</h1>
+                        <div className="flex flex-row justify-between md:gap-8 p-4 border-2 border-white text-xl rounded-md md:text-2xl w-full">
+                            <FontAwesomeIcon role="button" icon={faFacebook} />
+                            <FontAwesomeIcon role="button" icon={faInstagram} />
+                            <FontAwesomeIcon role="button" icon={faTwitter} />
+                            <FontAwesomeIcon role="button" icon={faTwitch} />
+                            <FontAwesomeIcon role="button" icon={faReddit} />
+                            <FontAwesomeIcon role="button" icon={faYoutube} />
+                            <FontAwesomeIcon role="button" icon={faTiktok} />
+                        </div>
+                    </div>
                 </div>
+               
+                
             </div>
             {/* Top Rated News */}
             {/* Footer */}
