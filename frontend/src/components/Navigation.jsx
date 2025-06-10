@@ -24,7 +24,7 @@ const Navigation = () => {
                     <span className="border-1 w-full md:border-0"></span>
                     <Link to="/news" role="button" className="cursor-pointer">News</Link>
                     <span className="border-1 w-full md:border-0"></span>
-                    <li role="button" className="cursor-pointer">Blogs</li>
+                    <Link to="/blogs" role="button" className="cursor-pointer">Blogs</Link>
                     
                     </ul>
                     <ul className="flex flex-col md:flex-row items-start md:items-center gap-4 bg-green-900 md:bg-transparent text-white p-2 border-white border-1 md:border-0 rounded-md shadow-white shadow-md md:rounded-none md:shadow-none">

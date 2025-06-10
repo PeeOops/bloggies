@@ -7,6 +7,7 @@ import NotFound from './components/404'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import News from './pages/News'
+import Blogs from './pages/Blogs'
 
 
 createRoot(document.getElementById('root')).render(
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')).render(
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path="/news" element={<News />} />
+      <Route path="/blogs" element={<Blogs />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="*" element={<NotFound />} />
