@@ -234,6 +234,113 @@ const News = () => {
             {/* Top Rated News */}
             <div className="flex flex-col gap-4 bg-emerald-950 py-8 px-4 md:px-24 text-white">
                 <h1 className="text-xl md:text-3xl">Top Rated News</h1>
+                <div className="grid grid-cols-2 gap-2 md:gap-4">
+                    <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
+                    <img src={Thumbnail} alt="" className="w-full h-24 md:h-64 object-cover" />
+                    <div className="p-4 md:p-6">
+                        {/* Published date and author */}
+                        <div className="hidden md:flex flex-row text-xs md:text-sm gap-2">
+                            <div className="flex flex-row gap-2 items-center">
+                                <FontAwesomeIcon icon={faCalendar} />
+                                <p>28th May 2025</p>
+                            </div>
+                            <span>|</span>
+                            <div className="flex flex-row gap-2 items-center">
+                                <FontAwesomeIcon icon={faUser} />
+                                <p>ELLIOT ALDERSON</p>
+                            </div>
+                        </div>
+                        {/* Title */}
+                        <h1 className="text-sm md:text-xl line-clamp-2 md:mt-2">One of the best steam games in 2025</h1>
+                        {/* Subtitle or Description */}
+                        <p className="hidden md:line-clamp-3 text-xs md:text-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, excepturi ratione animi error ducimus atque laborum fugiat iusto sequi blanditiis, illo temporibus aut consequuntur nulla earum, laudantium perferendis inventore placeat.</p>
+                        {/* Read more button */}
+                        <div className="flex flex-row gap-2 items-center text-xs md:text-sm mt-2">
+                            <FontAwesomeIcon icon={faAnglesRight} />
+                            <p>Read more</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
+                    <img src={Thumbnail} alt="" className="w-full h-24 md:h-64 object-cover" />
+                    <div className="p-4 md:p-6">
+                        {/* Published date and author */}
+                        <div className="hidden md:flex flex-row text-xs md:text-sm gap-2">
+                            <div className="flex flex-row gap-2 items-center">
+                                <FontAwesomeIcon icon={faCalendar} />
+                                <p>28th May 2025</p>
+                            </div>
+                            <span>|</span>
+                            <div className="flex flex-row gap-2 items-center">
+                                <FontAwesomeIcon icon={faUser} />
+                                <p>ELLIOT ALDERSON</p>
+                            </div>
+                        </div>
+                        {/* Title */}
+                        <h1 className="text-sm md:text-xl line-clamp-2 md:mt-2">One of the best steam games in 2025</h1>
+                        {/* Subtitle or Description */}
+                        <p className="hidden md:line-clamp-3 text-xs md:text-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, excepturi ratione animi error ducimus atque laborum fugiat iusto sequi blanditiis, illo temporibus aut consequuntur nulla earum, laudantium perferendis inventore placeat.</p>
+                        {/* Read more button */}
+                        <div className="flex flex-row gap-2 items-center text-xs md:text-sm mt-2">
+                            <FontAwesomeIcon icon={faAnglesRight} />
+                            <p>Read more</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
+                    <img src={Thumbnail} alt="" className="w-full h-24 md:h-64 object-cover" />
+                    <div className="p-4 md:p-6">
+                        {/* Published date and author */}
+                        <div className="hidden md:flex flex-row text-xs md:text-sm gap-2">
+                            <div className="flex flex-row gap-2 items-center">
+                                <FontAwesomeIcon icon={faCalendar} />
+                                <p>28th May 2025</p>
+                            </div>
+                            <span>|</span>
+                            <div className="flex flex-row gap-2 items-center">
+                                <FontAwesomeIcon icon={faUser} />
+                                <p>ELLIOT ALDERSON</p>
+                            </div>
+                        </div>
+                        {/* Title */}
+                        <h1 className="text-sm md:text-xl line-clamp-2 md:mt-2">One of the best steam games in 2025</h1>
+                        {/* Subtitle or Description */}
+                        <p className="hidden md:line-clamp-3 text-xs md:text-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, excepturi ratione animi error ducimus atque laborum fugiat iusto sequi blanditiis, illo temporibus aut consequuntur nulla earum, laudantium perferendis inventore placeat.</p>
+                        {/* Read more button */}
+                        <div className="flex flex-row gap-2 items-center text-xs md:text-sm mt-2">
+                            <FontAwesomeIcon icon={faAnglesRight} />
+                            <p>Read more</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
+                    <img src={Thumbnail} alt="" className="w-full h-24 md:h-64 object-cover" />
+                    <div className="p-4 md:p-6">
+                        {/* Published date and author */}
+                        <div className="hidden md:flex flex-row text-xs md:text-sm gap-2">
+                            <div className="flex flex-row gap-2 items-center">
+                                <FontAwesomeIcon icon={faCalendar} />
+                                <p>28th May 2025</p>
+                            </div>
+                            <span>|</span>
+                            <div className="flex flex-row gap-2 items-center">
+                                <FontAwesomeIcon icon={faUser} />
+                                <p>ELLIOT ALDERSON</p>
+                            </div>
+                        </div>
+                        {/* Title */}
+                        <h1 className="text-sm md:text-xl line-clamp-2 md:mt-2">One of the best steam games in 2025</h1>
+                        {/* Subtitle or Description */}
+                        <p className="hidden md:line-clamp-3 text-xs md:text-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, excepturi ratione animi error ducimus atque laborum fugiat iusto sequi blanditiis, illo temporibus aut consequuntur nulla earum, laudantium perferendis inventore placeat.</p>
+                        {/* Read more button */}
+                        <div className="flex flex-row gap-2 items-center text-xs md:text-sm mt-2">
+                            <FontAwesomeIcon icon={faAnglesRight} />
+                            <p>Read more</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <p role="button" className="text-white text-end cursor-pointer">Show more...</p>
             </div>
             {/* Footer */}
             <Footer />
