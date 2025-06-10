@@ -8,6 +8,7 @@ import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import News from './pages/News'
 import Blogs from './pages/Blogs'
+import Details from './pages/Details'
 
 
 createRoot(document.getElementById('root')).render(
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/news/id" element={<Details />} />
     </Routes>
   </BrowserRouter>
 
