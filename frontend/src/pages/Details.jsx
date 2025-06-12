@@ -73,8 +73,8 @@ const Details = () => {
 
                 {/* Right panel */}
                 <div className="flex flex-col gap-4">
-                    {/* Highlights */}
-                    <p className="border-l-3 border-white pl-2 md:text-lg">Highlights</p>
+                    {/* Similar posts */}
+                    <p className="border-l-3 border-white pl-2 md:text-lg">Similar posts</p>
                     <ol className="flex flex-col gap-4 list-decimal pl-4 text-base">
                         <li role="button" className="line-clamps-3 border-b-1 border-gray-400 pb-4">PlayStation Announces A State Of Play Will Air Tomorrow, June 4</li>
                         <li role="button" className="border-b-1 border-gray-400 pb-4">IO Interactive Announces Its First Showcase Featuring Hitman, 007 First Light, and MindsEye</li>
