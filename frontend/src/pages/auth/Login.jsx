@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 import TopBackground from "../../assets/images/background.jpg"
+import { useState } from "react";
 
 const Login = () => {
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    // Show password
+    const handleClickShowPassword = () => {
+        setShowPassword(prev => !prev);
+    }
+
     return(
         <div className="flex flex-col md:flex-row md:h-screen">
             <div className="flex flex-col justify-between  md:justify-evenly w-full md:w-1/2 h-64 md:h-full rounded-bl-4xl rounded-br-4xl md:rounded-bl-none md:rounded-br-4xl md:rounded-tr-4xl p-8 text-white" style={{ backgroundImage: `url(${TopBackground})` }}>
@@ -17,7 +26,12 @@ const Login = () => {
                     </div>
                     <div className="flex flex-col">
                         <label>Password</label>
-                        <input type="password" placeholder="password" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" required />
+                        <input type={showPassword ? "text" : "password"} placeholder="password" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" required />
+                        <div className="mt-2 flex flex-row gap-2 items-center">
+                            <input type="checkbox" onClick={() => handleClickShowPassword()} checked={showPassword ? true : false} />
+                            <p className="text-sm">Show password</p>
+                        </div>
+                       
                     </div>
                     <p role="button" className="text-xs text-right text-red-600">Forgot Password?</p>
                     <button className="bg-emerald-950 text-white p-2 rounded-md active:bg-white active:text-emerald-950 active:border-emerald-950 active:border-2 hover:bg-white hover:text-emerald-950 hover:border-emerald-950 hover:border-2 cursor-pointer">Sign In</button>

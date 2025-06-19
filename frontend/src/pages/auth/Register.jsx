@@ -74,6 +74,7 @@ const Register = () => {
                     <p className="md:text-2xl">Discover the latest in gaming news and articles.</p>
                 </div>
                 <div className="flex flex-col md:w-1/2 md:justify-center md:items-center py-8 px-12 gap-2 md:gap-4">
+                    <h1 className="text-xl md:text-3xl">Sign Up</h1>
                     {/* Error message */}
                     {
                         passwordMessage === "Passwords do not match!" ?
@@ -82,8 +83,6 @@ const Register = () => {
                             <p>Passwords do not match!</p>
                         </div> : ""
                     }
-                    
-                    <h1 className="text-xl md:text-3xl">Sign Up</h1>
                     <form onSubmit={handleSubmitForm} className="flex flex-col gap-4 md:gap-6 md:text-lg">
                         <div className="flex flex-col">
                             <label>Email</label>
