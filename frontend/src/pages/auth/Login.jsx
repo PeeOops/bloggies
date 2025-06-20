@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TopBackground from "../../assets/images/background.jpg"
 import { useState } from "react";
+import api from "../../axios.js";
 
 const Login = () => {
+
+    const navigate = useNavigate();
 
     // Input Form
     const [form, setForm] = useState({
@@ -12,17 +15,33 @@ const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
 
+    // Show password
+    const handleChangeShowPassword = () => {
+        setShowPassword(prev => !prev);
+    }
+
     // Handle change form
     const handleChangeForm = (e) => {
         setForm({...form, [e.target.name] : e.target.value});
     }
 
-    // Show password
-    const handleClickShowPassword = () => {
-        setShowPassword(prev => !prev);
+    // Sign in
+    const handleSubmitForm = (e) => {
+        e.preventDefault();
+
+        api.post("/login", form)
+        .then((res) => {
+            localStorage.setItem("token", res.data.token);
+
+            const token = localStorage.getItem("token");
+            if(token){
+                navigate("/");
+            }
+        })
+        .catch((error) => {
+
+        })
     }
-
-
 
     return(
         <div className="flex flex-col md:flex-row md:h-screen">
@@ -32,7 +51,7 @@ const Login = () => {
             </div>
             <div className="flex flex-col md:w-1/2 md:justify-center md:items-center py-8 px-12 gap-2 md:gap-4">
                 <h1 className="text-xl md:text-2xl">Sign In</h1>
-                <form action="" className="flex flex-col gap-4 md:gap-6 md:text-base">
+                <form onSubmit={handleSubmitForm} className="flex flex-col gap-4 md:gap-6 md:text-base">
                     <div className="flex flex-col">
                         <label>Username</label>
                         <input name="username" value={form.username} type="text" placeholder="username" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} required />
@@ -41,7 +60,7 @@ const Login = () => {
                         <label>Password</label>
                         <input name="password" value={form.password} type={showPassword ? "text" : "password"} placeholder="password" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} required />
                         <div className="mt-2 flex flex-row gap-2 items-center">
-                            <input type="checkbox" onClick={() => handleClickShowPassword()} checked={showPassword ? true : false} />
+                            <input type="checkbox" onChange={() => handleChangeShowPassword()} checked={showPassword ? true : false} />
                             <p className="text-sm">Show password</p>
                         </div>
                        
