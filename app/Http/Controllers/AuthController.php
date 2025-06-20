@@ -5,30 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
-        // Validate
+    
+    public function register(Request $request)
+    {
+        // ✅ Laravel will automatically handle 422 errors
         $request->validate([
-            "username" => "required|unique:users",
-            "email" => "required|unique:users|email",
-            "password" => "required|min:6"
-
+            'username' => 'required|min:3|max:20|unique:users',
+            'email'    => 'required|email|unique:users',
+            'password' => 'required|min:6',
         ]);
 
-        // Create
         $user = User::create([
-            "username" => $request->username,
-            "email" => $request->email,
-            "password" => Hash::make($request->password)
+            'username' => $request->username,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
         ]);
 
-        // Return
         return response()->json([
-            "message" => "User registered successfully"
-        ]);
+            'message' => 'User registered successfully',
+            'user' => $user
+        ], 201);
     }
 
     public function login(Request $request){
