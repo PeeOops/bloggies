@@ -18,11 +18,12 @@ const Navigation = () => {
         api.post("/logout")
         .then((res) => {
             localStorage.removeItem("token");
+            delete api.defaults.headers.common["Authorization"];
             navigate("/login");
             
         })
         .catch((error) => {
-            console.error("Logout failed", error);
+            
         });
     }
 

@@ -5,9 +5,9 @@ const api = axios.create({
 })
 
 // Auto attach token if exists
-const token = localStorage.getItem('token');
+const token = localStorage.getItem("token");
 if (token) {
-  api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
 
 export default api;

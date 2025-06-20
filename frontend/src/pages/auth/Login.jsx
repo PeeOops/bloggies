@@ -36,14 +36,15 @@ const Login = () => {
         .then((res) => {
             localStorage.setItem("token", res.data.token);
 
-            const token = localStorage.getItem("token");
-            if(token){
-                setLoginMessage("Signed in successfully");
+            api.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
 
-                setTimeout(() => {
-                    navigate("/");
-                },1500)
-            }
+
+            setLoginMessage("Signed in successfully");
+
+            setTimeout(() => {
+                navigate("/");
+            },1500)
+            
         })
         .catch((error) => {
             const errorMessages = Object.values(error.response.data.errors).flat();        
