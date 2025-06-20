@@ -2,10 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import TopBackground from "../../assets/images/background.jpg"
 import { useState } from "react";
 import api from "../../axios.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck, faWarning } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
 
     const navigate = useNavigate();
+    const [loginMessage, setLoginMessage] = useState([]);
 
     // Input Form
     const [form, setForm] = useState({
@@ -35,11 +38,19 @@ const Login = () => {
 
             const token = localStorage.getItem("token");
             if(token){
-                navigate("/");
+                setLoginMessage("Signed in successfully");
+
+                setTimeout(() => {
+                    navigate("/");
+                },1500)
             }
         })
         .catch((error) => {
+            const errorMessages = Object.values(error.response.data.errors).flat();        
 
+            if(error.response.status === 422){
+                setLoginMessage(errorMessages);
+            }
         })
     }
 
@@ -51,6 +62,20 @@ const Login = () => {
             </div>
             <div className="flex flex-col md:w-1/2 md:justify-center md:items-center py-8 px-12 gap-2 md:gap-4">
                 <h1 className="text-xl md:text-2xl">Sign In</h1>
+                <div className="flex flex-col  gap-2 md:gap-1">
+                    {
+                        loginMessage === "Signed in successfully" ?
+                        <div className="flex flex-row items-center gap-2 text-sm text-green-600">
+                            <FontAwesomeIcon icon={faCircleCheck} />
+                            <p>{loginMessage}</p>
+                        </div> : loginMessage !== "" ? loginMessage.map((item) => (
+                            <div className="flex flex-row items-center gap-2 text-sm text-red-600">
+                                <FontAwesomeIcon icon={faWarning} />
+                                <p>{item}</p>
+                            </div> 
+                        )) : ""
+                    }
+                </div>
                 <form onSubmit={handleSubmitForm} className="flex flex-col gap-4 md:gap-6 md:text-base">
                     <div className="flex flex-col">
                         <label>Username</label>
