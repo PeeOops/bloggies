@@ -13,7 +13,6 @@ class AuthController extends Controller
     
     public function register(Request $request)
     {
-        // ✅ Laravel will automatically handle 422 errors
         $request->validate([
             'username' => 'required|min:3|max:20|unique:users',
             'email'    => 'required|email|unique:users',
@@ -34,12 +33,18 @@ class AuthController extends Controller
 
     public function login(Request $request){
         // Get user
-        $user = User::where("username", $request->username)->first();
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+        
+        $user = User::where('username', $request->username)->first();
+
 
         // Check credentials
         if(!$user || !Hash::check($request->password, $user->password)){
             throw ValidationException::withMessages([
-                "username" => "The provided credentials are incorrect.",
+                "username" => ["The provided credentials are incorrect."],
             ]);
         }
 

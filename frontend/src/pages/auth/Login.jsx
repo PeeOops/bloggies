@@ -4,12 +4,25 @@ import { useState } from "react";
 
 const Login = () => {
 
+    // Input Form
+    const [form, setForm] = useState({
+        username : "",
+        password : ""
+    })
+
     const [showPassword, setShowPassword] = useState(false);
+
+    // Handle change form
+    const handleChangeForm = (e) => {
+        setForm({...form, [e.target.name] : e.target.value});
+    }
 
     // Show password
     const handleClickShowPassword = () => {
         setShowPassword(prev => !prev);
     }
+
+
 
     return(
         <div className="flex flex-col md:flex-row md:h-screen">
@@ -22,11 +35,11 @@ const Login = () => {
                 <form action="" className="flex flex-col gap-4 md:gap-6 md:text-base">
                     <div className="flex flex-col">
                         <label>Username</label>
-                        <input type="text" placeholder="username" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" required />
+                        <input name="username" value={form.username} type="text" placeholder="username" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} required />
                     </div>
                     <div className="flex flex-col">
                         <label>Password</label>
-                        <input type={showPassword ? "text" : "password"} placeholder="password" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" required />
+                        <input name="password" value={form.password} type={showPassword ? "text" : "password"} placeholder="password" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} required />
                         <div className="mt-2 flex flex-row gap-2 items-center">
                             <input type="checkbox" onClick={() => handleClickShowPassword()} checked={showPassword ? true : false} />
                             <p className="text-sm">Show password</p>
