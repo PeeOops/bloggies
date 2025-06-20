@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TopBackground from "../../assets/images/background.jpg"
 import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash, faWarning } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faWarning } from "@fortawesome/free-solid-svg-icons";
+import api from "../../axios.js";
 
 const Register = () => {
+    // Navigation
+    const navigate = useNavigate();
 
     // Input Form
     const [form,setForm] = useState({
@@ -14,10 +17,8 @@ const Register = () => {
     });
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    // Error message
-    const [error, setError] = useState("");
-
-    // Check password
+    // Messages
+    const [registeredMessage, setRegisteredMessage] = useState("");
     const [passwordMessage, setPasswordMessage] = useState("");
 
     // Handle change
@@ -31,7 +32,6 @@ const Register = () => {
     const handleChangeConfirmPassword = (e) => {
         setConfirmPassword(e.target.value)
     }
-
 
 
     useEffect(() => {
@@ -59,11 +59,18 @@ const Register = () => {
 
         setPasswordMessage("");
 
-        try {
-            
-        } catch (error) {
-            
-        }
+        // Register API
+        api.post("/register", form)
+        .then((res) => {
+            setRegisteredMessage("Registration complete! Please log in to continue.");
+
+            setTimeout(() => {
+                navigate("/login");
+            },1500);
+        })
+        .catch((error) => {
+            setRegisteredMessage("Registration failed, please check your data");
+        })
     }
 
     return(
@@ -78,9 +85,19 @@ const Register = () => {
                     {/* Error message */}
                     {
                         passwordMessage === "Passwords do not match!" ?
-                        <div className="flex flex-row items-center gap-2 text-sm text-red-400">
+                        <div className="flex flex-row items-center gap-2 text-sm text-red-600">
                             <FontAwesomeIcon icon={faWarning} />
-                            <p>Passwords do not match!</p>
+                            <p>{passwordMessage}</p>
+                        </div> : ""
+                    }
+                    {
+                        registeredMessage === "Registration complete! Please log in to continue." ?
+                        <div className="flex flex-row items-center gap-2 text-sm text-green-600">
+                            <FontAwesomeIcon icon={faCircleCheck} />
+                            <p>{registeredMessage}</p>
+                        </div> : registeredMessage === "Registration failed, please check your data" ? <div className="flex flex-row items-center gap-2 text-sm text-red-600">
+                            <FontAwesomeIcon icon={faWarning} />
+                            <p>{registeredMessage}</p>
                         </div> : ""
                     }
                     <form onSubmit={handleSubmitForm} className="flex flex-col gap-4 md:gap-6 md:text-lg">
@@ -104,7 +121,7 @@ const Register = () => {
                             passwordMessage ? 'border-red-400 focus:border-b-red-400' : 'border-emerald-950 focus:border-b-emerald-950'
                             }`} onPaste={(e) => e.preventDefault()} onChange={handleChangeConfirmPassword}  required />
                         </div>
-                        <button className="bg-emerald-950 text-white p-2 rounded-md active:bg-white active:text-emerald-950 active:border-emerald-950 active:border-2 hover:bg-white hover:text-emerald-950 hover:border-emerald-950 hover:border-2 cursor-pointer">Sign In</button>
+                        <button className="bg-emerald-950 text-white p-2 rounded-md active:bg-white active:text-emerald-950 active:border-emerald-950 active:border-2 hover:bg-white hover:text-emerald-950 hover:border-emerald-950 hover:border-2 cursor-pointer">Register</button>
                         <p className="text-xs text-center">Already have an account? <Link to="/login" className="text-gray-400 cursor-pointer" role="button">Sign In</Link></p>
                     </form>
                 </div>
