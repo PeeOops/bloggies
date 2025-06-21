@@ -62,7 +62,7 @@ const Home = () => {
                         <div className="flex flex-col gap-2 text-sm">
                             {
                                 categories.map((category) => (
-                                    <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
+                                    <div key={category.id} role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
                                         <p>{category.name}</p>
                                     </div>
                                 ))
