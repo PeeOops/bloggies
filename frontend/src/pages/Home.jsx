@@ -10,6 +10,7 @@ import api from "../axios.js";
 const Home = () => {
 
     const [categories, setCategories] = useState([]);
+    const [tags, setTags] = useState([]);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -23,7 +24,19 @@ const Home = () => {
             }
         }
 
+        const fetchTags = async () => {
+            try {
+                const response = await api.get("/tags");
+                const tags = response.data;
+                setTags(tags);
+            } catch (error) {
+                console.log("Error fetching tags",tags);
+                throw Error;
+            }
+        }
+
         fetchCategories();
+        fetchTags();
     },[])
 
     return (
@@ -76,31 +89,12 @@ const Home = () => {
                     <div className="flex flex-col gap-4 p-2 bg-emerald-950 border-1 border-white shadow-white shadow-md">
                         <h1 className="border-b-2">Tags</h1>
                         <div className="flex flex-wrap gap-2 text-sm">
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Action</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Adventure</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">RPG</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">MMO</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">FPS</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Fighting</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Strategy</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Simulation</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Sports</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Racing</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Horror</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Sandbox</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Survival</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Platformer</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Stealth</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Puzzle</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Rhythm</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Battle Royale</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Idle</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Visual Novel</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Card</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">MOBA</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">VR</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Tactical Shooter</span>
-                            <span role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">Interactive</span>
+                            {
+                                tags.map((tag) => (
+                                    <span key={tag.id} role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">{tag.name}</span>
+                                ))
+                            }
+                            
                         </div>
                     </div>
                 </div>
