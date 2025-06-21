@@ -4,8 +4,28 @@ import Thumbnail from "../assets/images/thumbnails/mirage.png"
 import Navigation from "../components/Navigation";
 import { faAnglesRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
+import api from "../axios.js";
 
 const Home = () => {
+
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await api.get("/categories");
+                const categories = response.data;
+                setCategories(categories);
+            } catch (error) {
+                console.log("Error fetching categories",error);
+                throw Error;
+            }
+        }
+
+        fetchCategories();
+    },[])
+
     return (
         <>
             {/* Header */}
@@ -40,26 +60,15 @@ const Home = () => {
                     <div className="flex flex-col gap-4 p-2 bg-emerald-950 border-1 border-white shadow-white shadow-md">
                         <h1 className="border-b-2">Categories</h1>
                         <div className="flex flex-col gap-2 text-sm">
-                            <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
-                                <p>Game Releases & Updates</p>
-                                <p>20</p>
-                            </div>
-                            <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
-                                <p>Reviews and Critiques</p>
-                                <p>20</p>
-                            </div>
-                            <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
-                                <p>eSports & Competition</p>
-                                <p>20</p>
-                            </div>
-                            <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
-                                <p>Guides & Tips</p>
-                                <p>20</p>
-                            </div>
-                            <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
-                                <p>Hardware & Accessories</p>
-                                <p>20</p>
-                            </div>
+                            {
+                                categories.map((category) => (
+                                    <div role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
+                                        <p>{category.name}</p>
+                                    </div>
+                                ))
+                                
+                            }
+                            
                         </div>
                     </div>
 
