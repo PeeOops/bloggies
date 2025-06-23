@@ -3,6 +3,7 @@ import TopBackground from "../assets/images/background.jpg"
 import Footer from "../components/Footer";
 import Profile from "../components/User/Profile";
 import { useState } from "react";
+import AddPost from "../components/User/AddPost";
 
 const User = () => {
 
@@ -51,7 +52,7 @@ const User = () => {
                     <h1 className="text-xl mb-6">{navigation}</h1>
                     {/* Profile Content */}
                     {
-                        navigation === "Profile" ? <Profile /> : ""
+                        navigation === "Profile" ? <Profile /> : navigation === "Add Post" ? <AddPost /> : ""
                     }
                 </div>
             </div>
