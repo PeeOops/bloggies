@@ -5,18 +5,26 @@ import { Link } from "react-router-dom";
 
 
 const Footer = () => {
+
+    const token = localStorage.getItem("token");
+
     return(
-        <footer className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 bg-emerald-950 text-white border-t-2 p-4 md:p-8">
-            <h1 role="button" className="text-3xl">Bloggies</h1>
+        <footer className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-2 md:gap-4 bg-emerald-950 text-white border-t-2 p-4 md:p-8">
+            <h1 role="button" className="text-xl">Bloggies</h1>
             <div className="flex flex-col justify-center items-center gap-4">
                 <div className="flex flex-col items-center gap-2">
                     <p>Get our latest gaming news</p>
-                    <Link to="/register" className="p-1 bg-white text-emerald-950 rounded-sm w-fit">Register Now</Link>
+                    {
+                        token ? 
+                        <Link to="/user" className="p-1 bg-white text-emerald-950 rounded-sm w-fit">Contribute Now</Link> :
+                        <Link to="/register" className="p-1 bg-white text-emerald-950 rounded-sm w-fit">Register Now</Link>
+                    }
+                    
                 </div>
                 {/* Links */}
                 <div className="flex flex-wrap text-gray-400 gap-2">
-                    <p role="button">News</p>
-                    <p role="button">Blogs</p>
+                    <p className="cursor-pointer" role="button">News</p>
+                    <p className="cursor-pointer" role="button">Blogs</p>
                 </div>
                 {/* Social media icons */}
                 <div className="flex flex-wrap gap-2">

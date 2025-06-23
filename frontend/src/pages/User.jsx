@@ -55,6 +55,9 @@ const User = () => {
                     }
                 </div>
             </div>
+
+            {/* Footer */}
+            <Footer />
         </>
     )
 }
