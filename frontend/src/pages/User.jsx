@@ -35,6 +35,7 @@ const User = () => {
                     <div className="flex flex-col border-b-2 border-emerald-950">
                         <p className="text-sm text-gray-500">Hello,</p>
                         <p>Mintymantis</p>
+                        <p className="text-sm text-gray-500">Reading</p>
                     </div>
                     
                     <div className="flex flex-col gap-4">
@@ -49,7 +50,9 @@ const User = () => {
                 <div className="bg-white text-emerald-950 px-4 py-2 shadow-gray-400 shadow-md">
                     <h1 className="text-xl mb-6">{navigation}</h1>
                     {/* Profile Content */}
-                    <Profile />
+                    {
+                        navigation === "Profile" ? <Profile /> : ""
+                    }
                 </div>
             </div>
         </>
