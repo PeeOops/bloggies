@@ -11,6 +11,7 @@ import Blogs from './pages/Blogs'
 import Details from './pages/Details'
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
+import Profile from './pages/Profile'
 
 
 createRoot(document.getElementById('root')).render(
@@ -18,12 +19,11 @@ createRoot(document.getElementById('root')).render(
     <Routes>
       {/* Public */}
       <Route path='/' element={<Home />} />
-      <Route path="/news" element={
-        <PrivateRoute>
-          <News />
-        </PrivateRoute>
-      } />
+      <Route path="/news" element={ <News />} />
       <Route path="/blogs" element={<Blogs />} />
+
+      {/* Private */}
+      <Route path="/user" element={<Profile />} />
 
       {/* Auth */}
       <Route path="/login" element={
@@ -36,6 +36,8 @@ createRoot(document.getElementById('root')).render(
           <Register />
         </PublicRoute>
       } />
+
+      
 
       {/* 404 */}
       <Route path="*" element={<NotFound />} />

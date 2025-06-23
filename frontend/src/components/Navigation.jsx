@@ -53,7 +53,7 @@ const Navigation = () => {
                         <ul className="flex flex-col md:flex-row items-start md:items-center gap-4 bg-green-900 md:bg-transparent text-white p-2 border-white border-1 md:border-0 rounded-md shadow-white shadow-md md:rounded-none md:shadow-none">
                             <Link to="" role="button" className="cursor-pointer">Post</Link>
                             <span className="border-1 w-full md:border-0"></span>
-                            <Link to="" role="button" className="cursor-pointer pb-2 md:pb-0">Profile</Link>
+                            <Link to="/user" role="button" className="cursor-pointer pb-2 md:pb-0">Profile</Link>
                             <span className="border-1 w-full md:border-0"></span>
                             <li onClick={() => handleClickLogout()} role="button" className="cursor-pointer pb-2 md:pb-0"> Logout</li>
                         </ul>
