@@ -1,3 +1,6 @@
+import SimpleMDE from 'react-simplemde-editor';
+import 'easymde/dist/easymde.min.css';
+
 const AddPost = () => {
     return(
         <div className="grid grid-cols-[3fr_1fr] gap-4">
@@ -28,6 +31,14 @@ const AddPost = () => {
                 {/* Content */}
                 <div className="flex flex-col gap-2">
                     <label>Post</label>
+                    <SimpleMDE
+                        value=""
+                        onChange=""
+                        options={{
+                        spellChecker: false,
+                        placeholder: "Write your post here...",
+                    }}
+                    />
                 </div>
                 
             </div>
