@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const User = () => {
 
-    const [navigation, setNavigation] = useState("");
+    const [navigation, setNavigation] = useState("Profile");
 
     const handleClickNavigate = (nav) => {
         setNavigation(nav);
