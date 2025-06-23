@@ -11,8 +11,7 @@ import Blogs from './pages/Blogs'
 import Details from './pages/Details'
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
-import Profile from './pages/Profile'
-
+import User from './pages/User'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -23,7 +22,7 @@ createRoot(document.getElementById('root')).render(
       <Route path="/blogs" element={<Blogs />} />
 
       {/* Private */}
-      <Route path="/user" element={<Profile />} />
+      <Route path="/user" element={<User />} />
 
       {/* Auth */}
       <Route path="/login" element={
