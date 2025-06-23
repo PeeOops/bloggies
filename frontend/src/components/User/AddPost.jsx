@@ -31,14 +31,21 @@ const AddPost = () => {
                 {/* Content */}
                 <div className="flex flex-col gap-2">
                     <label>Post</label>
-                    <SimpleMDE
-                        value=""
-                        onChange=""
-                        options={{
-                        spellChecker: false,
-                        placeholder: "Write your post here...",
-                    }}
-                    />
+                    <div className="max-w-xl overflow-auto">
+                        <SimpleMDE
+                            value=""
+                            onChange=""
+                            options={{
+                            spellChecker: false,
+                            lineWrapping: true,
+                            }}
+                        />
+                    </div>
+                </div>
+                {/* Button */}
+                <div className="flex flex-row gap-2">
+                    <button className="cursor-pointer bg-emerald-950 py-1 px-2 text-white rounded-sm">Save</button>
+                    <button className="cursor-pointer bg-red-600 py-1 px-2 text-white rounded-sm">Cancel</button>
                 </div>
                 
             </div>
@@ -71,6 +78,11 @@ const AddPost = () => {
                         <input type="checkbox" value="Virtual Reality" />
                         <p>Virtual Reality</p>
                     </div>
+                </div>
+                {/* Author */}
+                <div className="flex flex-col gap-2">
+                    <label for="category">Author:</label>
+                    <input type="text" placeholder="mintymantis" className="border-2 p-1"  disabled />
                 </div>
                 
             </div>
