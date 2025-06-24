@@ -22,7 +22,7 @@ createRoot(document.getElementById('root')).render(
       <Route path="/blogs" element={<Blogs />} />
 
       {/* Private */}
-      <Route path="/user" element={
+      <Route path="/user/:username" element={
         <PrivateRoute>
           <User />
         </PrivateRoute>

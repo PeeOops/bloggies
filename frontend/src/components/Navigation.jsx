@@ -1,7 +1,7 @@
 import { faBars} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../axios.js";
 
 const Navigation = () => {
@@ -9,6 +9,24 @@ const Navigation = () => {
     const [isMenu, setIsMenu] = useState(false);
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
+
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const fetchUser = () => {
+            if(token){
+                api.get("/me")
+                .then((res) => {
+                    setUser(res.data);
+                })
+                .catch((error) => {
+                    console.log("Error fetching user data: ", error);
+                })
+            }
+        }
+
+        fetchUser();
+    },[])
 
     const handleClickNav = () => {
         setIsMenu(prev => !prev);
@@ -19,6 +37,7 @@ const Navigation = () => {
         .then((res) => {
             localStorage.removeItem("token");
             delete api.defaults.headers.common["Authorization"];
+            setUser({});
             navigate("/login");
             
         })
@@ -51,7 +70,9 @@ const Navigation = () => {
                             <Link to="/register" role="button" className="cursor-pointer pb-2 md:pb-0">Register</Link>
                         </ul> :
                         <ul className="flex flex-col md:flex-row items-start md:items-center gap-4 bg-green-900 md:bg-transparent text-white p-2 border-white border-1 md:border-0 rounded-md shadow-white shadow-md md:rounded-none md:shadow-none">
-                            <Link to="/user" role="button" className="cursor-pointer md:pb-0">Mintymantis</Link>
+                            <Link to={`/user/${user.username}`} role="button" className="cursor-pointer md:pb-0">
+                                {user.username}
+                            </Link>
                             <span className="border-1 w-full md:border-0"></span>
                             <li onClick={() => handleClickLogout()} role="button" className="cursor-pointer pb-2 md:pb-0"> Logout</li>
                         </ul>

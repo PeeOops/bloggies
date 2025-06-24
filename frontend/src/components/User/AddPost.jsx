@@ -1,9 +1,12 @@
-import SimpleMDE from 'react-simplemde-editor';
-import 'easymde/dist/easymde.min.css';
+import SimpleMDE from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
 
 const AddPost = () => {
+
+    
+
     return(
-        <div className="grid grid-cols-[3fr_1fr] gap-4">
+        <form className="flex flex-col md:grid md:grid-cols-[3fr_1fr] gap-4">
             
             <div className="flex flex-col gap-4">
                 {/* Title */}
@@ -42,18 +45,13 @@ const AddPost = () => {
                         />
                     </div>
                 </div>
-                {/* Button */}
-                <div className="flex flex-row gap-2">
-                    <button className="cursor-pointer bg-emerald-950 py-1 px-2 text-white rounded-sm">Save</button>
-                    <button className="cursor-pointer bg-red-600 py-1 px-2 text-white rounded-sm">Cancel</button>
-                </div>
-                
             </div>
             <div className="flex flex-col gap-4">
                 {/* Category */}
                 <div className="flex flex-col gap-2">
                     <label for="category">Category:</label>
                     <select id="category" name="category" className="border-2 p-1">
+                        <option value="" hidden>Choose Category</option>
                         <option value="tech">Tech</option>
                         <option value="news">News</option>
                         <option value="sports">Sports</option>
@@ -84,10 +82,17 @@ const AddPost = () => {
                     <label for="category">Author:</label>
                     <input type="text" placeholder="mintymantis" className="border-2 p-1"  disabled />
                 </div>
+
                 
             </div>
+            {/* Button */}
+            <div className="flex flex-row gap-2">
+                <button type="submit" className="cursor-pointer bg-emerald-950 py-1 px-2 text-white rounded-sm">Save</button>
+                <button type="reset" className="cursor-pointer bg-red-600 py-1 px-2 text-white rounded-sm">Cancel</button>
+            </div>
+                
 
-        </div>
+        </form>
     )
 }
 
