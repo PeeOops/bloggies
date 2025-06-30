@@ -83,6 +83,7 @@ const User = () => {
         )
     }
     
+
     if(authorized){
         return (
             <>
@@ -106,8 +107,8 @@ const User = () => {
                     <div className="flex flex-col gap-6 bg-white text-emerald-950 px-4 py-6 shadow-gray-400 shadow-md">
                         <div className="flex flex-col border-b-2 border-emerald-950">
                             <p className="text-sm text-gray-500">Hello,</p>
-                            <p>Mintymantis</p>
-                            <p className="text-sm text-gray-500">Reading</p>
+                            <p>{userData.username}</p>
+                            <p className="text-sm text-gray-500">{userData.bio}</p>
                         </div>
                         
                         <div className="flex flex-col gap-4">
