@@ -69,4 +69,37 @@ class AuthController extends Controller
     public function me(Request $request) {
         return response()->json($request->user());
     }
+
+    public function update(Request $request){
+        // Get logged in user
+        $user = $request->user();
+
+        // Validate
+        $request->validate([
+            'username' => 'sometime|min:3|max:20|unique:users,username' . $user->id,
+            'email'    => 'sometime|email|unique:users,email' . $user->id,
+            "bio" => 'sometime|max:30'
+        ]);
+
+        // If update fields provided
+        if($request->has("username")){
+            $user->username = $request->username;
+        }
+
+        if($request->has("email")){
+            $user->email = $request->email;
+        }
+
+        if($request->has("bio")){
+            $user->bio = $request->bio;
+        }
+
+        // Save profile
+        $user->save();
+
+        return response()->json([
+            'message' => 'Profile updated successfully',
+            'user' => $user,
+        ]);
+    }
 }
