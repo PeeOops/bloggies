@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -76,9 +77,21 @@ class AuthController extends Controller
 
         // Validate
         $request->validate([
-            'username' => 'sometime|min:3|max:20|unique:users,username' . $user->id,
-            'email'    => 'sometime|email|unique:users,email' . $user->id,
-            "bio" => 'sometime|max:30'
+            'username' => [
+                'sometimes',
+                'min:3',
+                'max:20',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'email' => [
+                'sometimes',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'bio' => [
+                'sometimes',
+                'max:30',
+            ],
         ]);
 
         // If update fields provided
