@@ -17,6 +17,11 @@ const Profile = ({userData, setUserData}) => {
 
     const handleClickEdit = () => {
         setEditing(prev => !prev);
+        setForm({
+            username: userData.username,
+            email: userData.email,
+            bio: userData.bio,
+        });
     }
 
     const handleChangeForm = (e) => {
