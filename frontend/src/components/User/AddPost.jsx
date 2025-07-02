@@ -1,9 +1,37 @@
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
+import { useEffect, useState } from "react";
+import api from "../../axios";
 
-const AddPost = () => {
+const AddPost = ({userData}) => {
 
-    
+    const [categories, setCategories] = useState([]);
+    const [tags, setTags] = useState([]);
+
+    useEffect(() => {
+        // Fetch categories
+        const fetchCategories = async () => {
+            try {
+                const response = await api.get("/categories");
+                setCategories(response.data);
+            } catch (error) {
+                console.log("Error fetching categories", error);
+            }
+        }
+
+        // Fetch tags
+        const fetchTags = async () => {
+            try {
+                const response = await api.get("/tags");
+                setTags(response.data);
+            } catch (error) {
+                console.log("Error fetching tags", error);
+            }
+        }
+
+        fetchCategories();
+        fetchTags();
+    },[])
 
     return(
         <form className="flex flex-col md:grid md:grid-cols-[3fr_1fr] gap-4">
@@ -52,35 +80,30 @@ const AddPost = () => {
                     <label for="category">Category:</label>
                     <select id="category" name="category" className="border-2 p-1">
                         <option value="" hidden>Choose Category</option>
-                        <option value="tech">Tech</option>
-                        <option value="news">News</option>
-                        <option value="sports">Sports</option>
+                        {
+                            categories.map((category) => (
+                                <option key={category.id} value={category.id}>{category.name}</option>
+                            ))
+                        }
                     </select>
                 </div>
                 {/* Tags */}
                 <div className="flex flex-col gap-2">
-                    <label for="category">Tags:</label>
-                    <div className="flex flex-row gap-2">
-                        <input type="checkbox" value="MMO" />
-                        <p>MMO</p>
-                    </div>
-                    <div className="flex flex-row gap-2">
-                        <input type="checkbox" value="Action" />
-                        <p>Action</p>
-                    </div>
-                    <div className="flex flex-row gap-2">
-                        <input type="checkbox" value="Adventure" />
-                        <p>Adventure</p>
-                    </div>
-                    <div className="flex flex-row gap-2">
-                        <input type="checkbox" value="Virtual Reality" />
-                        <p>Virtual Reality</p>
-                    </div>
+                    <label for="tags">Tags:</label>
+                    {
+                        tags.map((tag) => (
+                            <div key={tag.id} className="flex flex-row gap-2">
+                                <input id={`tag-${tag.id}`} name="tag" type="checkbox" value={tag.id} />
+                                <label htmlFor={`tag-${tag.id}`}>{tag.name}</label>
+                            </div>
+                        ))
+                    }
+                    
                 </div>
                 {/* Author */}
                 <div className="flex flex-col gap-2">
                     <label for="category">Author:</label>
-                    <input type="text" placeholder="mintymantis" className="border-2 p-1"  disabled />
+                    <input type="text" value={userData.username} className="border-2 p-1"  disabled />
                 </div>
 
                 

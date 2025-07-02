@@ -124,7 +124,7 @@ const User = () => {
                         <h1 className="text-xl mb-6">{navigation}</h1>
                         {/* Profile Content */}
                         {
-                            navigation === "Profile" ? <Profile userData={userData} setUserData={setUserData} /> : navigation === "Add Post" ? <AddPost /> : ""
+                            navigation === "Profile" ? <Profile userData={userData} setUserData={setUserData} /> : navigation === "Add Post" ? <AddPost userData={userData} /> : ""
                         }
                     </div>
                 </div>
