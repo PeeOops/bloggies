@@ -70,8 +70,44 @@ const AddPost = ({userData}) => {
     }
 
     // Submit form
-    const handleClickSubmit = (e) => {
+    const handleClickSubmit = async (e) => {
         e.preventDefault();
+
+        if (!form.body.trim()) {
+            alert("Post content is required!");
+            return;
+        }
+
+        
+        try {
+            const formData = new FormData();
+
+            formData.append("title", form.title);
+            formData.append("subtitle", form.subtitle);
+            formData.append("body", form.body);
+            formData.append("category_id", form.category_id);
+            formData.append("author_id", form.author_id);
+
+            // Append tags array properly
+            form.tag_ids.forEach(tagId => formData.append("tag_ids[]", tagId));
+
+            if (form.featured_image) {
+            formData.append("featured_image", form.featured_image);
+            }
+
+            const response = await api.post("/post/store", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            });
+
+            alert("Post added successfully");
+        } catch (error) {
+            console.error(error);
+            alert("Failed to add post");
+        }
+
+
     }
 
     // SimpleMDE markdown configuration
@@ -90,12 +126,12 @@ const AddPost = ({userData}) => {
                 {/* Title */}
                 <div className="flex flex-col gap-2">
                     <label>Title</label>
-                    <input name="title" type="text" placeholder="Title" value={form.title} onChange={handleChangeForm} className="text-gray-600 border-2 border-black p-1" />
+                    <input name="title" type="text" placeholder="Title" value={form.title} onChange={handleChangeForm} className="text-gray-600 border-2 border-black p-1" required />
                 </div>
                 {/* Subtitle */}
                 <div className="flex flex-col gap-2">
                     <label>Subtitle</label>
-                    <input name="subtitle" type="text" value={form.subtitle} onChange={handleChangeForm} placeholder="Subtitle" className="text-gray-600 border-2 border-black p-1" />
+                    <input name="subtitle" type="text" value={form.subtitle} onChange={handleChangeForm} placeholder="Subtitle" className="text-gray-600 border-2 border-black p-1"  />
                 </div>
                 {/* Featured image */}
                 <div className="flex flex-col gap-2">
