@@ -10,7 +10,7 @@ const Register = () => {
     // Navigation
     const navigate = useNavigate();
 
-    // Error message
+    // Status message
     const [statusMessages, setStatusMessages] = useState([]);
 
     // LoadingBar logic
@@ -130,8 +130,8 @@ const Register = () => {
                             <div className="flex flex-row items-center gap-2 text-sm text-green-600">
                                 <FontAwesomeIcon icon={faCircleCheck} />
                                 <p>{statusMessages}</p>
-                            </div> : statusMessages !== "" ? statusMessages.map((item) => (
-                                <div  className="flex flex-row items-center gap-2 text-sm text-red-600">
+                            </div> : statusMessages !== "" ? statusMessages.map((item, index) => (
+                                <div key={index} className="flex flex-row items-center gap-2 text-sm text-red-600">
                                     <FontAwesomeIcon icon={faWarning} />
                                     <p>{item}</p>
                                 </div> 
@@ -158,7 +158,7 @@ const Register = () => {
                             <label>Confirm Password</label>
                             <input type="password" placeholder="confirm password" className={`bg-transparent text-emerald-950 p-2 border-2 rounded-md focus:outline-none focus:border-b-2 ${
                             statusMessages.includes("Passwords do not match!") ? 'border-red-400 focus:border-b-red-400' : 'border-emerald-950 focus:border-b-emerald-950'
-                            }`} onPaste={(e) => e.preventDefault()} onChange={handleChangeConfirmPassword}  required />
+                            }`} onKeyDown={(e) => {if(e.key === " ") e.preventDefault();}} onPaste={(e) => e.preventDefault()} onChange={handleChangeConfirmPassword}  required />
                         </div>
                         <button disabled={loading} className="bg-emerald-950 text-white p-2 rounded-md active:bg-white active:text-emerald-950 active:border-emerald-950 active:border-2 hover:bg-white hover:text-emerald-950 hover:border-emerald-950 hover:border-2 cursor-pointer">Register</button>
                         <p className="text-xs text-center">Already have an account? <Link to="/login" className="text-gray-400 cursor-pointer" role="button">Sign In</Link></p>
