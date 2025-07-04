@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import AddPost from "../components/User/AddPost";
 import { useParams } from "react-router-dom";
 import api from "../axios";
-import Unauthorized from "../components/403";
+import Unauthorized from "../components/Errors/403";
 
 const User = () => {
 
