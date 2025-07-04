@@ -6,41 +6,71 @@ import { faAnglesRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-i
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import api from "../axios.js";
+import LoadingBar from "../components/Utils/LoadingBar.jsx";
 
 const Home = () => {
 
+    // State declarations
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
 
+    // Loading bar
+    const [loading, setLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
+
+    const simulateProgress = () => {
+        setProgress(10);
+
+        const interval = setInterval(() => {
+            setProgress((prev) => {
+                if(prev < 90){
+                    return prev + Math.random() * 10;
+                }
+                clearInterval(interval);
+                return prev;
+            })
+        },100)
+
+        return interval;
+
+
+    }
+
     useEffect(() => {
-        const fetchCategories = async () => {
+        // Fetch data
+        const fetchData = async () => {
+            setLoading(true);
+            setProgress(0);
+
+            const progressInterval = simulateProgress();
+
             try {
-                const response = await api.get("/categories");
-                const categories = response.data;
-                setCategories(categories);
+                const [categoriesAPI, tagsAPI] = await Promise.all([
+                    api.get("/categories"),
+                    api.get("/tags")
+                ])
+                setCategories(categoriesAPI.data);
+                setTags(tagsAPI.data);
             } catch (error) {
-                console.log("Error fetching categories",error);
-                throw Error;
+                console.log("Failed fetching data", error)
+            } finally {
+                clearInterval(progressInterval);
+                setProgress(100);
+                setTimeout(() => {
+                    setLoading(false);
+                    setProgress(0);
+                },500);
             }
+            
         }
 
-        const fetchTags = async () => {
-            try {
-                const response = await api.get("/tags");
-                const tags = response.data;
-                setTags(tags);
-            } catch (error) {
-                console.log("Error fetching tags",tags);
-                throw Error;
-            }
-        }
-
-        fetchCategories();
-        fetchTags();
+        fetchData();
     },[])
 
     return (
         <>
+            <LoadingBar loading={loading} progress={progress} />
+            
             {/* Header */}
             <div className="relative overflow-hidden">
 
