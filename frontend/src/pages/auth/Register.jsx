@@ -10,7 +10,10 @@ const Register = () => {
     // Navigation
     const navigate = useNavigate();
 
-    // Loading
+    // Error message
+    const [statusMessages, setStatusMessages] = useState([]);
+
+    // LoadingBar logic
     const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState(0);
 
@@ -29,7 +32,7 @@ const Register = () => {
         return interval;
     }
 
-    // Input Form
+    // Register form
     const [form,setForm] = useState({
         username: "",
         email: "",
@@ -38,10 +41,9 @@ const Register = () => {
 
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    // Error message
-    const [errorMessages, setErrorMessages] = useState([]);
 
-    // Handle change
+
+    // Handle change functions
     const handleChangeForm = (e) => {
         setForm({
             ...form,
@@ -58,12 +60,12 @@ const Register = () => {
         // Check match password
         const handleChangeMatchPassword = () => {
             if(confirmPassword && form.password !== confirmPassword){
-                if(!errorMessages.includes("Passwords do not match!")){
-                    setErrorMessages(prev => [...prev, "Passwords do not match!"]);
+                if(!statusMessages.includes("Passwords do not match!")){
+                    setStatusMessages(prev => [...prev, "Passwords do not match!"]);
                 }
                 
             }else{
-                setErrorMessages(prev => prev.filter(item => item !== "Passwords do not match!"));
+                setStatusMessages(prev => prev.filter(item => item !== "Passwords do not match!"));
             }
         }
 
@@ -71,7 +73,7 @@ const Register = () => {
     },[form.password, confirmPassword])
 
 
-    // Form submit
+    // Submit register form
     const handleSubmitForm = (e) => {
         e.preventDefault();
 
@@ -87,17 +89,17 @@ const Register = () => {
         // Register API
         api.post("/register", form)
         .then((res) => {
-            setErrorMessages("Registration complete! Please log in to continue.");
-
+            setStatusMessages([]);
+            setStatusMessages("Registration complete! Please log in to continue.");
             setTimeout(() => {
                 navigate("/login");
             },1500);
         })
         .catch((error) => {
-            const errorMessages = Object.values(error.response.data.errors).flat();        
+            const statusMessages = Object.values(error.response.data.errors).flat();        
 
             if(error.response.status === 422){
-                setErrorMessages(errorMessages);
+                setStatusMessages(statusMessages);
             }
 
         })
@@ -107,7 +109,7 @@ const Register = () => {
             setTimeout(() => {
                 setLoading(false);
                 setProgress(0);
-            },1000);
+            },500);
         })
     }
 
@@ -124,12 +126,12 @@ const Register = () => {
                     {/* Error message */}
                     <div className="flex flex-col  gap-2 md:gap-1">
                         {
-                            errorMessages === "Registration complete! Please log in to continue." ?
+                            statusMessages === "Registration complete! Please log in to continue." ?
                             <div className="flex flex-row items-center gap-2 text-sm text-green-600">
                                 <FontAwesomeIcon icon={faCircleCheck} />
-                                <p>{errorMessages}</p>
-                            </div> : errorMessages !== "" ? errorMessages.map((item) => (
-                                <div className="flex flex-row items-center gap-2 text-sm text-red-600">
+                                <p>{statusMessages}</p>
+                            </div> : statusMessages !== "" ? statusMessages.map((item) => (
+                                <div  className="flex flex-row items-center gap-2 text-sm text-red-600">
                                     <FontAwesomeIcon icon={faWarning} />
                                     <p>{item}</p>
                                 </div> 
@@ -140,25 +142,25 @@ const Register = () => {
                     <form onSubmit={handleSubmitForm} className="flex flex-col gap-4 md:gap-6 md:text-base">
                         <div className="flex flex-col">
                             <label>Email</label>
-                            <input name="email" type="email" placeholder="email" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} value={form.email} required />
+                            <input name="email" type="email" placeholder="email" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" onKeyDown={(e) => {if(e.key === " ") e.preventDefault();}} onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} value={form.email} required />
                         </div>
                         <div className="flex flex-col">
                             <label>Username</label>
-                            <input name="username" type="text" placeholder="username" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} value={form.username} required />
+                            <input name="username" type="text" placeholder="username" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950"  onKeyDown={(e) => {if(e.key === " ") e.preventDefault();}} onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} value={form.username} required />
                         </div>
                         <div className="flex flex-col">
                             <label>Password</label>
                             <input name="password" type="password" placeholder="password" className={`bg-transparent text-emerald-950 p-2 border-2 rounded-md focus:outline-none focus:border-b-2 ${
-                            errorMessages.includes("Passwords do not match!") ? 'border-red-400 focus:border-b-red-400' : 'border-emerald-950 focus:border-b-emerald-950'
-                            }`} onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} value={form.password} required />
+                            statusMessages.includes("Passwords do not match!") ? 'border-red-400 focus:border-b-red-400' : 'border-emerald-950 focus:border-b-emerald-950'
+                            }`}  onKeyDown={(e) => {if(e.key === " ") e.preventDefault();}} onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} value={form.password} required />
                         </div>
                         <div className="flex flex-col">
                             <label>Confirm Password</label>
                             <input type="password" placeholder="confirm password" className={`bg-transparent text-emerald-950 p-2 border-2 rounded-md focus:outline-none focus:border-b-2 ${
-                            errorMessages.includes("Passwords do not match!") ? 'border-red-400 focus:border-b-red-400' : 'border-emerald-950 focus:border-b-emerald-950'
+                            statusMessages.includes("Passwords do not match!") ? 'border-red-400 focus:border-b-red-400' : 'border-emerald-950 focus:border-b-emerald-950'
                             }`} onPaste={(e) => e.preventDefault()} onChange={handleChangeConfirmPassword}  required />
                         </div>
-                        <button className="bg-emerald-950 text-white p-2 rounded-md active:bg-white active:text-emerald-950 active:border-emerald-950 active:border-2 hover:bg-white hover:text-emerald-950 hover:border-emerald-950 hover:border-2 cursor-pointer">Register</button>
+                        <button disabled={loading} className="bg-emerald-950 text-white p-2 rounded-md active:bg-white active:text-emerald-950 active:border-emerald-950 active:border-2 hover:bg-white hover:text-emerald-950 hover:border-emerald-950 hover:border-2 cursor-pointer">Register</button>
                         <p className="text-xs text-center">Already have an account? <Link to="/login" className="text-gray-400 cursor-pointer" role="button">Sign In</Link></p>
                     </form>
                 </div>
