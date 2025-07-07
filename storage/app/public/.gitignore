@@ -1,2 +1,7 @@
 *
 !.gitignore
+!featured_images/
+!featured_images/age_of_empires.jpg
+!featured_images/minecraft.png
+!featured_images/skyrim.jpg
+!featured_images/witcher.jpg
