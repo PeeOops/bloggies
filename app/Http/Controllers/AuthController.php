@@ -14,15 +14,31 @@ class AuthController extends Controller
     
     public function register(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'username' => 'required|min:3|max:20|unique:users|regex:/^\S+$/u',
             'email'    => 'required|email|unique:users|regex:/^\S+$/u',
             'password' => 'required|min:6|regex:/^\S+$/u',
         ]);
 
+        // Case-sensitive check
+        $usernameLower = strtolower($data["username"]);
+        $emailLower = strtolower($data["email"]);
+
+        if(User::whereRaw("LOWER(email) = ?", [$emailLower])->exists()){
+            throw ValidationException::withMessages([
+                "email" => ["Email has already been taken"]
+            ]);
+        }
+
+        if(User::whereRaw("LOWER(username) = ?",[$usernameLower])->exists()){
+            throw ValidationException::withMessages([
+                "username" => ["Username has already been taken."]
+            ]);
+        }
+
         $user = User::create([
-            'username' => $request->username,
-            'email'    => $request->email,
+            'username' => $data["username"],
+            'email'    => $emailLower,
             'password' => Hash::make($request->password),
         ]);
 
@@ -34,16 +50,16 @@ class AuthController extends Controller
 
     public function login(Request $request){
         // Get user
-        $request->validate([
+        $data = $request->validate([
             'username' => 'required',
             'password' => 'required'
         ]);
         
-        $user = User::where('username', $request->username)->first();
+        $user = User::whereRaw("LOWER(username) = ?", [strtolower($data["username"])])->first();
 
 
         // Check credentials
-        if(!$user || !Hash::check($request->password, $user->password)){
+        if(!$user || !Hash::check($data["password"], $user->password)){
             throw ValidationException::withMessages([
                 "username" => ["The provided credentials are incorrect."],
             ]);
