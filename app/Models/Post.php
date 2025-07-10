@@ -15,8 +15,10 @@ class Post extends Model
         "featured_image_url",
         "body",
         "category_id",
-        "type"
+        "type",
     ];
+
+    protected $dates = ['created_at', 'updated_at'];
 
     // Relationships
 
@@ -31,4 +33,5 @@ class Post extends Model
     public function author(){
         return $this->belongsTo(User::class, "author_id");
     }
+    
 }

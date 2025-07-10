@@ -180,7 +180,7 @@ class PostsTableSeeder extends Seeder
             [
                 "title" => "The Witcher 3: Wild Hunt Gets Next-Gen Combat & Monster AI Overhaul",
                 "subtitle" => "CDPR’s major July patch modernizes monster behavior, combat responsiveness, and adds a new gear tier.",
-                "featured_image_url" => "featured_images/witcher3.jpg",
+                "featured_image_url" => "featured_images/witcher.jpg",
                 "body" => <<<MD
                 ### ⚔️ What’s New in the July Patch?
 

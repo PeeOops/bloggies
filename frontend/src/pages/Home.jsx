@@ -13,6 +13,8 @@ const Home = () => {
     // State declarations
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
+    const [latestPosts, setLatestPosts] = useState([]);
+    const [page, setPage] = useState(1);
 
     // Loading bar
     const [loading, setLoading] = useState(false);
@@ -45,12 +47,14 @@ const Home = () => {
             const progressInterval = simulateProgress();
 
             try {
-                const [categoriesAPI, tagsAPI] = await Promise.all([
+                const [categoriesAPI, tagsAPI, latestPostsAPI] = await Promise.all([
                     api.get("/categories"),
-                    api.get("/tags")
+                    api.get("/tags"),
+                    api.get("/post/index")
                 ])
                 setCategories(categoriesAPI.data);
                 setTags(tagsAPI.data);
+                setLatestPosts(latestPostsAPI.data.posts);
             } catch (error) {
                 console.log("Failed fetching data", error)
             } finally {
@@ -132,110 +136,36 @@ const Home = () => {
                 {/* Right main */}
                 <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
-                        <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                            <img src={Thumbnail} alt="" className="w-full h-48 object-cover" />
-                            <div className="p-6">
-                                {/* Published date and author */}
-                                <div className="flex flex-row text-xs gap-2">
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <FontAwesomeIcon icon={faCalendar} />
-                                        <p>28th May 2025</p>
-                                    </div>
-                                    <span>|</span>
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <FontAwesomeIcon icon={faUser} />
-                                        <p>ELLIOT ALDERSON</p>
-                                    </div>
-                                </div>
-                                {/* Title */}
-                                <h1 className="text-lg mt-2">One of the best steam games in 2025</h1>
-                                {/* Subtitle or Description */}
-                                <p className="line-clamp-3 text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, excepturi ratione animi error ducimus atque laborum fugiat iusto sequi blanditiis, illo temporibus aut consequuntur nulla earum, laudantium perferendis inventore placeat.</p>
-                                {/* Read more button */}
-                                <div className="flex flex-row gap-2 items-center text-xs mt-2">
-                                    <FontAwesomeIcon icon={faAnglesRight} />
-                                    <p>Read more</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                            <img src={Thumbnail} alt="" className="w-full h-48 object-cover" />
-                            <div className="p-6">
-                                {/* Published date and author */}
-                                <div className="flex flex-row text-xs gap-2">
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <FontAwesomeIcon icon={faCalendar} />
-                                        <p>28th May 2025</p>
-                                    </div>
-                                    <span>|</span>
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <FontAwesomeIcon icon={faUser} />
-                                        <p>ELLIOT ALDERSON</p>
+                        {
+                            latestPosts.map((post) => (
+                                <div key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
+                                    <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-full h-48 object-cover" />
+                                    <div className="p-6">
+                                        {/* Published date and author */}
+                                        <div className="flex flex-row text-xs gap-2">
+                                            <div className="flex flex-row gap-2 items-center">
+                                                <FontAwesomeIcon icon={faCalendar} />
+                                                <p>{post.created_at}</p>
+                                            </div>
+                                            <span>|</span>
+                                            <div className="flex flex-row gap-2 items-center">
+                                                <FontAwesomeIcon icon={faUser} />
+                                                <p>{post.author.username}</p>
+                                            </div>
+                                        </div>
+                                        {/* Title */}
+                                        <h1 className="text-lg mt-2">{post.title}</h1>
+                                        {/* Subtitle or Description */}
+                                        <p className="line-clamp-3 text-xs">{post.subtitle}</p>
+                                        {/* Read more button */}
+                                        <div className="flex flex-row gap-2 items-center text-xs mt-2">
+                                            <FontAwesomeIcon icon={faAnglesRight} />
+                                            <p>Read more</p>
+                                        </div>
                                     </div>
                                 </div>
-                                {/* Title */}
-                                <h1 className="text-lg mt-2">One of the best steam games in 2025</h1>
-                                {/* Subtitle or Description */}
-                                <p className="line-clamp-3 text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, excepturi ratione animi error ducimus atque laborum fugiat iusto sequi blanditiis, illo temporibus aut consequuntur nulla earum, laudantium perferendis inventore placeat.</p>
-                                {/* Read more button */}
-                                <div className="flex flex-row gap-2 items-center text-xs mt-2">
-                                    <FontAwesomeIcon icon={faAnglesRight} />
-                                    <p>Read more</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                            <img src={Thumbnail} alt="" className="w-full h-48 object-cover" />
-                            <div className="p-6">
-                                {/* Published date and author */}
-                                <div className="flex flex-row text-xs gap-2">
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <FontAwesomeIcon icon={faCalendar} />
-                                        <p>28th May 2025</p>
-                                    </div>
-                                    <span>|</span>
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <FontAwesomeIcon icon={faUser} />
-                                        <p>ELLIOT ALDERSON</p>
-                                    </div>
-                                </div>
-                                {/* Title */}
-                                <h1 className="text-lg mt-2">One of the best steam games in 2025</h1>
-                                {/* Subtitle or Description */}
-                                <p className="line-clamp-3 text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, excepturi ratione animi error ducimus atque laborum fugiat iusto sequi blanditiis, illo temporibus aut consequuntur nulla earum, laudantium perferendis inventore placeat.</p>
-                                {/* Read more button */}
-                                <div className="flex flex-row gap-2 items-center text-xs mt-2">
-                                    <FontAwesomeIcon icon={faAnglesRight} />
-                                    <p>Read more</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                            <img src={Thumbnail} alt="" className="w-full h-48 object-cover" />
-                            <div className="p-6">
-                                {/* Published date and author */}
-                                <div className="flex flex-row text-xs gap-2">
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <FontAwesomeIcon icon={faCalendar} />
-                                        <p>28th May 2025</p>
-                                    </div>
-                                    <span>|</span>
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <FontAwesomeIcon icon={faUser} />
-                                        <p>ELLIOT ALDERSON</p>
-                                    </div>
-                                </div>
-                                {/* Title */}
-                                <h1 className="text-lg mt-2">One of the best steam games in 2025</h1>
-                                {/* Subtitle or Description */}
-                                <p className="line-clamp-3 text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, excepturi ratione animi error ducimus atque laborum fugiat iusto sequi blanditiis, illo temporibus aut consequuntur nulla earum, laudantium perferendis inventore placeat.</p>
-                                {/* Read more button */}
-                                <div className="flex flex-row gap-2 items-center text-xs mt-2">
-                                    <FontAwesomeIcon icon={faAnglesRight} />
-                                    <p>Read more</p>
-                                </div>
-                            </div>
-                        </div>
+                            ))
+                        }
                     </div>
                     {/* Paginations */}
                     <div className="flex flex-row items-center justify-between text-white mb-4">

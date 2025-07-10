@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -64,7 +65,11 @@ class PostController extends Controller
 
     public function index(Request $request){
         // Query builder to fetch posts with category, tags and author relationships
-        $query = Post::with("category","tags", "author");
+        $query = Post::with([
+            "category:id,name",
+            "tags:id,name",
+            "author:id,username,bio"
+        ]);
 
         // Filters
         // By category
@@ -85,15 +90,20 @@ class PostController extends Controller
             $query->where("title", "ILIKE", "%" . $search . "%");
         }
 
+        // Sort by latest posts
+        $query->orderBy("created_at", "desc");
+
         // Get post
         $posts = $query->get();
+        
+        // Format created_at for each post
+        foreach($posts as $post){
+            $post->created_at = Carbon::parse($post->created_at)->format("jS F Y");
+        }
 
         return response()->json([
             "posts" => $posts
         ]);
-
-
-
 
     }
 }
