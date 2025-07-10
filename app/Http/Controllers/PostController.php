@@ -68,7 +68,7 @@ class PostController extends Controller
         $query = Post::with([
             "category:id,name",
             "tags:id,name",
-            "author:id,username,bio"
+            "author:id,username,bio",
         ]);
 
         // Filters
@@ -95,11 +95,6 @@ class PostController extends Controller
 
         // Get post
         $posts = $query->get();
-        
-        // Format created_at for each post
-        foreach($posts as $post){
-            $post->created_at = Carbon::parse($post->created_at)->format("jS F Y");
-        }
 
         return response()->json([
             "posts" => $posts

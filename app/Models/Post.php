@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +19,11 @@ class Post extends Model
         "type",
     ];
 
-    protected $dates = ['created_at', 'updated_at'];
+    // created_at format date
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('jS F Y');
+    }
 
     // Relationships
 
