@@ -69,6 +69,7 @@ class PostsTableSeeder extends Seeder
                 The **Minecraft July 2025 update** elevates copper from a rarely-used material to a vital part of early gameplay.  
                 From **golems that organize your items** to **tools that look cool and get the job done**, this update hits the sweet spot for both builders and survival players.
                 MD,
+                "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [1,3,8,13]
@@ -119,6 +120,7 @@ class PostsTableSeeder extends Seeder
 
                 With **expanded civilizations**, deep campaigns, and **dynamic environmental effects**, *Dynasties of the East* is a must-play DLC for RTS fans and history buffs alike.
                 MD,
+                "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [1,7,8]
@@ -170,6 +172,7 @@ class PostsTableSeeder extends Seeder
                 **Skyrim’s 2025 patch** proves this legendary RPG still has surprises left.  
                 Whether you’re a battlemage or stealth archer, this update adds **depth, danger, and delight** to your next adventure.
                 MD,
+                "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [2,3,13]
@@ -223,6 +226,7 @@ class PostsTableSeeder extends Seeder
                 This **2025 combat-focused patch** brings *The Witcher 3* closer to modern RPG standards.  
                 Whether it’s the upgraded swordplay or smarter foes, veterans and newcomers alike have fresh reasons to dive back into the Continent.
                 MD,
+                "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [1,6,8,3]

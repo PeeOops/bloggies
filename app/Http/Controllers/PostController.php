@@ -14,6 +14,7 @@ class PostController extends Controller
             "subtitle" => "required|string|max:255",
             "featured_image" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             "body" => "required|string",
+            "type" => "required|string",
             "category_id" => "required|exists:categories,id",
             "tag_ids" => "nullable|array",
             "tag_ids.*" => "exists:tags,id"
@@ -30,7 +31,8 @@ class PostController extends Controller
             "title",
             "subtitle",
             "body",
-            "category_id"
+            "type",
+            "category_id",
         ]));
 
         // Assign author_id

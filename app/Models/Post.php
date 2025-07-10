@@ -14,7 +14,8 @@ class Post extends Model
         "subtitle",
         "featured_image_url",
         "body",
-        "category_id"
+        "category_id",
+        "type"
     ];
 
     // Relationships

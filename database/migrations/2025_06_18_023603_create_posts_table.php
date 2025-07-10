@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("subtitle")->nullable();
             $table->string("featured_image_url")->nullable();
             $table->text("body");
+            $table->string("type");
             $table->foreignId("category_id")->constrained()->onDelete("cascade");
             $table->foreignId("author_id")->constrained("users")->onDelete("cascade");
             $table->timestamps();
