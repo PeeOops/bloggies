@@ -61,4 +61,39 @@ class PostController extends Controller
             "post" => $post
         ],201);
     }
+
+    public function index(Request $request){
+        // Query builder to fetch posts with category, tags and author relationships
+        $query = Post::with("category","tags", "author");
+
+        // Filters
+        // By category
+        if($request->has("category_id")){
+            $query->where("category_id", $request->category_id);
+        }
+
+        // By tag
+        if($request->has("tag_ids")){
+            $query->whereHas("tags",function ($query) use ($request){
+                $query->whereIn("id",$request->tag_ids);
+            });
+        }
+
+        // By search
+        if($request->has("search")){
+            $search = $request->search;
+            $query->where("title", "ILIKE", "%" . $search . "%");
+        }
+
+        // Get post
+        $posts = $query->get();
+
+        return response()->json([
+            "posts" => $posts
+        ]);
+
+
+
+
+    }
 }
