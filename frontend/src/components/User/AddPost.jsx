@@ -14,6 +14,7 @@ const AddPost = ({userData}) => {
         "body" : "",
         "category_id" : null,
         "tag_ids" : [],
+        "type" : "",
         "author_id" : userData.id
         
     })
@@ -85,6 +86,7 @@ const AddPost = ({userData}) => {
             formData.append("title", form.title);
             formData.append("subtitle", form.subtitle);
             formData.append("body", form.body);
+            formData.append("type", form.type);
             formData.append("category_id", form.category_id);
             formData.append("author_id", form.author_id);
 
@@ -173,6 +175,15 @@ const AddPost = ({userData}) => {
                                 <option key={category.id} value={category.id}>{category.name}</option>
                             ))
                         }
+                    </select>
+                </div>
+                {/* Type : News or Blog */}
+                <div className="flex flex-col gap-2">
+                    <label htmlFor="type">Type:</label>
+                    <select name="type" id="type" onChange={handleChangeForm} className="border-2 p-1">
+                        <option value="" hidden>Choose Type</option>
+                        <option value="news">News</option>
+                        <option value="blog">Blog</option>
                     </select>
                 </div>
                 {/* Tags */}
