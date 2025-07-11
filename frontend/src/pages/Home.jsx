@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TopBackground from "../assets/images/background.jpg"
 import Navigation from "../components/Navigation";
-import { faAnglesRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAnglesRight, faArrowLeft, faArrowRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import api from "../axios.js";
@@ -40,7 +40,7 @@ const Home = () => {
     // Pagination
     const [searchParams, setSearchParams] = useSearchParams();
     const [itemsPerPage, setItemsPerPage] = useState(6);
-    const currentPage = parseInt(searchParams.get("page")) || "1";
+    const currentPage = parseInt(searchParams.get("page")) || 1;
     const lastIndex = currentPage * itemsPerPage;
     const firstIndex = lastIndex - itemsPerPage;
 
@@ -49,6 +49,12 @@ const Home = () => {
 
         if(currentPage < maxPage){
             setSearchParams({page: currentPage + 1});
+        }
+    }
+
+    const handleClickPrevPage = () => {
+        if(currentPage > 1){
+            setSearchParams({page: currentPage - 1});
         }
     }
 
@@ -68,7 +74,7 @@ const Home = () => {
                 ])
                 setCategories(categoriesAPI.data);
                 setTags(tagsAPI.data);
-                setLatestPosts(latestPostsAPI.data.posts);
+                setLatestPosts(latestPostsAPI.data.posts);  
             } catch (error) {
                 console.log("Failed fetching data", error)
             } finally {
@@ -151,7 +157,7 @@ const Home = () => {
                 <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
                         {
-                            latestPosts.map((post) => (
+                            latestPosts.slice(firstIndex,lastIndex).map((post) => (
                                 <div key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
                                     <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-full h-48 object-cover" />
                                     <div className="p-6">
@@ -183,14 +189,14 @@ const Home = () => {
                     </div>
                     {/* Paginations */}
                     <div className="flex flex-row items-center justify-between text-white mb-4">
-                        <button>Prev</button>
-                        <ul className="flex flex-row items-center gap-1">
-                            <li role="button" className="border-1 py-1 px-2 bg-white border-emerald-950 text-emerald-950 ">1</li>
-                            <li role="button" className="border-1 py-1 px-2">2</li>
-                            <li role="button" className="border-1 py-1 px-2">...</li>
-                            <li role="button" className="border-1 py-1 px-2">15</li>
-                        </ul>
-                        <button>Next</button>
+                        <div role="button" className={`flex flex-row items-center gap-2 cursor-pointer ${currentPage === 1 ? "invisible" : "visible"} `} onClick={() => handleClickPrevPage()}>
+                            <FontAwesomeIcon icon={faArrowLeft} />
+                            <p>Prev</p>
+                        </div>
+                        <div role="button" className={`flex flex-row items-center gap-2 cursor-pointer ${currentPage === Math.ceil(latestPosts.length / itemsPerPage) ? "invisible" : "visible"} `} onClick={() => handleClickNextPage()}>
+                            <p>Next</p>
+                            <FontAwesomeIcon icon={faArrowRight} />
+                        </div>
                     </div>
                 </div>
             </div>

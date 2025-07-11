@@ -545,10 +545,6 @@ class PostsTableSeeder extends Seeder
             ]
 
 
-
-
-
-
         ];
 
         foreach($posts as $post){
