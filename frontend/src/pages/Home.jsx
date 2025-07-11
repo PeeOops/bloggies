@@ -13,6 +13,7 @@ const Home = () => {
     // State declarations
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
+    const [allPosts, setAllPosts] = useState([]);
     const [latestPosts, setLatestPosts] = useState([]);
 
     // Loading bar
@@ -34,7 +35,6 @@ const Home = () => {
 
         return interval;
 
-
     }
 
 
@@ -49,14 +49,39 @@ const Home = () => {
         const maxPage = Math.ceil(latestPosts.length / itemsPerPage);
 
         if(currentPage < maxPage){
-            setSearchParams({page: currentPage + 1});
+            if(filteredCategories){
+                setSearchParams({
+                    category_id: filteredCategories,
+                    page: currentPage + 1
+                })
+            }else{
+                setSearchParams({page: currentPage + 1});
+            }
+            
         }
     }
 
     const handleClickPrevPage = () => {
         if(currentPage > 1){
-            setSearchParams({page: currentPage - 1});
+            if(filteredCategories){
+                setSearchParams({
+                    category_id: filteredCategories,
+                    page: currentPage - 1
+                })
+            }else{
+                setSearchParams({page: currentPage - 1});
+            }
+            
         }
+    }
+
+    // Category filters
+        const filteredCategories = searchParams.get("category_id") || "";
+    const handleClickFilterCategory = (id) => {
+        setSearchParams({
+            category_id: id,
+            page: 1
+        })
     }
 
     useEffect(() => {
@@ -68,14 +93,20 @@ const Home = () => {
             const progressInterval = simulateProgress();
 
             try {
-                const [categoriesAPI, tagsAPI, latestPostsAPI] = await Promise.all([
+                const [categoriesAPI, tagsAPI, latestPostsAPI, filteredCategoryPostsAPI] = await Promise.all([
                     api.get("/categories"),
                     api.get("/tags"),
-                    api.get("/post/index")
+                    api.get("/post/index"),
+                    filteredCategories ? api.get(`/post/index?category_id=${filteredCategories}`) : Promise.resolve(null)
                 ])
                 setCategories(categoriesAPI.data);
                 setTags(tagsAPI.data);
-                setLatestPosts(latestPostsAPI.data.posts);
+                setAllPosts(latestPostsAPI.data.posts);
+                if(filteredCategories){
+                    setLatestPosts(filteredCategoryPostsAPI.data.posts);
+                }else{
+                    setLatestPosts(latestPostsAPI.data.posts);
+                }
             } catch (error) {
                 console.log("Failed fetching data", error)
             } finally {
@@ -90,7 +121,7 @@ const Home = () => {
         }
 
         fetchData();
-    },[])
+    },[filteredCategories])
 
     return (
         <>
@@ -130,9 +161,9 @@ const Home = () => {
                         <div className="flex flex-col gap-2 text-sm">
                             {
                                 categories.map((category) => (
-                                    <div key={category.id} role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
+                                    <div key={category.id} onClick={() => handleClickFilterCategory(category.id)} role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
                                         <p>{category.name}</p>
-                                        <p>{latestPosts.filter((post) => post.category_id === category.id).length}</p>
+                                        <p>{allPosts.filter((post) => post.category_id === category.id).length}</p>
                                     </div>
                                 ))
                                 
@@ -176,7 +207,7 @@ const Home = () => {
                                             </div>
                                         </div>
                                         {/* Title */}
-                                        <h1 className="text-lg mt-2">{post.title}</h1>
+                                        <h1 className="text-lg mt-2 line-clamp-2">{post.title}</h1>
                                         {/* Subtitle or Description */}
                                         <p className="line-clamp-3 text-xs">{post.subtitle}</p>
                                         {/* Read more button */}
