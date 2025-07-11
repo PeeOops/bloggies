@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TopBackground from "../assets/images/background.jpg"
-import Thumbnail from "../assets/images/thumbnails/mirage.png"
 import Navigation from "../components/Navigation";
 import { faAnglesRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import api from "../axios.js";
 import LoadingBar from "../components/Utils/LoadingBar.jsx";
+import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
 
@@ -14,7 +14,6 @@ const Home = () => {
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [latestPosts, setLatestPosts] = useState([]);
-    const [page, setPage] = useState(1);
 
     // Loading bar
     const [loading, setLoading] = useState(false);
@@ -36,6 +35,21 @@ const Home = () => {
         return interval;
 
 
+    }
+
+    // Pagination
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [itemsPerPage, setItemsPerPage] = useState(6);
+    const currentPage = parseInt(searchParams.get("page")) || "1";
+    const lastIndex = currentPage * itemsPerPage;
+    const firstIndex = lastIndex - itemsPerPage;
+
+    const handleClickNextPage = () => {
+        const maxPage = Math.ceil(latestPosts.length / itemsPerPage);
+
+        if(currentPage < maxPage){
+            setSearchParams({page: currentPage + 1});
+        }
     }
 
     useEffect(() => {

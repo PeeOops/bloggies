@@ -230,6 +230,106 @@ class PostsTableSeeder extends Seeder
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [1,6,8,3]
+            ],
+            [
+                "title" => "The Binding of Isaac: Repentance – A Beautiful Descent into Chaos",
+                "subtitle" => "This final expansion delivers a roguelike masterpiece filled with pain, polish, and pixel-perfect madness.",
+                "featured_image_url" => "featured_images/isaac.png",
+                "body" => <<<MD
+                ### 🩸 A Darker, Deeper Isaac
+
+                **Repentance** isn’t just more Isaac—it’s the *ultimate* version.  
+                With **new floors, hundreds of items**, and brutal bosses, this is Edmund McMillen’s chaotic vision fully realized.
+
+                Original review:  
+                👉 [Polygon – Isaac Repentance Final Review](https://polygon.com/reviews/isaac-repentance-review-2025?utm_source=chatgpt.com)
+
+                ---
+
+                ### 🌀 What’s Changed?
+
+                - Over **130 new enemies** and **100+ bosses**, many with alternate forms.  
+                - **True co-op** support lets two players battle hell together.  
+                - **Alternate paths and endings** offer replay value like never before.
+
+                ---
+
+                ### 🎯 Gameplay Verdict
+
+                - Tight, twitchy combat with endless item synergy chaos.  
+                - New characters like **Bethany** and **Jacob & Esau** bring wild twists.  
+                - “Greedier Mode” is punishing and addictive.
+
+                ---
+
+                ### 💀 Difficulty & Design
+
+                - Not for the faint of heart.  
+                - RNG still reigns, but feels more “earned” than ever.  
+                - “Delirium” and “The Beast” are **final bosses worthy of the name**.
+
+                ---
+
+                ### 🧷 Final Score
+
+                **9.5/10 – A definitive roguelike experience.**  
+                Repentance is both a celebration and culmination.  
+                There’s *no going back* to older versions after this.
+                MD,
+                "type" => "blog",
+                "category_id" => 2,
+                "author_id" => 1,
+                "tag_ids" => [1,2,3]
+            ],
+            [
+                "title" => "Spiritfarer Review – Saying Goodbye Has Never Been So Beautiful",
+                "subtitle" => "A cozy management game about death that’s more heartwarming than heartbreaking.",
+                "featured_image_url" => "featured_images/spiritfarer.png",
+                "body" => <<<MD
+                ### ⛵ A Journey of Farewells
+
+                **Spiritfarer** is a game about guiding souls to the afterlife—but somehow, it’s incredibly life-affirming.  
+                With hand-drawn art, gentle pacing, and real emotional weight, it’s a one-of-a-kind experience.
+
+                Full review:  
+                👉 [Kotaku – Spiritfarer Is a Gentle Goodbye](https://kotaku.com/spiritfarer-review-2025?utm_source=chatgpt.com)
+
+                ---
+
+                ### 🎨 Visuals & Atmosphere
+
+                - Gorgeously animated 2D sprites with warm, expressive design.  
+                - Day/night cycles and dynamic weather feel alive.  
+                - Music shifts gently with mood and moment.
+
+                ---
+
+                ### 🌱 Gameplay Loop
+
+                - Build and upgrade a boat to house spirits.  
+                - Farm, cook, fish, and craft—all **woven with story**.  
+                - Platforming and exploration provide light challenge.
+
+                ---
+
+                ### 😢 Themes of Loss
+
+                - Every spirit represents a past relationship and lesson.  
+                - Dialogue explores grief, regret, and peace.  
+                - Saying goodbye never gets easier—but that’s the point.
+
+                ---
+
+                ### ⭐ Final Thoughts
+
+                **8.8/10 – A warm hug of a game about death.**  
+                Spiritfarer balances light simulation gameplay with heavy emotional storytelling.  
+                A must-play for anyone who’s lost—and loved.
+                MD,
+                "type" => "blog",
+                "category_id" => 2,
+                "author_id" => 1,
+                "tag_ids" => [2,5,3,9]
             ]
 
 
