@@ -330,7 +330,223 @@ class PostsTableSeeder extends Seeder
                 "category_id" => 2,
                 "author_id" => 1,
                 "tag_ids" => [2,5,3,9]
+            ],
+            [
+                "title" => "Fantasy Life i: 10 Starter Tips for Your First Loop",
+                "subtitle" => "Beginner’s guide to crafting, combat, and island building in this charming time-loop RPG.",
+                "featured_image_url" => "featured_images/fantasy_life.jpg",
+                "body" => <<<MD
+                ### ⏳ Getting Started in Fantasy Life i
+
+                The **Girl Who Steals Time** mixes life-sim charm with time-traveling adventure.  
+                Whether you’re gathering apples or battling beetles, here are some **tips to thrive on Mystery Island**.
+
+                Full guide:  
+                👉 [GamesRadar – Fantasy Life i Starter Tips](https://gamesradar.com/fantasy-life-i-tips-2025?utm_source=chatgpt.com)
+
+                ---
+
+                ### 🛠️ 1. Pick the Right Life Early
+
+                - Start with **Gatherer or Carpenter** for easier progression.  
+                - You can switch Lives at any time—no commitment stress!
+
+                ---
+
+                ### 🌱 2. Rebuild Your Town Strategically
+
+                - Focus on **farming buildings** first for early resources.  
+                - Roads and shops speed up crafting and commerce.
+
+                ---
+
+                ### ⚔️ 3. Combat Isn’t Just Button-Mashing
+
+                - Dodging is key in later fights—especially during boss events.  
+                - Upgrade your gear regularly with crafted materials.
+
+                ---
+
+                ### ⌛ 4. Time Loop Perks
+
+                - After each loop, you **retain progress** and unlock new areas.  
+                - Don’t rush the main quest—explore and master your skills!
+
+                ---
+
+                ### 📚 Bonus Tip
+
+                - **Talk to everyone**—NPCs often unlock quests or recipes.
+
+                ---  
+
+                Enjoy your journey through time. 🌙  
+                There’s always more to craft, build, and discover!
+                MD,
+                "type" => "guide",
+                "category_id" => 4,
+                "author_id" => 1,
+                "tag_ids" => [2,5,3,9]
+            ],
+            [
+                "title" => "Cult of the Lamb Runs Smooth on Steam Deck – But With Caveats",
+                "subtitle" => "Devolver’s cult hit is fully playable on Steam Deck with minor tweaks to optimize performance.",
+                "featured_image_url" => "featured_images/cult_of_the_lamb.png",
+                "body" => <<<MD
+                ### 🎮 Steam Deck Ready? Mostly Yes.
+
+                **Cult of the Lamb** is marked *Verified* on Steam Deck, but players report best results after some tweaks.
+
+                Community findings:  
+                👉 [Reddit Thread – Cult of the Lamb Steam Deck Settings](https://reddit.com/r/SteamDeck/comments/cult_settings_2025?utm_source=chatgpt.com)
+
+                ---
+
+                ### ✅ What Works Well
+
+                - **Default controls** feel tight and intuitive.  
+                - 720p @ 60fps is consistent in most dungeon runs.  
+                - Sleep/resume works without crashing.
+
+                ---
+
+                ### ⚙️ Recommended Settings
+
+                - **VSync ON** + Frame cap to 45fps for battery savings.  
+                - Set Texture Quality to Medium to avoid minor stutter.  
+                - Proton 8.0 is the most stable runtime as of July 2025.
+
+                ---
+
+                ### ⚠️ Minor Drawbacks
+
+                - UI occasionally clips on certain aspect ratios.  
+                - Some users report longer load times post-patch.
+
+                ---
+
+                ### 🎯 Final Verdict
+
+                **Play it on Deck? Absolutely.**  
+                With a few adjustments, *Cult of the Lamb* is just as addictive on the go as it is on PC or console.
+                MD,
+                "type" => "tech",
+                "category_id" => 5,
+                "author_id" => 1,
+                "tag_ids" => [4,7,10,3]
+            ],
+            [
+                "title" => "Sea of Stars Gets Boss Rush Mode, Photo Features in July Update",
+                "subtitle" => "Sabotage Studio’s retro RPG adds new late-game challenge and cosmetic fun in its 2025 summer patch.",
+                "featured_image_url" => "featured_images/sea_of_stars.png",
+                "body" => <<<MD
+                ### ✨ What’s New This Month?
+
+                The **July 2025 update** brings exciting extras to *Sea of Stars*, including a long-requested **Boss Rush mode** and **Photo Mode**.
+
+                Full patch notes:  
+                👉 [Sea of Stars Official Site](https://seaofstarsgame.com/updates/july-2025?utm_source=chatgpt.com)
+
+                ---
+
+                ### 🌀 Boss Rush Arena
+
+                - Challenge all story bosses back-to-back.  
+                - **Speedrun timers** and rankings included.  
+                - Rewards include **new skins and aura effects**.
+
+                ---
+
+                ### 📸 Photo Mode
+
+                - Pause the action anywhere to take shots.  
+                - Includes filters, poses, and sprite scaling.  
+                - Even works mid-battle!
+
+                ---
+
+                ### 🛠️ Bug Fixes & Tweaks
+
+                - Fixed softlock in Dweller’s Vault.  
+                - Improved frame pacing on Steam Deck.  
+                - Accessibility toggles added (combat speed, contrast).
+
+                ---
+
+                ### 🧡 Fans React
+
+                “Photo Mode was made for this game’s stunning pixel art.” – Reddit User  
+                “Boss Rush is a dream for New Game+ lovers.”
+
+                ---
+
+                A small update—but a mighty one.
+                MD,
+                "type" => "news",
+                "category_id" => 1,
+                "author_id" => 1,
+                "tag_ids" => [1,4,6,3]
+            ],
+            [
+                "title" => "Oxygen Not Included: 8 Essential Tips to Keep Your Dupes Alive",
+                "subtitle" => "Surviving the first 50 cycles in Klei’s colony sim isn’t easy—here’s how to avoid catastrophe.",
+                "featured_image_url" => "featured_images/oni.png",
+                "body" => <<<MD
+                ### 🧪 Surviving the Asteroid
+
+                *Oxygen Not Included* is one of the most complex survival sims out there.  
+                Here are 8 tips to **keep your base running smoothly**—and your dupes breathing.
+
+                Deep dive:  
+                👉 [Steam Guides – ONI New Player Tips](https://steamcommunity.com/guides/oni2025?utm_source=chatgpt.com)
+
+                ---
+
+                ### 🌬️ 1. Don’t Trust the Starter Oxygen
+
+                - Algae runs out fast—research **Electrolyzers** ASAP.  
+                - Use airflow tiles and doors to control gas flow.
+
+                ---
+
+                ### 🔥 2. Heat Is a Silent Killer
+
+                - Plan ahead: **Insulated tiles and wheezeworts** are your friends.  
+                - Avoid early metal refinery overuse—it gets hot quick.
+
+                ---
+
+                ### 💩 3. Manage Waste and Water
+
+                - Compost early on, then automate with **polluted water loops**.  
+                - Separate clean and dirty water zones.
+
+                ---
+
+                ### ⚙️ 4. Automation Wins Long-Term
+
+                - Smart batteries, pressure plates, and sensors make a huge difference.  
+                - Don’t fear automation—it reduces dupe micromanagement.
+
+                ---
+
+                ### 🛠️ Bonus Tip
+
+                - **Pause often** to plan. Panic builds kill more colonies than bad RNG.
+
+                ---
+
+                Build smart. Survive longer. Thrive eventually. 🌑
+                MD,
+                "type" => "guide",
+                "category_id" => 4,
+                "author_id" => 1,
+                "tag_ids" => [4,7,3,11]
             ]
+
+
+
+
 
 
         ];
