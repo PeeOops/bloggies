@@ -107,6 +107,7 @@ const Home = () => {
                 }else{
                     setLatestPosts(latestPostsAPI.data.posts);
                 }
+                console.log(latestPosts)
             } catch (error) {
                 console.log("Failed fetching data", error)
             } finally {
@@ -190,6 +191,7 @@ const Home = () => {
                 <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
                         {
+                            latestPosts.length !== 0 ? 
                             latestPosts.slice(firstIndex,lastIndex).map((post) => (
                                 <div key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
                                     <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-full h-48 object-cover" />
@@ -216,17 +218,20 @@ const Home = () => {
                                             <p>Read more</p>
                                         </div>
                                     </div>
-                                </div>
-                            ))
+                                </div> 
+                            )) : 
+                            <div className="flex justify-center items-center">
+                                <p>Nothing to show just yet — check back soon!</p>
+                            </div>
                         }
                     </div>
                     {/* Paginations */}
                     <div className="flex flex-row items-center justify-between text-white mb-4">
-                        <div role="button" className={`flex flex-row items-center gap-2 cursor-pointer ${currentPage === 1 ? "invisible" : "visible"} `} onClick={() => handleClickPrevPage()}>
+                        <div role="button" className={`flex flex-row items-center gap-2 cursor-pointer ${currentPage === 1 || latestPosts.length === 0 ? "invisible" : "visible"} `} onClick={() => handleClickPrevPage()}>
                             <FontAwesomeIcon icon={faArrowLeft} />
                             <p>Prev</p>
                         </div>
-                        <div role="button" className={`flex flex-row items-center gap-2 cursor-pointer ${currentPage === Math.ceil(latestPosts.length / itemsPerPage) ? "invisible" : "visible"} `} onClick={() => handleClickNextPage()}>
+                        <div role="button" className={`flex flex-row items-center gap-2 cursor-pointer ${currentPage === Math.ceil(latestPosts.length / itemsPerPage) || latestPosts.length === 0 ? "invisible" : "visible"} `} onClick={() => handleClickNextPage()}>
                             <p>Next</p>
                             <FontAwesomeIcon icon={faArrowRight} />
                         </div>
