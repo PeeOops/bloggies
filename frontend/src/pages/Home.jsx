@@ -37,6 +37,7 @@ const Home = () => {
 
     }
 
+
     // Pagination
     const [searchParams, setSearchParams] = useSearchParams();
     const [itemsPerPage, setItemsPerPage] = useState(6);
@@ -74,7 +75,7 @@ const Home = () => {
                 ])
                 setCategories(categoriesAPI.data);
                 setTags(tagsAPI.data);
-                setLatestPosts(latestPostsAPI.data.posts);  
+                setLatestPosts(latestPostsAPI.data.posts);
             } catch (error) {
                 console.log("Failed fetching data", error)
             } finally {
@@ -131,6 +132,7 @@ const Home = () => {
                                 categories.map((category) => (
                                     <div key={category.id} role="button" className="flex flex-row justify-between p-1 rounded-sm hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 cursor-pointer">
                                         <p>{category.name}</p>
+                                        <p>{latestPosts.filter((post) => post.category_id === category.id).length}</p>
                                     </div>
                                 ))
                                 
