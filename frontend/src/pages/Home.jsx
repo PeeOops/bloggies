@@ -75,8 +75,32 @@ const Home = () => {
         }
     }
 
-    // Category filters
-        const filteredCategories = searchParams.get("category_id") || "";
+    // Search filter
+    const [searchValue, setSearchValue] = useState("");
+    const filteredSearch = searchParams.get("search") || "";
+
+    const handleChangeSearch = (e) => {
+        setSearchValue(e.target.value);
+    }
+
+    const handleClickFilterSearch = () => {
+        const search = searchValue.toLowerCase();
+
+        setSearchParams({
+            search : search,
+        })
+        setInputValue("");
+    }
+
+    const handleClickEnter = (e) => {
+        if(e.key === "Enter"){
+            handleClickFilterSearch();
+        }
+    }
+
+
+    // Category filter
+    const filteredCategories = searchParams.get("category_id") || "";
     const handleClickFilterCategory = (id) => {
         setSearchParams({
             category_id: id,
@@ -93,17 +117,17 @@ const Home = () => {
             const progressInterval = simulateProgress();
 
             try {
-                const [categoriesAPI, tagsAPI, latestPostsAPI, filteredCategoryPostsAPI] = await Promise.all([
+                const [categoriesAPI, tagsAPI, latestPostsAPI, filteredPostsAPI] = await Promise.all([
                     api.get("/categories"),
                     api.get("/tags"),
                     api.get("/post/index"),
-                    filteredCategories ? api.get(`/post/index?category_id=${filteredCategories}`) : Promise.resolve(null)
+                    filteredCategories ? api.get(`/post/index?category_id=${filteredCategories}`) : filteredSearch ? api.get(`/post/index?search=${filteredSearch}`) : Promise.resolve(null)
                 ])
                 setCategories(categoriesAPI.data);
                 setTags(tagsAPI.data);
                 setAllPosts(latestPostsAPI.data.posts);
-                if(filteredCategories){
-                    setLatestPosts(filteredCategoryPostsAPI.data.posts);
+                if(filteredCategories || filteredSearch){
+                    setLatestPosts(filteredPostsAPI.data.posts);
                 }else{
                     setLatestPosts(latestPostsAPI.data.posts);
                 }
@@ -122,7 +146,7 @@ const Home = () => {
         }
 
         fetchData();
-    },[filteredCategories])
+    },[filteredCategories, filteredSearch])
 
     return (
         <>
@@ -153,7 +177,7 @@ const Home = () => {
                     <h1 className="text-lg md:hidden">Filters:</h1>
                     {/* Search */}
                     <div className="p-2 bg-emerald-950 border-1 border-white shadow-white shadow-md">
-                        <input type="text" placeholder="Search" className="text-white focus:outline-none" />
+                        <input value={searchValue} type="text" placeholder="Search" className="text-white focus:outline-none" onKeyDown={handleClickEnter} onChange={handleChangeSearch} />
                     </div>
 
                     {/* Categories */}
