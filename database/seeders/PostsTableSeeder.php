@@ -383,7 +383,7 @@ class PostsTableSeeder extends Seeder
                 Enjoy your journey through time. 🌙  
                 There’s always more to craft, build, and discover!
                 MD,
-                "type" => "guide",
+                "type" => "blog",
                 "category_id" => 4,
                 "author_id" => 1,
                 "tag_ids" => [2,5,3,9]
@@ -430,7 +430,7 @@ class PostsTableSeeder extends Seeder
                 **Play it on Deck? Absolutely.**  
                 With a few adjustments, *Cult of the Lamb* is just as addictive on the go as it is on PC or console.
                 MD,
-                "type" => "tech",
+                "type" => "news",
                 "category_id" => 5,
                 "author_id" => 1,
                 "tag_ids" => [4,7,10,3]
@@ -538,11 +538,215 @@ class PostsTableSeeder extends Seeder
 
                 Build smart. Survive longer. Thrive eventually. 🌑
                 MD,
-                "type" => "guide",
+                "type" => "blog",
                 "category_id" => 4,
                 "author_id" => 1,
                 "tag_ids" => [4,7,3,11]
+            ],
+            [
+                "title" => "Steam Deck OLED Launches Worldwide: Release Dates and Specs",
+                "subtitle" => "Valve's upgraded handheld arrives with better battery life and an OLED display.",
+                "featured_image_url" => "featured_images/steamdeck.png",
+                "body" => <<<MD
+                ### 🕹️ Steam Deck OLED Has Arrived
+
+                Valve’s Steam Deck OLED is rolling out globally, bringing **enhanced display and thermals** to handheld gaming.
+
+                📅 **Release Date:**  
+                - North America & Europe: **November 16, 2024**  
+                - Asia-Pacific: **December 5, 2024**
+
+                🔋 **Upgrades include:**
+                - Brighter OLED screen
+                - Longer battery life
+                - Quieter fans & better thermals
+
+                💬 More at:  
+                👉 [Steam Deck OLED FAQ](https://store.steampowered.com/steamdeck)
+
+                Get ready to dock or go. 🎮
+                MD,
+                "type" => "news",
+                "category_id" => 5,
+                "author_id" => 1,
+                "tag_ids" => []
+            ],
+            [
+                "title" => "Black Myth: Wukong – Critics Weigh In",
+                "subtitle" => "The long-awaited Chinese action-RPG draws praise—and some critique.",
+                "featured_image_url" => "featured_images/wukong.png",
+                "body" => <<<MD
+                ### 🐒 A Stunning Soulslike
+
+                *Black Myth: Wukong* impressed reviewers with its visuals and combat, but some noted a steep difficulty curve.
+
+                **Highlights from early reviews:**
+                - 🎨 "Visually breathtaking" – IGN  
+                - ⚔️ "Deep, punishing combat" – GameSpot  
+                - 🧭 "Sparse tutorials may frustrate casual players"
+
+                📊 **Metacritic average (as of July 2025):** 84/100  
+                👉 [Full Review Roundup](https://blackmyth.game/news)
+
+                Is it GOTY material or just flashy? You decide.
+                MD,
+                "type" => "blog",
+                "category_id" => 2,
+                "author_id" => 1,
+                "tag_ids" => [4, 8, 10]
+            ],
+            [
+                "title" => "Path of Exile 2: July Patch Adds New Skills and Bosses",
+                "subtitle" => "Grinding Gear Games drops a major mid-season update with balance changes and new gear.",
+                "featured_image_url" => "featured_images/poe2.png",
+                "body" => <<<MD
+                ### ⚔️ POE2 Grows Stronger
+
+                The July 2025 patch for *Path of Exile 2* introduces **six new active skills**, fresh legendary drops, and a long-awaited fix for dual-wield bugs.
+
+                🛠️ **Highlights:**
+                - New skill gems: Shatter Bolt, Flame Loop
+                - Act 3 boss rework: Crimson Maws
+                - UI/UX improvements for controller support
+
+                🧪 Full patch notes:  
+                👉 [pathofexile.com/patch-notes](https://www.pathofexile.com)
+
+                Exiles, your grind continues.
+                MD,
+                "type" => "news",
+                "category_id" => 1,
+                "author_id" => 1,
+                "tag_ids" => [3, 5, 11]
+            ],
+            [
+                "title" => "Fantasy Life 2: All Redeem Codes for July 2025",
+                "subtitle" => "Get free items, gems, and more with these active codes.",
+                "featured_image_url" => "featured_images/fl2.jpg",
+                "body" => <<<MD
+                ### 🎁 Free Rewards This Month
+
+                Use these **Fantasy Life 2** codes before they expire! Valid through **July 31, 2025**.
+
+                🔑 **Active Codes:**
+                - `LIFE2025GIFT` – 100 Gems  
+                - `FREEDOMCRAFT` – Furniture set  
+                - `GOLDENBLAZE` – Legendary sword skin
+
+                📌 Redeem in-game or at:  
+                👉 [codes.fantasylife.jp](https://codes.fantasylife.jp)
+
+                Codes change monthly—grab yours now!
+                MD,
+                "type" => "news",
+                "category_id" => 4,
+                "author_id" => 1,
+                "tag_ids" => [6, 7, 14]
+                ],
+            [
+                "title" => "Palworld and Terraria Join Forces: Crossover Event Details",
+                "subtitle" => "Pals meet pixelated chaos in a surprising indie crossover.",
+                "featured_image_url" => "featured_images/palworld.jpg",
+                "body" => <<<MD
+                ### 🧩 Unexpected Combo
+
+                *Palworld* players can now enjoy **Terraria-inspired content** as part of a July 2025 crossover event.
+
+                🔨 What's included:
+                - Terraria biome island
+                - Pal skin based on the Eye of Cthulhu
+                - Craftable Terraria-themed gear
+
+                ⏳ **Event ends August 15, 2025**  
+                👉 [palworld.com/events](https://palworld.com/events)
+
+                Grab your grappling hook—it’s building time.
+                MD,
+                "type" => "news",
+                "category_id" => 1,
+                "author_id" => 1,
+                "tag_ids" => [7, 13, 4]
+            ],
+            [
+                "title" => "Valorant Champions Tour 2025: Key Dates and Locations",
+                "subtitle" => "Riot reveals the global VCT schedule leading to Champions.",
+                "featured_image_url" => "featured_images/valorant.jpg",
+                "body" => <<<MD
+                ### 🎯 Valorant Esports Heats Up
+
+                The 2025 VCT season is in full swing with **international LANs**, regional showdowns, and the **Champions final in Seoul**.
+
+                🗓️ Upcoming Events:
+                - Masters Tokyo: **August 2–10**
+                - LCQ Europe: **July 18–23**
+                - Champions Seoul: **September 12–21**
+
+                📺 Stream on:  
+                👉 [Twitch.tv/Valorant](https://twitch.tv/valorant)
+
+                Watch the world’s best duel it out.
+                MD,
+                "type" => "news",
+                "category_id" => 3,
+                "author_id" => 1,
+                "tag_ids" => [9, 15, 2]
+            ],
+            [
+                "title" => "Dota 2 The International 2025: Dates Confirmed",
+                "subtitle" => "TI heads to Singapore with the biggest prize pool yet.",
+                "featured_image_url" => "featured_images/dota.png",
+                "body" => <<<MD
+                ### 🧙 TI Returns in Style
+
+                Valve has officially confirmed **The International 2025** will be hosted in **Singapore**.
+
+                📅 **Key Dates:**
+                - Group Stage: **October 3–7**  
+                - Main Event: **October 10–17**
+
+                🏆 Prize Pool: Over **\$35 million** (and counting)
+
+                👉 [dota2.com/international](https://www.dota2.com/international)
+
+                Who will lift the Aegis this year?
+                MD,
+                "type" => "news",
+                "category_id" => 3,
+                "author_id" => 1,
+                "tag_ids" => [10, 2, 9]
+            ],
+            [
+                "title" => "CS2 Major 2025: Dates, Teams, and What to Expect",
+                "subtitle" => "Counter-Strike 2 enters its second year with a packed esports calendar.",
+                "featured_image_url" => "featured_images/cs2.png",
+                "body" => <<<MD
+                ### 🔫 CS2 Esports in 2025
+
+                *Counter-Strike 2* continues its momentum with the 2025 Major circuit, featuring revamped maps and refined mechanics.
+
+                🗓️ **Upcoming Events:**
+                - BLAST Paris Major: **August 21–31, 2025**
+                - ESL Pro League Season 20: **September 15–October 5**
+                - IEM Katowice Qualifiers: **Starting October 18**
+
+                💰 Prize pools remain strong with **\$1.25M+** per major.
+
+                👉 Watch on: [twitch.tv/ESL_CSGO](https://twitch.tv/ESL_CSGO)
+
+                Smoke mid. Flash long. Watch legends rise.
+                MD,
+                "type" => "news",
+                "category_id" => 3,
+                "author_id" => 1,
+                "tag_ids" => [2, 16, 9]
             ]
+
+
+
+
+
+
+
 
 
         ];

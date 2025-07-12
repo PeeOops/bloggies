@@ -104,7 +104,6 @@ const Home = () => {
     const handleClickFilterCategory = (id) => {
         setSearchParams({
             category_id: id,
-            page: 1
         })
     }
 
@@ -131,7 +130,6 @@ const Home = () => {
                 }else{
                     setLatestPosts(latestPostsAPI.data.posts);
                 }
-                console.log(latestPosts)
             } catch (error) {
                 console.log("Failed fetching data", error)
             } finally {
