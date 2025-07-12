@@ -19,27 +19,23 @@ class TagsTableSeeder extends Seeder
             ["name" => "RPG"],
             ["name" => "MMO"],
             ["name" => "FPS"],
-            ["name" => "Fighting"],
             ["name" => "Strategy"],
             ["name" => "Simulation"],
-            ["name" => "Sport"],
+            ["name" => "Sports"],
             ["name" => "Racing"],
-            ["name" => "Horror"],
-            ["name" => "Sandbox"],
-            ["name" => "Survival"],
-            ["name" => "Platformer"],
-            ["name" => "Stealth"],
+            ["name" => "Fighting"],
             ["name" => "Puzzle"],
-            ["name" => "Rhythm"],
+            ["name" => "Platformer"],
+            ["name" => "Survival"],
+            ["name" => "Sandbox"],
+            ["name" => "Horror"],
             ["name" => "Battle Royale"],
-            ["name" => "Idle"],
-            ["name" => "Visual Novel"],
-            ["name" => "Card"],
-            ["name" => "MOBA"],
-            ["name" => "Virtual Reality"],
             ["name" => "Tactical Shooter"],
-            ["name" => "Interactive"]
+            ["name" => "Co-op"],
+            ["name" => "Open World"],
+            ["name" => "Indie"]
         ];
+
 
         foreach($tags as $tag){
             Tag::firstOrCreate($tag);
