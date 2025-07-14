@@ -3,7 +3,7 @@ import TopBackground from "../assets/images/background.jpg"
 import Navigation from "../components/Navigation";
 import { faAnglesRight, faArrowLeft, faArrowRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import api from "../axios.js";
 import LoadingBar from "../components/Utils/LoadingBar.jsx";
 import { useSearchParams } from "react-router-dom";
@@ -15,6 +15,7 @@ const Home = () => {
     const [tags, setTags] = useState([]);
     const [allPosts, setAllPosts] = useState([]);
     const [latestPosts, setLatestPosts] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     // Loading bar
     const [loading, setLoading] = useState(false);
@@ -39,7 +40,6 @@ const Home = () => {
 
 
     // Pagination
-    const [searchParams, setSearchParams] = useSearchParams();
     const [itemsPerPage, setItemsPerPage] = useState(6);
     const currentPage = parseInt(searchParams.get("page")) || 1;
     const lastIndex = currentPage * itemsPerPage;
@@ -108,34 +108,31 @@ const Home = () => {
     }
 
     // Tag filters
-    const filteredTags = searchParams.get("tag_ids") || [];
+
+    const filteredTags = searchParams.getAll("tag_ids");
+    const selectedTags = useMemo(() => {
+        return filteredTags.map(Number);
+    }, [filteredTags.join(",")]);
+
     const handleClickFilterTags = (id) => {
-        const selectedTags = filteredTags.push(id)
-        setSearchParams({
-            tag_ids: selectedTags
-        })
+        let updatedTags;
+        // Tag exist?
+        if(selectedTags.includes(id)){
+            updatedTags = selectedTags.filter((tag) => tag !== id);
+        }else{
+            updatedTags = [...selectedTags, id];
+        }
+
+        const newSearchParams = new URLSearchParams(searchParams);
+
+        newSearchParams.delete("tag_ids");
+
+        updatedTags.forEach((tagId) => {
+            newSearchParams.append("tag_ids", tagId);
+        });
+
+        setSearchParams(newSearchParams);
     }
-
-    // const selectedTags = filteredTags ? filteredTags.split(",").map(Number) : [];
-    // const handleClickFilterTags = (id) => {
-    //     let updatedTags;
-    //     // Tag exist?
-    //     if(selectedTags.includes(id)){
-    //         updatedTags = selectedTags.filter((tag) => tag !== id);
-    //     }else{
-    //         updatedTags = [...selectedTags, id];
-    //     }
-
-    //     const tagsParam = new URLSearchParams(searchParams);
-
-    //     if(selectedTags.length > 0){
-    //         tagsParam.set("tag_ids", updatedTags.join(","));
-    //     }else{
-    //         tagsParam.delete("tag_ids");
-    //     }
-
-    //     setSearchParams(tagsParam);
-    // }
 
     useEffect(() => {
         // Fetch data
@@ -150,12 +147,14 @@ const Home = () => {
                     api.get("/categories"),
                     api.get("/tags"),
                     api.get("/post/index"),
-                    filteredCategories ? api.get(`/post/index?category_id=${filteredCategories}`) : filteredSearch ? api.get(`/post/index?search=${filteredSearch}`) :  Promise.resolve(null)
+                    filteredCategories ? api.get(`/post/index?category_id=${filteredCategories}`) : filteredSearch ? api.get(`/post/index?search=${filteredSearch}`) : selectedTags.length > 0
+                    ? api.get(`/post/index?${selectedTags.map(id => `tag_ids[]=${id}`).join("&")}`)
+                    : Promise.resolve(null)
                 ])
                 setCategories(categoriesAPI.data);
                 setTags(tagsAPI.data);
                 setAllPosts(latestPostsAPI.data.posts);
-                if(filteredCategories || filteredSearch){
+                if(filteredCategories || filteredSearch || selectedTags.length > 0){
                     setLatestPosts(filteredPostsAPI.data.posts);
                 }else{
                     setLatestPosts(latestPostsAPI.data.posts);
@@ -174,7 +173,7 @@ const Home = () => {
         }
 
         fetchData();
-    },[filteredCategories, filteredSearch])
+    },[filteredCategories, filteredSearch, selectedTags])
 
     return (
         <>
@@ -234,7 +233,11 @@ const Home = () => {
                                     <span
                                         key={tag.id}
                                         onClick={() => handleClickFilterTags(tag.id)}
-                                        className={`p-2 cursor-pointer rounded-sm `}
+                                        className={`p-2 cursor-pointer rounded-sm ${
+                                            selectedTags.includes(tag.id)
+                                            ? "bg-white text-emerald-950"
+                                            : "bg-gray-600 hover:bg-white hover:text-emerald-950"
+                                        }`}
                                     >
                                         {tag.name}
                                     </span>
