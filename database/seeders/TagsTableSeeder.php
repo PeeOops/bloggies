@@ -34,7 +34,7 @@ class TagsTableSeeder extends Seeder
             ["name" => "Co-op"],
             ["name" => "Open World"],
             ["name" => "Indie"]
-        ];
+        ];  
 
 
         foreach($tags as $tag){

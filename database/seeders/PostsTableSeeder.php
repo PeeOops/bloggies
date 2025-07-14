@@ -72,7 +72,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
-                "tag_ids" => [1,3,8,13]
+                "tag_ids" => [2,3,13,19]
             ],
             [
                 "title" => "Age of Empires IV Expands With ‘Dynasties of the East’ DLC",
@@ -123,7 +123,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
-                "tag_ids" => [1,7,8]
+                "tag_ids" => [1,3,6,18]
             ],
             [
                 "title" => "Skyrim 2025 Anniversary Patch Adds Spellcrafting & Dragon Raids",
@@ -175,7 +175,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
-                "tag_ids" => [2,3,13]
+                "tag_ids" => [1,2,3,13,14,19]
             ],
             [
                 "title" => "The Witcher 3: Wild Hunt Gets Next-Gen Combat & Monster AI Overhaul",
@@ -229,7 +229,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
-                "tag_ids" => [1,6,8,3]
+                "tag_ids" => [1,2,3]
             ],
             [
                 "title" => "The Binding of Isaac: Repentance – A Beautiful Descent into Chaos",
@@ -279,7 +279,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "blog",
                 "category_id" => 2,
                 "author_id" => 1,
-                "tag_ids" => [1,2,3]
+                "tag_ids" => [1,3,12,15,20]
             ],
             [
                 "title" => "Spiritfarer Review – Saying Goodbye Has Never Been So Beautiful",
@@ -329,7 +329,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "blog",
                 "category_id" => 2,
                 "author_id" => 1,
-                "tag_ids" => [2,5,3,9]
+                "tag_ids" => [3,7,20]
             ],
             [
                 "title" => "Fantasy Life i: 10 Starter Tips for Your First Loop",
@@ -386,7 +386,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "blog",
                 "category_id" => 4,
                 "author_id" => 1,
-                "tag_ids" => [2,5,3,9]
+                "tag_ids" => [2,3,19,20]
             ],
             [
                 "title" => "Cult of the Lamb Runs Smooth on Steam Deck – But With Caveats",
@@ -433,7 +433,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 5,
                 "author_id" => 1,
-                "tag_ids" => [4,7,10,3]
+                "tag_ids" => [1,12,20]
             ],
             [
                 "title" => "Sea of Stars Gets Boss Rush Mode, Photo Features in July Update",
@@ -485,7 +485,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
-                "tag_ids" => [1,4,6,3]
+                "tag_ids" => [1,3,20]
             ],
             [
                 "title" => "Oxygen Not Included: 8 Essential Tips to Keep Your Dupes Alive",
@@ -541,7 +541,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "blog",
                 "category_id" => 4,
                 "author_id" => 1,
-                "tag_ids" => [4,7,3,11]
+                "tag_ids" => [6,7,13,14,20]
             ],
             [
                 "title" => "Steam Deck OLED Launches Worldwide: Release Dates and Specs",
@@ -593,7 +593,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "blog",
                 "category_id" => 2,
                 "author_id" => 1,
-                "tag_ids" => [4, 8, 10]
+                "tag_ids" => [1,3,10]
             ],
             [
                 "title" => "Path of Exile 2: July Patch Adds New Skills and Bosses",
@@ -617,7 +617,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
-                "tag_ids" => [3, 5, 11]
+                "tag_ids" => [1,3,4,18,19]
             ],
             [
                 "title" => "Fantasy Life 2: All Redeem Codes for July 2025",
@@ -641,7 +641,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 4,
                 "author_id" => 1,
-                "tag_ids" => [6, 7, 14]
+                "tag_ids" => [2,3,19,20]
                 ],
             [
                 "title" => "Palworld and Terraria Join Forces: Crossover Event Details",
@@ -665,7 +665,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 1,
                 "author_id" => 1,
-                "tag_ids" => [7, 13, 4]
+                "tag_ids" => [1,2,3,19]
             ],
             [
                 "title" => "Valorant Champions Tour 2025: Key Dates and Locations",
@@ -689,7 +689,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 3,
                 "author_id" => 1,
-                "tag_ids" => [9, 15, 2]
+                "tag_ids" => [5]
             ],
             [
                 "title" => "Dota 2 The International 2025: Dates Confirmed",
@@ -713,7 +713,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 3,
                 "author_id" => 1,
-                "tag_ids" => [10, 2, 9]
+                "tag_ids" => [18]
             ],
             [
                 "title" => "CS2 Major 2025: Dates, Teams, and What to Expect",
@@ -738,7 +738,7 @@ class PostsTableSeeder extends Seeder
                 "type" => "news",
                 "category_id" => 3,
                 "author_id" => 1,
-                "tag_ids" => [2, 16, 9]
+                "tag_ids" => [5]
             ]
 
 

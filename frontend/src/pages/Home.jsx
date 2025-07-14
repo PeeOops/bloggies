@@ -107,6 +107,9 @@ const Home = () => {
         })
     }
 
+    // Tag filters
+    
+
     useEffect(() => {
         // Fetch data
         const fetchData = async () => {
