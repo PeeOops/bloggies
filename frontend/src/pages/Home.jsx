@@ -96,10 +96,21 @@ const Home = () => {
     const handleClickFilterSearch = () => {
         const search = searchValue.toLowerCase();
 
-        setSearchParams({
-            search : search,
-        })
+        const newSearchParams = new URLSearchParams(searchParams);
+        newSearchParams.set("search", search);
+        newSearchParams.delete("page");
+
+        if(searchParams.has("category_id")){
+            newSearchParams.delete("category_id");
+        }
+
+        if(searchParams.has("tag_ids")){
+            newSearchParams.delete("tag_ids");
+        }
+
+        setSearchParams(newSearchParams);
         setSearchValue("");
+
     }
 
     const handleClickEnter = (e) => {
@@ -112,9 +123,20 @@ const Home = () => {
     // Category filter
     const filteredCategories = searchParams.get("category_id") || "";
     const handleClickFilterCategory = (id) => {
-        setSearchParams({
-            category_id: id,
-        })
+        const newSearchParams = new URLSearchParams(searchParams);
+        newSearchParams.set("category_id", id);
+        newSearchParams.delete("page");
+
+        if(searchParams.has("search")){
+            newSearchParams.delete("search");
+        }
+
+        if(searchParams.has("tag_ids")){
+            newSearchParams.delete("tag_ids");
+        }
+
+
+        setSearchParams(newSearchParams);
     }
 
     // Tag filters
@@ -134,6 +156,14 @@ const Home = () => {
         }
 
         const newSearchParams = new URLSearchParams(searchParams);
+
+        if(newSearchParams.has("category_id")){
+            newSearchParams.delete("category_id");
+        }
+
+        if(newSearchParams.has("search")){
+            newSearchParams.delete("search");
+        }
 
         newSearchParams.delete("tag_ids");
 
