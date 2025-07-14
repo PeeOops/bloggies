@@ -165,6 +165,7 @@ const Home = () => {
             newSearchParams.delete("search");
         }
 
+        newSearchParams.delete("page");
         newSearchParams.delete("tag_ids");
 
         updatedTags.forEach((tagId) => {
