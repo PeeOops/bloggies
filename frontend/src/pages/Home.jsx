@@ -54,6 +54,11 @@ const Home = () => {
                     category_id: filteredCategories,
                     page: currentPage + 1
                 })
+            }else if(filteredSearch){
+                setSearchParams({
+                    search: filteredSearch,
+                    page: currentPage + 1
+                })
             }else{
                 setSearchParams({page: currentPage + 1});
             }
@@ -66,6 +71,11 @@ const Home = () => {
             if(filteredCategories){
                 setSearchParams({
                     category_id: filteredCategories,
+                    page: currentPage - 1
+                })
+            }else if(filteredSearch){
+                setSearchParams({
+                    search: filteredSearch,
                     page: currentPage - 1
                 })
             }else{
@@ -130,6 +140,7 @@ const Home = () => {
         updatedTags.forEach((tagId) => {
             newSearchParams.append("tag_ids", tagId);
         });
+
 
         setSearchParams(newSearchParams);
     }
