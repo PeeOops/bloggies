@@ -89,7 +89,7 @@ const Home = () => {
         setSearchParams({
             search : search,
         })
-        setInputValue("");
+        setSearchValue("");
     }
 
     const handleClickEnter = (e) => {
@@ -108,7 +108,34 @@ const Home = () => {
     }
 
     // Tag filters
-    
+    const filteredTags = searchParams.get("tag_ids") || [];
+    const handleClickFilterTags = (id) => {
+        const selectedTags = filteredTags.push(id)
+        setSearchParams({
+            tag_ids: selectedTags
+        })
+    }
+
+    // const selectedTags = filteredTags ? filteredTags.split(",").map(Number) : [];
+    // const handleClickFilterTags = (id) => {
+    //     let updatedTags;
+    //     // Tag exist?
+    //     if(selectedTags.includes(id)){
+    //         updatedTags = selectedTags.filter((tag) => tag !== id);
+    //     }else{
+    //         updatedTags = [...selectedTags, id];
+    //     }
+
+    //     const tagsParam = new URLSearchParams(searchParams);
+
+    //     if(selectedTags.length > 0){
+    //         tagsParam.set("tag_ids", updatedTags.join(","));
+    //     }else{
+    //         tagsParam.delete("tag_ids");
+    //     }
+
+    //     setSearchParams(tagsParam);
+    // }
 
     useEffect(() => {
         // Fetch data
@@ -123,7 +150,7 @@ const Home = () => {
                     api.get("/categories"),
                     api.get("/tags"),
                     api.get("/post/index"),
-                    filteredCategories ? api.get(`/post/index?category_id=${filteredCategories}`) : filteredSearch ? api.get(`/post/index?search=${filteredSearch}`) : Promise.resolve(null)
+                    filteredCategories ? api.get(`/post/index?category_id=${filteredCategories}`) : filteredSearch ? api.get(`/post/index?search=${filteredSearch}`) :  Promise.resolve(null)
                 ])
                 setCategories(categoriesAPI.data);
                 setTags(tagsAPI.data);
@@ -204,7 +231,13 @@ const Home = () => {
                         <div className="flex flex-wrap gap-2 text-sm">
                             {
                                 tags.map((tag) => (
-                                    <span key={tag.id} role="button" className="hover:bg-white hover:text-emerald-950 active:bg-white active:text-emerald-950 p-2 bg-gray-600 cursor-pointer rounded-sm">{tag.name}</span>
+                                    <span
+                                        key={tag.id}
+                                        onClick={() => handleClickFilterTags(tag.id)}
+                                        className={`p-2 cursor-pointer rounded-sm `}
+                                    >
+                                        {tag.name}
+                                    </span>
                                 ))
                             }
                             

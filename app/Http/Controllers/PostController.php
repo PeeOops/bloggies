@@ -78,11 +78,17 @@ class PostController extends Controller
         }
 
         // By tag
-        if($request->has("tag_ids")){
-            $query->whereHas("tags",function ($query) use ($request){
-                $query->whereIn("id",$request->tag_ids);
-            });
-        }
+           if ($request->has('tag_ids')) {
+                $tagIds = $request->input('tag_ids');
+
+                    if (is_array($tagIds)) {
+                        foreach ($tagIds as $tagId) {
+                            $query->whereHas('tags', function ($query) use ($tagId) {
+                                $query->where('id', $tagId);
+                            });
+                        }
+                    }
+            }
 
         // By search
         if($request->has("search")){
