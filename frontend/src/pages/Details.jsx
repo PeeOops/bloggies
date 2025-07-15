@@ -65,23 +65,27 @@ const Details = () => {
             const progressInterval = simulateProgress();
 
             try {
+                // API Fetch
                 const [postDataAPI, allPostAPI] = await Promise.all([
                     api.get(`/post/${id}`),
                     api.get("/post/index")
                 ])
+                // Id params check
                 const checkedId = allPostAPI.data.posts.map((post) => post.id);
-
-                const plainText = stripMarkdown(postDataAPI.data.post.body);
-                const wordsLength = plainText.trim().split(/\s+/).length;
-                const readingPerMin = 200;
-                setReadingTime(Math.ceil(wordsLength/readingPerMin));
-                
                 if(!checkedId.includes(parseInt(id))){
                     navigate("/404");
                 }else{
                     setPostData(postDataAPI.data.post);
                     setPostTags(postDataAPI.data.post.tags);
                 }
+
+                // Reading time
+                const plainText = stripMarkdown(postDataAPI.data.post.body);
+                const wordsLength = plainText.trim().split(/\s+/).length;
+                const readingPerMin = 200;
+                setReadingTime(Math.ceil(wordsLength/readingPerMin));
+                
+
                 
             } catch (error) {
                 console.log("Failed fetching data", error);
@@ -144,9 +148,11 @@ const Details = () => {
                         <p className="border-l-3 border-white pl-2 md:text-lg">Tags</p>
                         <div className="flex flex-wrap gap-2 text-sm">
                             {
+                                    postTags.length > 0 ?
                                     postTags.map((tag) => (
                                         <span key={tag.id} className="bg-white text-emerald-950 p-2 rounded-sm">{tag.name}</span>
-                                    ))
+                                    )) :
+                                    <span>-</span>
                                     
                             }
                             
