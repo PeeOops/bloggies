@@ -17,7 +17,7 @@ const Details = () => {
     const navigate = useNavigate();
     const [postData, setPostData] = useState([]);
     const [postTags, setPostTags] = useState([]);
-    const [checkId, setCheckId] = useState([]);
+    const [readingTime, setReadingTime] = useState(0);
 
     // Loading bar
     const [loading, setLoading] = useState(false);
@@ -40,6 +40,16 @@ const Details = () => {
 
     }
 
+    // Reading time
+    const stripMarkdown = (markdown) => {
+        return markdown
+        .replace(/!\[.*?\]\(.*?\)/g, '')
+        .replace(/\[.*?\]\(.*?\)/g, '') 
+        .replace(/[`*_>#\-~]/g, '')     
+        .replace(/\n+/g, ' ')           
+        .trim();
+    }
+
     // Scroll to top when visiting page
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -60,7 +70,11 @@ const Details = () => {
                     api.get("/post/index")
                 ])
                 const checkedId = allPostAPI.data.posts.map((post) => post.id);
-                setCheckId(checkedId);
+
+                const plainText = stripMarkdown(postDataAPI.data.post.body);
+                const wordsLength = plainText.trim().split(/\s+/).length;
+                const readingPerMin = 200;
+                setReadingTime(Math.ceil(wordsLength/readingPerMin));
                 
                 if(!checkedId.includes(parseInt(id))){
                     navigate("/404");
@@ -114,7 +128,7 @@ const Details = () => {
                     <div className="flex flex-row gap-4 text-xs md:text-sm text-gray-400">
                         <p>{postData.created_at}</p>
                         <span>-</span>
-                        <p>4 mins read</p>
+                        <p>{readingTime === 1 ? `${readingTime} min read` : `${readingTime} mins read`}</p>
                         <span>-</span>
                         <FontAwesomeIcon className="cursor-pointer text-white" icon={faHeart} />
                         <FontAwesomeIcon className="cursor-pointer text-white" icon={faShare} />
