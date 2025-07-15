@@ -1,6 +1,6 @@
 import Navigation from "../components/Navigation";
 import TopBackground from "../assets/images/background.jpg";
-import Thumbnail from "../assets/images/thumbnails/mirage.png";
+import ReactMarkdown from 'react-markdown';
 import Footer from "../components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShare, faCalendar, faUser, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
@@ -73,12 +73,7 @@ const Details = () => {
                     {/* Sub title */}
                     <h3 className="italic text-gray-400 text-base md:text-lg">{postData.subtitle}</h3>
                     {/* Post */}
-                    <p className="text-sm md:text-base">When the moon blinked twice last Friday, gamers around the globe collectively glooped their fleebles in unison. That’s when Quantum Muffin: Echoes of Snarf dropped—an interdimensional multiplayer saga that defies all logic, physics, and toaster-related etiquette.</p>
-                    <p className="text-sm md:text-base">From the opening splink, where the protagonist Yibblebonk rides a thermodynamic kangaroo across the jellywaves of Sector 9-Bloop, to the final boss fight against the inverted philosophy of Schrödog’s Kat, Quantum Muffin dazzles. The gameplay is fueled by a patented engine called FLURB-X™, which renders every emotion as a fruit and lets players duel using synchronized interpretive sneeze-dances.</p>
-                    <p className="text-sm md:text-base">From the opening splink, where the protagonist Yibblebonk rides a thermodynamic kangaroo across the jellywaves of Sector 9-Bloop, to the final boss fight against the inverted philosophy of Schrödog’s Kat, Quantum Muffin dazzles. The gameplay is fueled by a patented engine called FLURB-X™, which renders every emotion as a fruit and lets players duel using synchronized interpretive sneeze-dances.</p>
-                    <p className="text-sm md:text-base">From the opening splink, where the protagonist Yibblebonk rides a thermodynamic kangaroo across the jellywaves of Sector 9-Bloop, to the final boss fight against the inverted philosophy of Schrödog’s Kat, Quantum Muffin dazzles. The gameplay is fueled by a patented engine called FLURB-X™, which renders every emotion as a fruit and lets players duel using synchronized interpretive sneeze-dances.</p>
-                    <p className="text-sm md:text-base">From the opening splink, where the protagonist Yibblebonk rides a thermodynamic kangaroo across the jellywaves of Sector 9-Bloop, to the final boss fight against the inverted philosophy of Schrödog’s Kat, Quantum Muffin dazzles. The gameplay is fueled by a patented engine called FLURB-X™, which renders every emotion as a fruit and lets players duel using synchronized interpretive sneeze-dances.</p>
-                    <p className="text-sm md:text-base">From the opening splink, where the protagonist Yibblebonk rides a thermodynamic kangaroo across the jellywaves of Sector 9-Bloop, to the final boss fight against the inverted philosophy of Schrödog’s Kat, Quantum Muffin dazzles. The gameplay is fueled by a patented engine called FLURB-X™, which renders every emotion as a fruit and lets players duel using synchronized interpretive sneeze-dances.</p>
+                    <ReactMarkdown children={postData.body} />
                     {/* Tags */}
                     <div className="flex flex-col gap-4">
                         <p className="border-l-3 border-white pl-2 md:text-lg">Tags</p>
