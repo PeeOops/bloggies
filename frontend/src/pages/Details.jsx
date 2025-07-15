@@ -17,7 +17,9 @@ const Details = () => {
     const navigate = useNavigate();
     const [postData, setPostData] = useState([]);
     const [postTags, setPostTags] = useState([]);
-    const [readingTime, setReadingTime] = useState(0);
+    const [readingTime, setReadingTime] = useState(0);3
+    const [currentPostTags, setCurrentPostTags] = useState([]);
+    const [similarPosts, setSimilarPosts] = useState([]);
 
     // Loading bar
     const [loading, setLoading] = useState(false);
@@ -78,6 +80,12 @@ const Details = () => {
                     setPostData(postDataAPI.data.post);
                     setPostTags(postDataAPI.data.post.tags);
                 }
+
+                setCurrentPostTags(postDataAPI.data.post.tags.map((tag) => tag.id))
+
+                console.log(currentPostTags)
+
+
 
                 // Reading time
                 const plainText = stripMarkdown(postDataAPI.data.post.body);
