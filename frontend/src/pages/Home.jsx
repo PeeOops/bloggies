@@ -46,43 +46,16 @@ const Home = () => {
     const firstIndex = lastIndex - itemsPerPage;
 
     const handleClickNextPage = () => {
-        const maxPage = Math.ceil(latestPosts.length / itemsPerPage);
-
-        if(currentPage < maxPage){
-            if(filteredCategories){
-                setSearchParams({
-                    category_id: filteredCategories,
-                    page: currentPage + 1
-                })
-            }else if(filteredSearch){
-                setSearchParams({
-                    search: filteredSearch,
-                    page: currentPage + 1
-                })
-            }else{
-                setSearchParams({page: currentPage + 1});
-            }
-            
-        }
+        const newSearchParams = new URLSearchParams(searchParams);
+        newSearchParams.set("page", currentPage + 1);
+        setSearchParams(newSearchParams);
     }
 
     const handleClickPrevPage = () => {
-        if(currentPage > 1){
-            if(filteredCategories){
-                setSearchParams({
-                    category_id: filteredCategories,
-                    page: currentPage - 1
-                })
-            }else if(filteredSearch){
-                setSearchParams({
-                    search: filteredSearch,
-                    page: currentPage - 1
-                })
-            }else{
-                setSearchParams({page: currentPage - 1});
-            }
-            
-        }
+
+        const newSearchParams = new URLSearchParams(searchParams);
+        newSearchParams.set("page", currentPage - 1);
+        setSearchParams(newSearchParams);
     }
 
     // Search filter
