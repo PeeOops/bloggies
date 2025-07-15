@@ -5,25 +5,44 @@ import Footer from "../components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShare, faCalendar, faUser, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
 import api from "../axios";
 
 const Details = () => {
 
+    // State declarations
     const { id } = useParams();
-    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const [postData, setPostData] = useState([]);
     const [postTags, setPostTags] = useState([]);
+    const [checkId, setCheckId] = useState([]);
 
+    // Loading bar
+    const [loading, setLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
     useEffect(() => {
 
         const fetchPost = async () => {
             try {
-                const response = await api.get(`/post/${id}`);
-                setPostData(response.data.post);
-                setPostTags(response.data.post.tags);
+                const [postDataAPI, allPostAPI] = await Promise.all([
+                    api.get(`/post/${id}`),
+                    api.get("/post/index")
+                ])
+                const checkedId = allPostAPI.data.posts.map((post) => post.id);
+                setCheckId(checkedId);
+                if(!checkedId.includes(parseInt(id))){
+                    navigate("/404");
+                }else{
+                    setPostData(postDataAPI.data.post);
+                    setPostTags(postDataAPI.data.post.tags);
+                }
+                
             } catch (error) {
                 console.log("Failed fetching data", error);
             } finally{
