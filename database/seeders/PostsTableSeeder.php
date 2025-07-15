@@ -69,7 +69,7 @@ class PostsTableSeeder extends Seeder
                 The **Minecraft July 2025 update** elevates copper from a rarely-used material to a vital part of early gameplay.  
                 From **golems that organize your items** to **tools that look cool and get the job done**, this update hits the sweet spot for both builders and survival players.
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [2,3,13,19]
@@ -120,7 +120,7 @@ class PostsTableSeeder extends Seeder
 
                 With **expanded civilizations**, deep campaigns, and **dynamic environmental effects**, *Dynasties of the East* is a must-play DLC for RTS fans and history buffs alike.
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [1,3,6,18]
@@ -172,7 +172,7 @@ class PostsTableSeeder extends Seeder
                 **Skyrim’s 2025 patch** proves this legendary RPG still has surprises left.  
                 Whether you’re a battlemage or stealth archer, this update adds **depth, danger, and delight** to your next adventure.
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [1,2,3,13,14,19]
@@ -226,7 +226,7 @@ class PostsTableSeeder extends Seeder
                 This **2025 combat-focused patch** brings *The Witcher 3* closer to modern RPG standards.  
                 Whether it’s the upgraded swordplay or smarter foes, veterans and newcomers alike have fresh reasons to dive back into the Continent.
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [1,2,3]
@@ -276,7 +276,7 @@ class PostsTableSeeder extends Seeder
                 Repentance is both a celebration and culmination.  
                 There’s *no going back* to older versions after this.
                 MD,
-                "type" => "blog",
+                "type" => "Blog",
                 "category_id" => 2,
                 "author_id" => 1,
                 "tag_ids" => [1,3,12,15,20]
@@ -326,7 +326,7 @@ class PostsTableSeeder extends Seeder
                 Spiritfarer balances light simulation gameplay with heavy emotional storytelling.  
                 A must-play for anyone who’s lost—and loved.
                 MD,
-                "type" => "blog",
+                "type" => "Blog",
                 "category_id" => 2,
                 "author_id" => 1,
                 "tag_ids" => [3,7,20]
@@ -383,7 +383,7 @@ class PostsTableSeeder extends Seeder
                 Enjoy your journey through time. 🌙  
                 There’s always more to craft, build, and discover!
                 MD,
-                "type" => "blog",
+                "type" => "Blog",
                 "category_id" => 4,
                 "author_id" => 1,
                 "tag_ids" => [2,3,19,20]
@@ -430,7 +430,7 @@ class PostsTableSeeder extends Seeder
                 **Play it on Deck? Absolutely.**  
                 With a few adjustments, *Cult of the Lamb* is just as addictive on the go as it is on PC or console.
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 5,
                 "author_id" => 1,
                 "tag_ids" => [1,12,20]
@@ -482,7 +482,7 @@ class PostsTableSeeder extends Seeder
 
                 A small update—but a mighty one.
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [1,3,20]
@@ -538,7 +538,7 @@ class PostsTableSeeder extends Seeder
 
                 Build smart. Survive longer. Thrive eventually. 🌑
                 MD,
-                "type" => "blog",
+                "type" => "Blog",
                 "category_id" => 4,
                 "author_id" => 1,
                 "tag_ids" => [6,7,13,14,20]
@@ -566,7 +566,7 @@ class PostsTableSeeder extends Seeder
 
                 Get ready to dock or go. 🎮
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 5,
                 "author_id" => 1,
                 "tag_ids" => []
@@ -590,7 +590,7 @@ class PostsTableSeeder extends Seeder
 
                 Is it GOTY material or just flashy? You decide.
                 MD,
-                "type" => "blog",
+                "type" => "Blog",
                 "category_id" => 2,
                 "author_id" => 1,
                 "tag_ids" => [1,3,10]
@@ -614,7 +614,7 @@ class PostsTableSeeder extends Seeder
 
                 Exiles, your grind continues.
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [1,3,4,18,19]
@@ -638,7 +638,7 @@ class PostsTableSeeder extends Seeder
 
                 Codes change monthly—grab yours now!
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 4,
                 "author_id" => 1,
                 "tag_ids" => [2,3,19,20]
@@ -662,7 +662,7 @@ class PostsTableSeeder extends Seeder
 
                 Grab your grappling hook—it’s building time.
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 1,
                 "author_id" => 1,
                 "tag_ids" => [1,2,3,19]
@@ -686,7 +686,7 @@ class PostsTableSeeder extends Seeder
 
                 Watch the world’s best duel it out.
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 3,
                 "author_id" => 1,
                 "tag_ids" => [5]
@@ -710,7 +710,7 @@ class PostsTableSeeder extends Seeder
 
                 Who will lift the Aegis this year?
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 3,
                 "author_id" => 1,
                 "tag_ids" => [18]
@@ -735,7 +735,7 @@ class PostsTableSeeder extends Seeder
 
                 Smoke mid. Flash long. Watch legends rise.
                 MD,
-                "type" => "news",
+                "type" => "News",
                 "category_id" => 3,
                 "author_id" => 1,
                 "tag_ids" => [5]

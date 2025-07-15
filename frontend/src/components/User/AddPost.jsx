@@ -182,8 +182,8 @@ const AddPost = ({userData}) => {
                     <label htmlFor="type">Type:</label>
                     <select name="type" id="type" onChange={handleChangeForm} className="border-2 p-1">
                         <option value="" hidden>Choose Type</option>
-                        <option value="news">News</option>
-                        <option value="blog">Blog</option>
+                        <option value="News">News</option>
+                        <option value="Blog">Blog</option>
                     </select>
                 </div>
                 {/* Tags */}

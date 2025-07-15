@@ -43,7 +43,7 @@ createRoot(document.getElementById('root')).render(
 
       {/* 404 */}
       <Route path="*" element={<NotFound />} />
-      <Route path="/news/id" element={<Details />} />
+      <Route path="/post/:id" element={<Details />} />
     </Routes>
   </BrowserRouter>
 

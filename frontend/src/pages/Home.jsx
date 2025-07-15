@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import { useEffect, useMemo, useState } from "react";
 import api from "../axios.js";
 import LoadingBar from "../components/Utils/LoadingBar.jsx";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const Home = () => {
 
@@ -269,7 +269,7 @@ const Home = () => {
                         {
                             latestPosts.length !== 0 ? 
                             latestPosts.slice(firstIndex,lastIndex).map((post) => (
-                                <div key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
+                                <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
                                     <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-full h-48 object-cover" />
                                     <div className="p-6">
                                         {/* Published date and author */}
@@ -294,7 +294,7 @@ const Home = () => {
                                             <p>Read more</p>
                                         </div>
                                     </div>
-                                </div> 
+                                </Link> 
                             )) : 
                             <div className="flex justify-center items-center">
                                 <p>Nothing to show just yet — check back soon!</p>

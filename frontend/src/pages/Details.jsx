@@ -5,8 +5,36 @@ import Footer from "../components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShare, faCalendar, faUser, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import api from "../axios";
 
 const Details = () => {
+
+    const { id } = useParams();
+    const [loading, setLoading] = useState(false);
+    const [postData, setPostData] = useState([]);
+    const [postTags, setPostTags] = useState([]);
+
+
+    useEffect(() => {
+
+        const fetchPost = async () => {
+            try {
+                const response = await api.get(`/post/${id}`);
+                setPostData(response.data.post);
+                setPostTags(response.data.post.tags);
+            } catch (error) {
+                console.log("Failed fetching data", error);
+            } finally{
+
+            }
+        }
+
+        fetchPost();
+
+    },[{id}])
+
     return(
         <>
             {/* Header */}
@@ -28,12 +56,12 @@ const Details = () => {
                 {/* Left panel */}
                 <div className="flex flex-col gap-4">
                     {/* News or Blogs */}
-                    <p className="text-sm md:text-sm text-gray-400">News</p>
+                    <p className="text-sm md:text-sm text-gray-400">{postData.type}</p>
                     {/* Title */}
-                    <h1 className="text-2xl md:text-4xl">One of the best steam games in 2025</h1>
+                    <h1 className="text-2xl md:text-4xl">{postData.title}</h1>
                     {/* Date and Average reading time */}
                     <div className="flex flex-row gap-4 text-xs md:text-sm text-gray-400">
-                        <p>2 Oct, 2018</p>
+                        <p>{postData.created_at}</p>
                         <span>-</span>
                         <p>4 mins read</p>
                         <span>-</span>
@@ -41,9 +69,9 @@ const Details = () => {
                         <FontAwesomeIcon className="cursor-pointer text-white" icon={faShare} />
                     </div>
                     {/* Featured image */}
-                    <img src={Thumbnail} alt="" className="w-full" />
+                    <img src={`http://localhost:8000/storage/${postData.featured_image_url}`} alt="" className="w-full" />
                     {/* Sub title */}
-                    <h3 className="italic text-gray-400 text-base md:text-lg">Zorblax Revolutionizes Pixelated Quantum Narratives with Flarbinomics</h3>
+                    <h3 className="italic text-gray-400 text-base md:text-lg">{postData.subtitle}</h3>
                     {/* Post */}
                     <p className="text-sm md:text-base">When the moon blinked twice last Friday, gamers around the globe collectively glooped their fleebles in unison. That’s when Quantum Muffin: Echoes of Snarf dropped—an interdimensional multiplayer saga that defies all logic, physics, and toaster-related etiquette.</p>
                     <p className="text-sm md:text-base">From the opening splink, where the protagonist Yibblebonk rides a thermodynamic kangaroo across the jellywaves of Sector 9-Bloop, to the final boss fight against the inverted philosophy of Schrödog’s Kat, Quantum Muffin dazzles. The gameplay is fueled by a patented engine called FLURB-X™, which renders every emotion as a fruit and lets players duel using synchronized interpretive sneeze-dances.</p>
@@ -54,7 +82,15 @@ const Details = () => {
                     {/* Tags */}
                     <div className="flex flex-col gap-4">
                         <p className="border-l-3 border-white pl-2 md:text-lg">Tags</p>
-                        <div className="flex flex-wrap gap-2 text-sm"><span className="bg-white text-emerald-950 p-2 rounded-sm">Adventure</span><span className="bg-white text-emerald-950 p-2 rounded-sm">MMORPG</span><span className="bg-white text-emerald-950 p-2 rounded-sm">Story Rich</span></div>
+                        <div className="flex flex-wrap gap-2 text-sm">
+                            {
+                                    postTags.map((tag) => (
+                                        <span className="bg-white text-emerald-950 p-2 rounded-sm">{tag.name}</span>
+                                    ))
+                                    
+                            }
+                            
+                        </div>
                     </div>
                     {/* Social medias */}
                     <div className="flex flex-col gap-4">
