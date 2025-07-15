@@ -25,6 +25,7 @@ Route::post("/login",[AuthController::class,"login"]);
 Route::get("/categories",[CategoriesController::class, "getAllCategories"]);
 Route::get("/tags",[TagsController::class,"getAllTags"]);
 Route::get("/post/index", [PostController::class, "index"]);
+Route::get("/post/{id}", [PostController::class, "show"]);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);

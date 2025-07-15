@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
@@ -80,14 +81,13 @@ class PostController extends Controller
         // By tag
            if ($request->has('tag_ids')) {
                 $tagIds = $request->input('tag_ids');
-
-                    if (is_array($tagIds)) {
-                        foreach ($tagIds as $tagId) {
-                            $query->whereHas('tags', function ($query) use ($tagId) {
-                                $query->where('id', $tagId);
-                            });
-                        }
+                if (is_array($tagIds)) {
+                    foreach ($tagIds as $tagId) {
+                        $query->whereHas('tags', function ($query) use ($tagId) {
+                            $query->where('id', $tagId);
+                        });
                     }
+                }
             }
 
         // By search
@@ -106,5 +106,23 @@ class PostController extends Controller
             "posts" => $posts
         ]);
 
+    }
+
+    public function show($id){
+        $post = Post::with([
+            "category:id,name",
+            "tags:id,name",
+            "author:id,username"
+        ])->find($id);
+
+        if(!$post){
+            return response()->json([
+                "message" => ["Post not found", 404]
+            ]);
+        }
+
+        return response()->json([
+            "post" => $post
+        ]);
     }
 }
