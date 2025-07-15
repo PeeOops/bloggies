@@ -145,7 +145,7 @@ const Details = () => {
                         <div className="flex flex-wrap gap-2 text-sm">
                             {
                                     postTags.map((tag) => (
-                                        <span className="bg-white text-emerald-950 p-2 rounded-sm">{tag.name}</span>
+                                        <span key={tag.id} className="bg-white text-emerald-950 p-2 rounded-sm">{tag.name}</span>
                                     ))
                                     
                             }
