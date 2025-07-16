@@ -3,7 +3,7 @@ import TopBackground from "../assets/images/background.jpg";
 import ReactMarkdown from 'react-markdown';
 import Footer from "../components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faShare, faCalendar, faUser, faAnglesRight, faX } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faHeartBroken, faShare} from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
@@ -17,8 +17,11 @@ const Details = () => {
     const navigate = useNavigate();
     const [postData, setPostData] = useState([]);
     const [postTags, setPostTags] = useState([]);
-    const [readingTime, setReadingTime] = useState(0);3
+    const [readingTime, setReadingTime] = useState(0);
     const [similarPosts, setSimilarPosts] = useState([]);
+    const [liked, setLiked] = useState(false);
+    const [likeCounts, setLikeCounts] = useState("");
+
 
     // Loading bar
     const [loading, setLoading] = useState(false);
@@ -51,8 +54,13 @@ const Details = () => {
         .trim();
     }
 
-
-    const memoizedSimilarPosts = useMemo(() => similarPosts, [similarPosts]);
+    // Like post
+    const handleClickLike = () => {
+        api.post(`/post/${id}/like`)
+        .then((res) => {
+            setLiked(res.data.liked);
+        })
+    }
 
     // Scroll to top when visiting page
     useEffect(() => {
@@ -70,9 +78,10 @@ const Details = () => {
 
             try {
                 // API Fetch
-                const [postDataAPI, allPostAPI] = await Promise.all([
+                const [postDataAPI, allPostAPI, likeStatusAPI] = await Promise.all([
                     api.get(`/post/${id}`),
-                    api.get("/post/index")
+                    api.get("/post/index"),
+                    api.get(`/post/${id}/like`)
                 ])
                 // Id params check
                 const checkedId = allPostAPI.data.posts.map((post) => post.id);
@@ -81,6 +90,8 @@ const Details = () => {
                 }else{
                     setPostData(postDataAPI.data.post);
                     setPostTags(postDataAPI.data.post.tags);
+                    setLiked(likeStatusAPI.data.liked);
+                    setLikeCounts(likeStatusAPI.data.likes_count);
                 }
 
                 const currentPostTags = postDataAPI.data.post.tags.map((tag) => tag.id);
@@ -140,12 +151,15 @@ const Details = () => {
                     {/* Title */}
                     <h1 className="text-2xl md:text-4xl">{postData.title}</h1>
                     {/* Date and Average reading time */}
-                    <div className="flex flex-row gap-4 text-xs md:text-sm text-gray-400">
+                    <div className="flex flex-row gap-4 items-center text-xs md:text-sm text-gray-400">
                         <p>{postData.created_at}</p>
                         <span>-</span>
                         <p>{readingTime === 1 ? `${readingTime} min read` : `${readingTime} mins read`}</p>
                         <span>-</span>
-                        <FontAwesomeIcon className="cursor-pointer text-white" icon={faHeart} />
+                        <div className="flex flex-row gap-1 items-center">
+                            <p>{likeCounts}</p>
+                            <FontAwesomeIcon onClick={() => handleClickLike()} className={`cursor-pointer ${liked ? "text-red-400" : "text-white"}`} icon={liked ? faHeart : faHeartBroken} />
+                        </div>
                         <FontAwesomeIcon className="cursor-pointer text-white" icon={faShare} />
                     </div>
                     {/* Featured image */}

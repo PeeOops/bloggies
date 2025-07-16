@@ -38,5 +38,9 @@ class Post extends Model
     public function author(){
         return $this->belongsTo(User::class, "author_id");
     }
+
+    public function likedByUsers(){
+        return $this->belongsToMany(User::class, "post_user_likes")->withTimestamps();
+    }
     
 }
