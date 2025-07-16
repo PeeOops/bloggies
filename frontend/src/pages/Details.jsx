@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShare, faCalendar, faUser, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import api from "../axios";
 import LoadingBar from "../components/Utils/LoadingBar";
@@ -18,7 +18,6 @@ const Details = () => {
     const [postData, setPostData] = useState([]);
     const [postTags, setPostTags] = useState([]);
     const [readingTime, setReadingTime] = useState(0);3
-    const [currentPostTags, setCurrentPostTags] = useState([]);
     const [similarPosts, setSimilarPosts] = useState([]);
 
     // Loading bar
@@ -52,6 +51,9 @@ const Details = () => {
         .trim();
     }
 
+
+    const memoizedSimilarPosts = useMemo(() => similarPosts, [similarPosts]);
+
     // Scroll to top when visiting page
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -81,20 +83,21 @@ const Details = () => {
                     setPostTags(postDataAPI.data.post.tags);
                 }
 
-                setCurrentPostTags(postDataAPI.data.post.tags.map((tag) => tag.id))
+                const currentPostTags = postDataAPI.data.post.tags.map((tag) => tag.id);
 
-                console.log(currentPostTags)
+                // aaa
+                const similar = allPostAPI.data.posts.filter(post =>
+                    post.id !== parseInt(id) && post.tags.some(tag => currentPostTags.includes(tag.id))
+                );
 
-
+                setSimilarPosts(similar);
 
                 // Reading time
                 const plainText = stripMarkdown(postDataAPI.data.post.body);
                 const wordsLength = plainText.trim().split(/\s+/).length;
                 const readingPerMin = 200;
                 setReadingTime(Math.ceil(wordsLength/readingPerMin));
-                
-
-                
+                                
             } catch (error) {
                 console.log("Failed fetching data", error);
             } finally{
@@ -184,14 +187,19 @@ const Details = () => {
                 {/* Right panel */}
                 <div className="flex flex-col gap-4">
                     {/* Similar posts */}
-                    <p className="border-l-3 border-white pl-2 md:text-lg">Similar posts</p>
+                    {
+                        similarPosts.length > 0 ?
+                        <p className="border-l-3 border-white pl-2 md:text-lg">Similar posts</p> :
+                        ""
+                    }
+                    
                     <ol className="flex flex-col gap-4 list-decimal pl-4 text-base">
-                        <li role="button" className="line-clamps-3 border-b-1 border-gray-400 pb-4">PlayStation Announces A State Of Play Will Air Tomorrow, June 4</li>
-                        <li role="button" className="border-b-1 border-gray-400 pb-4">IO Interactive Announces Its First Showcase Featuring Hitman, 007 First Light, and MindsEye</li>
-                        <li role="button" className="border-b-1 border-gray-400 pb-4">World of Warcraft: The Legacy of Arathor Update to Arrive Mid-June</li>
-                        <li role="button" className="border-b-1 border-gray-400 pb-4">Assassin's Creed Statue Makers May Have Leaked Existence Of Assassin's Creed 4: Black Flag Remake</li>
-                        <li role="button" className="border-b-1 border-gray-400 pb-4">Assassin's Creed Statue Makers May Have Leaked Existence Of Assassin's Creed 4: Black Flag Remake</li>
-                        <li role="button">Forza Horizon Founder New Studio is Working on a “AAA” Racing Game</li>
+                        {
+                            similarPosts.length > 0 ?
+                            similarPosts.slice(0,5).map((post) => (
+                                <Link to={`/post/${post.id}`} className="line-clamps-3 border-b-1 last:border-b-0 border-gray-400 pb-4"><li key={post.id} role="button" >{post.title}</li></Link>
+                            )) : ""
+                        }
                     </ol>
                 </div>
             </div>
