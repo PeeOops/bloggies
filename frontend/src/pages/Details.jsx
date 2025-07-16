@@ -20,7 +20,7 @@ const Details = () => {
     const [readingTime, setReadingTime] = useState(0);
     const [similarPosts, setSimilarPosts] = useState([]);
     const [liked, setLiked] = useState(false);
-    const [likeCounts, setLikeCounts] = useState("");
+    const [likesCount, setLikesCount] = useState("");
 
 
     // Loading bar
@@ -59,6 +59,7 @@ const Details = () => {
         api.post(`/post/${id}/like`)
         .then((res) => {
             setLiked(res.data.liked);
+            setLikesCount(res.data.likes_count)
         })
     }
 
@@ -91,7 +92,7 @@ const Details = () => {
                     setPostData(postDataAPI.data.post);
                     setPostTags(postDataAPI.data.post.tags);
                     setLiked(likeStatusAPI.data.liked);
-                    setLikeCounts(likeStatusAPI.data.likes_count);
+                    setLikesCount(likeStatusAPI.data.likes_count);
                 }
 
                 const currentPostTags = postDataAPI.data.post.tags.map((tag) => tag.id);
@@ -157,7 +158,7 @@ const Details = () => {
                         <p>{readingTime === 1 ? `${readingTime} min read` : `${readingTime} mins read`}</p>
                         <span>-</span>
                         <div className="flex flex-row gap-1 items-center">
-                            <p>{likeCounts}</p>
+                            <p>{likesCount > 0 ? likesCount : ""}</p>
                             <FontAwesomeIcon onClick={() => handleClickLike()} className={`cursor-pointer ${liked ? "text-red-400" : "text-white"}`} icon={liked ? faHeart : faHeartBroken} />
                         </div>
                         <FontAwesomeIcon className="cursor-pointer text-white" icon={faShare} />
