@@ -3,8 +3,8 @@ import TopBackground from "../assets/images/background.jpg";
 import ReactMarkdown from 'react-markdown';
 import Footer from "../components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faShare, faCalendar, faUser, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
-import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faHeart, faShare, faCalendar, faUser, faAnglesRight, faX } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import api from "../axios";
@@ -173,13 +173,13 @@ const Details = () => {
                     <div className="flex flex-col gap-4">
                         <p className="border-l-3 border-white pl-2 md:text-lg">Follow Us</p>
                         <div className="flex flex-wrap gap-4 text-lg">
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faFacebook} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faInstagram} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitter} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitch} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faReddit} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faYoutube} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTiktok} /></a>
+                            <a href="https://facebook.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faFacebook} /></a>
+                            <a href="https://instagram.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faInstagram} /></a>
+                            <a href="https://twitter.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faXTwitter} /></a>
+                            <a href="https://twitch.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitch} /></a>
+                            <a href="https://reddit.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faReddit} /></a>
+                            <a href="https://youtube.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faYoutube} /></a>
+                            <a href="https://tiktok.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTiktok} /></a>
                         </div>
                     </div>
                 </div>
