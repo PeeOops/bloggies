@@ -63,6 +63,17 @@ const Details = () => {
         })
     }
 
+    // Share Post
+    const handleClickShare = () => {
+        navigator.clipboard.writeText(window.location.href)
+        .then(() => {
+            alert("Link copied to clipboard!");
+        })
+        .catch((error) => {
+            console.log("Failed to copy link", error)
+        })
+    }
+
     // Scroll to top when visiting page
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -161,7 +172,7 @@ const Details = () => {
                             <p>{likesCount > 0 ? likesCount : ""}</p>
                             <FontAwesomeIcon onClick={() => handleClickLike()} className={`cursor-pointer ${liked ? "text-red-400" : "text-white"}`} icon={liked ? faHeart : faHeartBroken} />
                         </div>
-                        <FontAwesomeIcon className="cursor-pointer text-white" icon={faShare} />
+                        <FontAwesomeIcon onClick={() => handleClickShare()} className="cursor-pointer text-white" icon={faShare} />
                     </div>
                     {/* Featured image */}
                     <img src={`http://localhost:8000/storage/${postData.featured_image_url}`} alt="" className="w-full" />
