@@ -6,9 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faHeartBroken, faShare} from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../axios";
 import LoadingBar from "../components/Utils/LoadingBar";
+import ModalMessage from "../components/Utils/ModalMessage";
 
 const Details = () => {
 
@@ -21,7 +22,7 @@ const Details = () => {
     const [similarPosts, setSimilarPosts] = useState([]);
     const [liked, setLiked] = useState(false);
     const [likesCount, setLikesCount] = useState("");
-
+    const [message, setMessage] = useState("");
 
     // Loading bar
     const [loading, setLoading] = useState(false);
@@ -56,6 +57,10 @@ const Details = () => {
 
     // Like post
     const handleClickLike = () => {
+        if(!localStorage.getItem("token")){
+            setMessage("You need to be logged in to perform this action.");
+        }
+
         api.post(`/post/${id}/like`)
         .then((res) => {
             setLiked(res.data.liked);
@@ -108,7 +113,7 @@ const Details = () => {
 
                 const currentPostTags = postDataAPI.data.post.tags.map((tag) => tag.id);
 
-                // aaa
+                // Similar posts
                 const similar = allPostAPI.data.posts.filter(post =>
                     post.id !== parseInt(id) && post.tags.some(tag => currentPostTags.includes(tag.id))
                 );
@@ -139,7 +144,16 @@ const Details = () => {
 
     return(
         <>
+            {/* Loading bar */}
             <LoadingBar loading={loading} progress={progress} />
+
+            {/* Modal */}
+            {
+                message ? 
+                <ModalMessage message={message} /> :
+                ""
+            }
+
             {/* Header */}
             <div className="relative overflow-hidden">
 
@@ -223,7 +237,7 @@ const Details = () => {
                         {
                             similarPosts.length > 0 ?
                             similarPosts.slice(0,5).map((post) => (
-                                <Link to={`/post/${post.id}`} className="line-clamps-3 border-b-1 last:border-b-0 border-gray-400 pb-4"><li key={post.id} role="button" >{post.title}</li></Link>
+                                <Link key={post.id} to={`/post/${post.id}`} className="line-clamps-3 border-b-1 last:border-b-0 border-gray-400 pb-4"><li  role="button" >{post.title}</li></Link>
                             )) : ""
                         }
                     </ol>

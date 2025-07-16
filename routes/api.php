@@ -27,6 +27,7 @@ Route::get("/categories",[CategoriesController::class, "getAllCategories"]);
 Route::get("/tags",[TagsController::class,"getAllTags"]);
 Route::get("/post/index", [PostController::class, "index"]);
 Route::get("/post/{id}", [PostController::class, "show"]);
+Route::get('/post/{post}/like', [PostLikeController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -34,5 +35,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update',[AuthController::class,'update']);
     Route::post('/post/store',[PostController::class,'store']);
     Route::post('/post/{post}/like', [PostLikeController::class, 'toggleLike']);
-    Route::get('/post/{post}/like', [PostLikeController::class, 'show']);
 });
