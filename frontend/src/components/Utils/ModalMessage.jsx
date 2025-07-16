@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ModalMessage = ({message}) => {
+const ModalMessage = ({message, setMessage}) => {
 
     const navigate = useNavigate();
     const dialogRef = useRef();
@@ -17,6 +17,9 @@ const ModalMessage = ({message}) => {
     const handleClickContinue = () => {
         if(message === "You need to be logged in to perform this action."){
             navigate("/login");
+        }else{
+            dialogRef.current?.close();
+            setMessage("");
         }
     }
 

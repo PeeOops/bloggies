@@ -72,7 +72,7 @@ const Details = () => {
     const handleClickShare = () => {
         navigator.clipboard.writeText(window.location.href)
         .then(() => {
-            alert("Link copied to clipboard!");
+            setMessage("Link copied to clipboard!");
         })
         .catch((error) => {
             console.log("Failed to copy link", error)
@@ -150,7 +150,7 @@ const Details = () => {
             {/* Modal */}
             {
                 message ? 
-                <ModalMessage message={message} /> :
+                <ModalMessage message={message} setMessage={setMessage} /> :
                 ""
             }
 
