@@ -14,7 +14,7 @@ class PostController extends Controller
         $validated = $request->validate([
             "title" => "required|string|max:50",
             "subtitle" => "required|string|max:255",
-            "featured_image" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
+            "featured_image" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096",
             "body" => "required|string",
             "type" => "required|string",
             "category_id" => "required|exists:categories,id",
