@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import api from "../axios";
 import { Link } from "react-router-dom";
+import LoadingBar from "../components/Utils/LoadingBar";
 
 const Blogs = () => {
 
@@ -14,8 +15,34 @@ const Blogs = () => {
     const [recentBlogPosts, setRecentBlogPosts] = useState([]);
     const [popularBlogPosts, setPopularBlogPosts] = useState([]);
 
+    // Loading bar
+    const [loading, setLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
+
+    const simulateProgress = () => {
+        setProgress(10);
+
+        const interval = setInterval(() => {
+            setProgress((prev) => {
+                if(prev < 90){
+                    return prev + Math.random() * 10;
+                }
+                clearInterval(interval);
+                return prev;
+            })
+        },100)
+
+        return interval;
+
+    }
+
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
+            setProgress(0);
+
+            const progressInterval = simulateProgress();
+
             try {
                 const [recentBlogsAPI, popularBlogAPI] = await Promise.all([
                     api.get("/post/index"),
@@ -26,6 +53,13 @@ const Blogs = () => {
 
             } catch (error) {
                 
+            } finally{
+                clearInterval(progressInterval);
+                setProgress(100);
+                setTimeout(() => {
+                    setLoading(false);
+                    setProgress(0);
+                },500);
             }
         }
 
@@ -34,6 +68,9 @@ const Blogs = () => {
 
     return(
         <>
+            {/* Loading bar */}
+            <LoadingBar loading={loading} progress={progress} />
+
             {/* Header */}
             <div className="relative overflow-hidden">
 
