@@ -125,13 +125,13 @@ const News = () => {
                     <div className="flex flex-col gap-4">
                         {
                             popularNewsPosts.map((post) => (
-                                <div key={post.id} role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
+                                <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
                                     <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-36 md:w-64 h-auto rounded-md" />
                                     <div className="flex flex-col justify-between">
                                         <h1 className="text-sm md:text-xl">{post.title}</h1>
                                         <p className="text-xs md:text-lg text-gray-400">{post.created_at}</p>
                                     </div>
-                                </div>
+                                </Link>
                             ))
 
                         }
@@ -141,22 +141,22 @@ const News = () => {
                     <div className="flex flex-col gap-4">
                         <h1 className="text-xl md:text-xl mt-6">Follow Us</h1>
                         <div className="flex flex-row justify-between md:gap-8 p-4 border-2 border-white text-xl rounded-md md:text-2xl w-full">
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faFacebook} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faInstagram} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitter} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitch} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faReddit} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faYoutube} /></a>
-                            <a href=""><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTiktok} /></a>
+                            <a href="https://facebook.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faFacebook} /></a>
+                            <a href="https://instagram.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faInstagram} /></a>
+                            <a href="https://x.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitter} /></a>
+                            <a href="https://twitch.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitch} /></a>
+                            <a href="https://reddit.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faReddit} /></a>
+                            <a href="https://youtube.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faYoutube} /></a>
+                            <a href="https://tiktok.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTiktok} /></a>
                         </div>
                         <h1 className="text-xl md:text-xl mt-6 border-l-4 border-white pl-4">Highlights</h1>
                         <ol className="flex flex-col gap-4 list-decimal pl-4">
-                            <li role="button" className="line-clamps-3 border-b-1 border-gray-400 pb-4">PlayStation Announces A State Of Play Will Air Tomorrow, June 4</li>
-                            <li role="button" className="border-b-1 border-gray-400 pb-4">IO Interactive Announces Its First Showcase Featuring Hitman, 007 First Light, and MindsEye</li>
-                            <li role="button" className="border-b-1 border-gray-400 pb-4">World of Warcraft: The Legacy of Arathor Update to Arrive Mid-June</li>
-                            <li role="button" className="border-b-1 border-gray-400 pb-4">Assassin's Creed Statue Makers May Have Leaked Existence Of Assassin's Creed 4: Black Flag Remake</li>
-                            <li role="button" className="border-b-1 border-gray-400 pb-4">Assassin's Creed Statue Makers May Have Leaked Existence Of Assassin's Creed 4: Black Flag Remake</li>
-                            <li role="button">Forza Horizon Founder New Studio is Working on a “AAA” Racing Game</li>
+                            {
+                                recentNewsPosts.slice(-5).map((post) => (
+                                    <Link to={`/post/${post}`} role="button" className="line-clamps-3 border-b-1 border-gray-400 pl-4 pb-4 last:border-0 last:pb-0"><li>{post.title}</li></Link>
+                                ))
+                            }
+                            
                         </ol>
                     </div>
                 </div>
