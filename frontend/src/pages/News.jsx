@@ -202,9 +202,10 @@ const News = () => {
             </div>
             {/* More News */}
             <div className="flex flex-col gap-4 bg-emerald-950 py-8 px-4 md:px-24 text-white">
-                <h1 className="text-xl md:text-3xl">More News</h1>
+                <h1 className="text-xl md:text-3xl">{recentNewsPosts.slice(6,10).length > 0 ? "More news" : ""}</h1>
                 <div className="grid grid-cols-2 gap-2 md:gap-4">
                     {
+                        recentNewsPosts.slice(6,10).length > 0 ?
                         recentNewsPosts.slice(6,10).map((post) => (
                             <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
                                 <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-full h-24 md:h-64 object-cover" />
@@ -232,7 +233,7 @@ const News = () => {
                                     </div>
                                 </div>
                             </Link>
-                        ))
+                        )) : ""
                     }
                     
                 </div>
