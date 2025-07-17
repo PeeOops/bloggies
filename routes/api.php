@@ -28,6 +28,7 @@ Route::get("/tags",[TagsController::class,"getAllTags"]);
 Route::get("/post/index", [PostController::class, "index"]);
 Route::get("/post/{id}", [PostController::class, "show"]);
 Route::get('/post/{post}/like', [PostLikeController::class, 'show']);
+Route::get('/post/index/popular', [PostLikeController::class, 'showByPopularity']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);

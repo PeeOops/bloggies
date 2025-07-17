@@ -19,7 +19,7 @@ class PostLikeController extends Controller
         }
     }
 
-        public function show(Post $post, Request $request)
+    public function show(Post $post, Request $request)
     {
         $user = $request->user();
 
@@ -27,6 +27,14 @@ class PostLikeController extends Controller
             'post' => $post,
             'liked' => $user ? $user->likedPosts->contains($post->id) : false,
             'likes_count' => $post->likedByUsers()->count()
+        ]);
+    }
+
+    public function showByPopularity(){
+        $posts = Post::withCount("likedByUsers")->orderByDesc("liked_by_users_count")->get();
+
+        return response()->json([
+            "posts" => $posts
         ]);
     }
 }

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TopBackground from "../assets/images/background.jpg"
 import Thumbnail from "../assets/images/thumbnails/mirage.png"
 import Navigation from "../components/Navigation";
-import { faAnglesRight, faArrowRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAnglesRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
@@ -11,15 +11,18 @@ import { Link } from "react-router-dom";
 
 const News = () => {
 
-    const [recentNewsPost, setRecentNewsPost] = useState([]);
+    const [recentNewsPosts, setRecentNewsPosts] = useState([]);
+    const [popularNewsPosts, setPopularNewsPosts] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [recentNewsAPI] = await Promise.all([
-                    api.get("/post/index")
+                const [recentNewsAPI, popularNewsAPI] = await Promise.all([
+                    api.get("/post/index"),
+                    api.get("/post/index/popular")
                 ])
-                setRecentNewsPost(recentNewsAPI.data.posts.filter((post) => post.type === "News"));
+                setRecentNewsPosts(recentNewsAPI.data.posts.filter((post) => post.type === "News"));
+                setPopularNewsPosts(popularNewsAPI.data.posts.slice(0,5));
 
             } catch (error) {
                 
@@ -50,7 +53,7 @@ const News = () => {
                 <div className="flex flex-col md:grid md:grid-cols-[2fr_3fr] gap-4">
                     {/* Newest */}
                     {
-                        recentNewsPost.slice(0,1).map((post) => (
+                        recentNewsPosts.slice(0,1).map((post) => (
                             <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
                                 <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-full h-48 md:h-96 object-cover" />
                                 <div className="p-4 md:p-6">
@@ -83,7 +86,7 @@ const News = () => {
                     {/* 2nd to 4th Recent News */}
                     <div className="grid grid-cols-2 gap-2 md:gap-4">
                         {
-                            recentNewsPost.slice(1,5).map((post) => (
+                            recentNewsPosts.slice(1,5).map((post) => (
                                 <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
                                     <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-full h-24 md:h-36 object-cover" />
                                     <div className="p-4 md:p-6">
@@ -114,49 +117,25 @@ const News = () => {
                         }
                         </div>
                     </div>
-                <p role="button" className="text-white text-end cursor-pointer">Show more...</p>
             </div>
             {/* Popular News */}
             <div className="flex flex-col gap-4 bg-emerald-950 py-8 px-4 md:px-24 text-white">
                 <h1 className="text-xl md:text-3xl">Popular News</h1>
                 <div className="flex flex-col md:grid md:grid-cols-[3fr_2fr] gap-16">
                     <div className="flex flex-col gap-4">
-                        <div role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                            <img src={Thumbnail} alt="" className="w-36 md:w-64 h-auto rounded-md" />
-                            <div className="flex flex-col justify-between">
-                                <h1 className="text-sm md:text-xl">One of the best steam games in 2025</h1>
-                                <p className="text-xs md:text-lg text-gray-400">Survival, Apocalypse</p>
-                            </div>
-                        </div>
-                        <div role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                            <img src={Thumbnail} alt="" className="w-36 md:w-64 h-auto rounded-md" />
-                            <div className="flex flex-col justify-between">
-                                <h1 className="text-sm md:text-xl">One of the best steam games in 2025</h1>
-                                <p className="text-xs md:text-lg text-gray-400">Survival, Apocalypse</p>
-                            </div>
-                        </div>
-                        <div role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                            <img src={Thumbnail} alt="" className="w-36 md:w-64 h-auto rounded-md" />
-                            <div className="flex flex-col justify-between">
-                                <h1 className="text-sm md:text-xl">One of the best steam games in 2025</h1>
-                                <p className="text-xs md:text-lg text-gray-400">Survival, Apocalypse</p>
-                            </div>
-                        </div>
-                        <div role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                            <img src={Thumbnail} alt="" className="w-36 md:w-64 h-auto rounded-md" />
-                            <div className="flex flex-col justify-between">
-                                <h1 className="text-sm md:text-xl">One of the best steam games in 2025</h1>
-                                <p className="text-xs md:text-lg text-gray-400">Survival, Apocalypse</p>
-                            </div>
-                        </div>
-                        <div role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                            <img src={Thumbnail} alt="" className="w-36 md:w-64 h-auto rounded-md" />
-                            <div className="flex flex-col justify-between">
-                                <h1 className="text-sm md:text-xl">One of the best steam games in 2025</h1>
-                                <p className="text-xs md:text-lg text-gray-400">Survival, Apocalypse</p>
-                            </div>
-                        </div>
-                        <p role="button" className="text-white text-end cursor-pointer">Show more...</p>
+                        {
+                            popularNewsPosts.map((post) => (
+                                <div key={post.id} role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
+                                    <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-36 md:w-64 h-auto rounded-md" />
+                                    <div className="flex flex-col justify-between">
+                                        <h1 className="text-sm md:text-xl">{post.title}</h1>
+                                        <p className="text-xs md:text-lg text-gray-400">{post.created_at}</p>
+                                    </div>
+                                </div>
+                            ))
+
+                        }
+                        
                     </div>
                     
                     <div className="flex flex-col gap-4">
