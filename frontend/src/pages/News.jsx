@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 const News = () => {
 
+    // State declarations
     const [recentNewsPosts, setRecentNewsPosts] = useState([]);
     const [popularNewsPosts, setPopularNewsPosts] = useState([]);
 
