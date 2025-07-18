@@ -10,15 +10,18 @@ import Unauthorized from "../components/Errors/403";
 
 const User = () => {
 
+    // State declarations
     const [navigation, setNavigation] = useState("profile");
     const {username} = useParams();
     const [userData, setUserData] = useState({});
     const [authorized, setAuthorized] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
 
+
    useEffect(() => {
     const token = localStorage.getItem("token");
 
+    // Fetch user data
     const fetchUser = () => {
         if (token) {
             api.get("/me")
@@ -45,6 +48,8 @@ const User = () => {
         fetchUser();
     }, [username]);
 
+
+    // Handle click navigation
     const handleClickNavigate = (nav) => {
         setNavigation(nav);
         if(nav){

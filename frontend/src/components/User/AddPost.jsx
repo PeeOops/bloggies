@@ -77,8 +77,7 @@ const AddPost = ({userData}) => {
         e.preventDefault();
 
         if (!form.body.trim()) {
-            alert("Post content is required!");
-            return;
+            setMessage("Post content is required!");
         }
 
         
@@ -107,8 +106,7 @@ const AddPost = ({userData}) => {
 
             setMessage("Post added successfully");
         } catch (error) {
-            console.error(error);
-            alert("Failed to add post");
+            console.error("Post data failed", error);
         }
 
 
