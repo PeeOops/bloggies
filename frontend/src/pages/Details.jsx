@@ -189,7 +189,10 @@ const Details = () => {
                         <FontAwesomeIcon onClick={() => handleClickShare()} className="cursor-pointer text-white" icon={faShare} />
                     </div>
                     {/* Featured image */}
-                    <img src={`http://localhost:8000/storage/${postData.featured_image_url}`} alt="" className="w-full" />
+                    {
+                        postData.featured_image_url !== null ?
+                        <img src={`http://localhost:8000/storage/${postData.featured_image_url}`} alt={postData.title} className="w-full" /> : ""
+                    }
                     {/* Sub title */}
                     <h3 className="italic text-gray-400 text-base md:text-lg">{postData.subtitle}</h3>
                     {/* Post */}

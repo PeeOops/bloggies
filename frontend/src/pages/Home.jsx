@@ -271,6 +271,7 @@ const Home = () => {
                             latestPosts.slice(firstIndex,lastIndex).map((post) => (
                                 <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
                                     <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-full h-48 object-cover" />
+                                    
                                     <div className="p-6">
                                         {/* Published date and author */}
                                         <div className="flex flex-row text-xs gap-2">
