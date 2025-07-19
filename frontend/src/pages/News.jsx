@@ -94,7 +94,7 @@ const News = () => {
                     {
                         recentNewsPosts.slice(0,1).map((post) => (
                             <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
-                                <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-full h-48 md:h-96 object-cover" />
+                                <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-full h-48 md:h-96 object-cover" />
                                 <div className="p-4 md:p-6">
                                     {/* Published date and author */}
                                     <div className="flex flex-row text-xs md:text-md gap-2">
@@ -127,7 +127,7 @@ const News = () => {
                         {
                             recentNewsPosts.slice(1,5).map((post) => (
                                 <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
-                                    <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-full h-24 md:h-36 object-cover" />
+                                    <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-full h-48 object-cover" />
                                     <div className="p-4 md:p-6">
                                         {/* Published date and author */}
                                         <div className="hidden md:flex flex-row text-xs gap-2">
@@ -165,7 +165,7 @@ const News = () => {
                         {
                             popularNewsPosts.map((post) => (
                                 <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                                    <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-36 md:w-64 h-auto rounded-md" />
+                                    <img  src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-36 md:w-64 h-auto rounded-md" />
                                     <div className="flex flex-col justify-between">
                                         <h1 className="text-sm md:text-xl">{post.title}</h1>
                                         <p className="text-xs md:text-lg text-gray-400">{post.created_at}</p>
@@ -208,7 +208,7 @@ const News = () => {
                         recentNewsPosts.slice(6,10).length > 0 ?
                         recentNewsPosts.slice(6,10).map((post) => (
                             <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
-                                <img src={`http://localhost:8000/storage/${post.featured_image_url}`} alt={post.title} className="w-full h-24 md:h-64 object-cover" />
+                                <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-full h-48 object-cover" />
                                 <div className="p-4 md:p-6">
                                     {/* Published date and author */}
                                     <div className="hidden md:flex flex-row text-xs md:text-sm gap-2">
