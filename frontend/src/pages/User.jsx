@@ -139,7 +139,7 @@ const User = () => {
                         <h1 className="text-xl mb-6">{navigation.charAt(0).toUpperCase() + navigation.slice(1)}</h1>
                         {/* Profile Content */}
                         {
-                            navigation === "profile" ? <Profile userData={userData} setUserData={setUserData} /> : navigation === "add post" ? <AddPost userData={userData} /> : navigation === "my posts" ? <MyPosts /> : navigation === "liked posts" ? <LikedPost /> : ""
+                            navigation === "profile" ? <Profile userData={userData} setUserData={setUserData} /> : navigation === "add post" ? <AddPost userData={userData} /> : navigation === "my posts" ? <MyPosts userData={userData} /> : navigation === "liked posts" ? <LikedPost /> : ""
                         }
                     </div>
                 </div>
