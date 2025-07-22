@@ -7,6 +7,8 @@ import AddPost from "../components/User/AddPost";
 import { useParams, useSearchParams } from "react-router-dom";
 import api from "../axios";
 import Unauthorized from "../components/Errors/403";
+import MyPosts from "../components/User/MyPosts";
+import LikedPost from "../components/User/LikedPosts";
 
 const User = () => {
 
@@ -127,8 +129,8 @@ const User = () => {
                         <div className="flex flex-col gap-4">
                             <p onClick={() => handleClickNavigate("profile")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "profile" ? "border-l-3 bg-gray-200" : ""}`} role="button">Profile</p>
                             <p onClick={() => handleClickNavigate("add post")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "add post" ? "border-l-3 bg-gray-200" : ""}`} role="button">Add Post</p>
-                            <p onClick={() => handleClickNavigate("saved articles")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "saved articles" ? "border-l-3 bg-gray-200" : ""}`} role="button">Saved Articles</p>
-                            <p onClick={() => handleClickNavigate("activities")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "activities" ? "border-l-3 bg-gray-200" : ""}`} role="button">Activities</p>
+                            <p onClick={() => handleClickNavigate("my posts")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "my posts" ? "border-l-3 bg-gray-200" : ""}`} role="button">My posts</p>
+                            <p onClick={() => handleClickNavigate("liked posts")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "liked posts" ? "border-l-3 bg-gray-200" : ""}`} role="button">Liked posts</p>
                         </div>
                     </div>
 
@@ -137,7 +139,7 @@ const User = () => {
                         <h1 className="text-xl mb-6">{navigation.charAt(0).toUpperCase() + navigation.slice(1)}</h1>
                         {/* Profile Content */}
                         {
-                            navigation === "profile" ? <Profile userData={userData} setUserData={setUserData} /> : navigation === "add post" ? <AddPost userData={userData} /> : ""
+                            navigation === "profile" ? <Profile userData={userData} setUserData={setUserData} /> : navigation === "add post" ? <AddPost userData={userData} /> : navigation === "my posts" ? <MyPosts /> : navigation === "liked posts" ? <LikedPost /> : ""
                         }
                     </div>
                 </div>
