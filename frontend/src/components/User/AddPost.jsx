@@ -106,6 +106,7 @@ const AddPost = ({userData}) => {
 
             setMessage("Post added successfully");
         } catch (error) {
+            setMessage("Please check your input");
             console.error("Post data failed", error);
         }
 
