@@ -108,7 +108,7 @@ const MyPosts = ({userData, setLoading, setProgress, setNavigation}) => {
                 {   
                     posts.length > 0 ?
                     posts.slice(firstIndex,lastIndex).map((post) => (
-                        <div key={post.id} className="flex flex-col md:flex-row gap-2 border-2 border-emerald-950 p-2 md:max-h-36">
+                        <div key={post.id} className="flex flex-col md:flex-row gap-2 border-2 border-emerald-950 p-2 md:max-h-64">
                             <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-full md:w-96 h-36 md:h-auto object-cover" />
                             <div className="flex flex-col justify-between w-full text-emerald-950">
                                 <h1 className="text-xl md:text-2xl line-clamp-2">{post.title}</h1>
