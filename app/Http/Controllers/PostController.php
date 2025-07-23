@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
@@ -133,6 +135,11 @@ class PostController extends Controller
             return response()->json([
                 "message" => ["Unauthorized", 403]
             ]);
+        }
+
+        // Delete image
+        if ($post->featured_image_url && Storage::disk('public')->exists($post->featured_image_url)) {
+            Storage::disk('public')->delete($post->featured_image_url);
         }
 
         $post->delete();
