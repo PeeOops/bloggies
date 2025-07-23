@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../axios";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import ModalMessage from "../Utils/ModalMessage";
 
 
 const MyPosts = ({userData, setLoading, setProgress}) => {
@@ -8,6 +9,7 @@ const MyPosts = ({userData, setLoading, setProgress}) => {
     // State declarations
     const [posts, setPosts] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [message, setMessage] = useState("");
 
     // Paginations
     const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -45,6 +47,18 @@ const MyPosts = ({userData, setLoading, setProgress}) => {
 
     }
 
+    // Delete post
+    const handleClickDeletePost = (postId) => {
+        
+        try {
+            api.delete(`/post/${postId}/delete`);
+            setMessage("Post deleted successfully");
+
+        } catch (error) {
+            setMessage("Delete post failed");
+        }
+    }
+
 
 
     useEffect(() => {
@@ -76,6 +90,13 @@ const MyPosts = ({userData, setLoading, setProgress}) => {
 
     return(
         <>
+            {/* Modal message */}
+            {
+                message ?
+                <ModalMessage message={message} />
+                : ""
+            }
+            
             <div className="flex flex-col gap-5">
                 {   
                     posts.length > 0 ?
@@ -85,7 +106,9 @@ const MyPosts = ({userData, setLoading, setProgress}) => {
                             <div className="flex flex-col justify-between w-full text-emerald-950">
                                 <h1 className="text-xl md:text-2xl line-clamp-2">{post.title}</h1>
                                 <h2 className="text-sm md:text-base text-gray-400 line-clamp-1">{post.subtitle}</h2>
+                                <Link to={`/post/${post.id}`} className="text-center bg-emerald-950 text-white border-2 border-emerald-950 hover:bg-white hover:text-emerald-950 mt-2 cursor-pointer">View</Link>
                                 <button className="bg-emerald-950 text-white border-2 border-emerald-950 hover:bg-white hover:text-emerald-950 mt-2 cursor-pointer">Edit</button>
+                                <button onClick={() => handleClickDeletePost(post.id)} className="bg-red-600 text-white border-2 border-red-600 hover:bg-white hover:text-red-600 mt-2 cursor-pointer">Delete</button>
                             </div>
                         </div>
                     )) :

@@ -17,7 +17,7 @@ const ModalMessage = ({message, setMessage}) => {
     const handleClickContinue = () => {
         if(message === "You need to be logged in to perform this action."){
             navigate("/login");
-        }else if(message === "Post added successfully"){
+        }else if(message === "Post added successfully" || message === "Post deleted successfully"){
             window.location.reload();
         }else{
             dialogRef.current?.close();

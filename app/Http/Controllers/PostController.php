@@ -125,4 +125,20 @@ class PostController extends Controller
             "post" => $post
         ]);
     }
+
+    public function delete(Post $post, Request $request){
+        $user = $request->user();
+
+        if($post->author_id !== $user->id){
+            return response()->json([
+                "message" => ["Unauthorized", 403]
+            ]);
+        }
+
+        $post->delete();
+
+        return response()->json([
+            "message" => "Post deleted successfully"
+        ]);
+    }
 }
