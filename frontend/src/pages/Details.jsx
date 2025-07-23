@@ -59,6 +59,7 @@ const Details = () => {
     const handleClickLike = () => {
         if(!localStorage.getItem("token")){
             setMessage("You need to be logged in to perform this action.");
+            return;
         }
 
         api.post(`/post/${id}/like`)
@@ -196,7 +197,7 @@ const Details = () => {
                     {/* Sub title */}
                     <h3 className="italic text-gray-400 text-base md:text-lg">{postData.subtitle}</h3>
                     {/* Post */}
-                    <ReactMarkdown children={postData.body} />
+                    <ReactMarkdown>{postData.body}</ReactMarkdown>
                     {/* Tags */}
                     <div className="flex flex-col gap-4">
                         <p className="border-l-3 border-white pl-2 md:text-lg">Tags</p>

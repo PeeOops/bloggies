@@ -10,6 +10,7 @@ import Unauthorized from "../components/Errors/403";
 import MyPosts from "../components/User/MyPosts";
 import LikedPost from "../components/User/LikedPosts";
 import LoadingBar from "../components/Utils/LoadingBar";
+import EditPost from "../components/User/EditPost";
 
 const User = () => {
 
@@ -148,7 +149,7 @@ const User = () => {
                         <h1 className="text-xl mb-6">{navigation.charAt(0).toUpperCase() + navigation.slice(1)}</h1>
                         {/* Profile Content */}
                         {
-                            navigation === "profile" ? <Profile userData={userData} setUserData={setUserData} /> : navigation === "add post" ? <AddPost userData={userData} /> : navigation === "my posts" ? <MyPosts userData={userData} setLoading={setLoading} setProgress={setProgress} /> : navigation === "liked posts" ? <LikedPost setLoading={setLoading} setProgress={setProgress} /> : ""
+                            navigation === "profile" ? <Profile userData={userData} setUserData={setUserData} /> : navigation === "add post" ? <AddPost userData={userData} /> : navigation === "my posts" ? <MyPosts userData={userData} setLoading={setLoading} setProgress={setProgress} setNavigation={setNavigation} /> : navigation === "liked posts" ? <LikedPost setLoading={setLoading} setProgress={setProgress} /> : navigation === "edit post" ? <EditPost /> : ""
                         }
                     </div>
                 </div>
