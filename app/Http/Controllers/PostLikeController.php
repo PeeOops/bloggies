@@ -30,6 +30,17 @@ class PostLikeController extends Controller
         ]);
     }
 
+    public function likedPosts(Request $request)
+    {   
+        $user = $request->user();
+
+        $likedPosts = $user->likedPosts()->get();
+
+        return response()->json([
+            "liked_posts" => $likedPosts
+        ]);
+    }
+
     public function showByPopularity(){
         $posts = Post::withCount("likedByUsers")->orderByDesc("liked_by_users_count")->get();
 

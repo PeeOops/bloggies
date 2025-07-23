@@ -3,7 +3,7 @@ import api from "../../axios";
 import { useSearchParams } from "react-router-dom";
 
 
-const MyPosts = ({userData}) => {
+const MyPosts = ({userData, setLoading, setProgress}) => {
 
     // State declarations
     const [posts, setPosts] = useState([]);
@@ -27,10 +27,32 @@ const MyPosts = ({userData}) => {
         setSearchParams(newSearchParams);
     }
 
+    // Loading bar
+    const simulateProgress = () => {
+        setProgress(10);
+
+        const interval = setInterval(() => {
+            setProgress((prev) => {
+                if(prev < 90){
+                    return prev + Math.random() * 10;
+                }
+                clearInterval(interval);
+                return prev;
+            })
+        },100)
+
+        return interval;
+
+    }
+
 
 
     useEffect(() => {
         const fetchPosts = async () => {
+            setLoading(true);
+            setProgress(0);
+
+            const progressInterval = simulateProgress();
             
             try {
                 const response = await api.get("/post/index");
@@ -38,7 +60,12 @@ const MyPosts = ({userData}) => {
             } catch (error) {
                 console.log("Fetch data failed", error);
             } finally {
-
+                clearInterval(progressInterval);
+                setProgress(100);
+                setTimeout(() => {
+                    setLoading(false);
+                    setProgress(0);
+                },500);
             }
         }
 
@@ -54,7 +81,7 @@ const MyPosts = ({userData}) => {
                     posts.length > 0 ?
                     posts.slice(firstIndex,lastIndex).map((post) => (
                         <div key={post.id} className="flex flex-col md:flex-row gap-2 border-2 border-emerald-950 p-2 md:max-h-36">
-                            <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="md:w-96 h-auto" />
+                            <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-full md:w-96 h-36 md:h-auto object-cover" />
                             <div className="flex flex-col justify-between w-full text-emerald-950">
                                 <h1 className="text-xl md:text-2xl line-clamp-2">{post.title}</h1>
                                 <h2 className="text-sm md:text-base text-gray-400 line-clamp-1">{post.subtitle}</h2>

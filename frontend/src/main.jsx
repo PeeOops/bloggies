@@ -19,6 +19,7 @@ createRoot(document.getElementById('root')).render(
       <Route path='/' element={<Home />} />
       <Route path="/news" element={ <News />} />
       <Route path="/blogs" element={<Blogs />} />
+      <Route path="/post/:id" element={<Details />} />
 
       {/* Private */}
       <Route path="/user/:username" element={
@@ -43,7 +44,7 @@ createRoot(document.getElementById('root')).render(
 
       {/* 404 */}
       <Route path="*" element={<NotFound />} />
-      <Route path="/post/:id" element={<Details />} />
+
     </Routes>
   </BrowserRouter>
 

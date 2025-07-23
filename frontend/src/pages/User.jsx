@@ -9,6 +9,7 @@ import api from "../axios";
 import Unauthorized from "../components/Errors/403";
 import MyPosts from "../components/User/MyPosts";
 import LikedPost from "../components/User/LikedPosts";
+import LoadingBar from "../components/Utils/LoadingBar";
 
 const User = () => {
 
@@ -18,6 +19,10 @@ const User = () => {
     const [userData, setUserData] = useState({});
     const [authorized, setAuthorized] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
+
+    // Loading bar
+    const [loading, setLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
 
 
    useEffect(() => {
@@ -56,6 +61,7 @@ const User = () => {
         setNavigation(nav);
         if(nav){
             const newSearchParams = new URLSearchParams(searchParams);
+            newSearchParams.delete("page");
             newSearchParams.set("nav", nav);
             setSearchParams(newSearchParams)
         }
@@ -102,6 +108,9 @@ const User = () => {
     if(authorized){
         return (
             <>
+                {/* Loading bar */}
+                <LoadingBar loading={loading} progress={progress} />
+
                 {/* Header */}
                 <div className="relative overflow-hidden">
 
@@ -139,7 +148,7 @@ const User = () => {
                         <h1 className="text-xl mb-6">{navigation.charAt(0).toUpperCase() + navigation.slice(1)}</h1>
                         {/* Profile Content */}
                         {
-                            navigation === "profile" ? <Profile userData={userData} setUserData={setUserData} /> : navigation === "add post" ? <AddPost userData={userData} /> : navigation === "my posts" ? <MyPosts userData={userData} /> : navigation === "liked posts" ? <LikedPost /> : ""
+                            navigation === "profile" ? <Profile userData={userData} setUserData={setUserData} /> : navigation === "add post" ? <AddPost userData={userData} /> : navigation === "my posts" ? <MyPosts userData={userData} setLoading={setLoading} setProgress={setProgress} /> : navigation === "liked posts" ? <LikedPost /> : ""
                         }
                     </div>
                 </div>
