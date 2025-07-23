@@ -37,7 +37,7 @@ class PostLikeController extends Controller
         $likedPosts = $user->likedPosts()->get();
 
         return response()->json([
-            "liked_posts" => $likedPosts
+            "posts" => $likedPosts
         ]);
     }
 
