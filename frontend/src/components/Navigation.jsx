@@ -97,7 +97,7 @@ const Navigation = () => {
                     <FontAwesomeIcon onClick={() => handleClickNav()} role="button" icon={faBars} className="text-xl md:invisible cursor-pointer" />
                     <Link to="/" role="button" className="text-xl md:text-md text-center md:text-left my-4">Bloggies</Link>
                 </div>
-                <div className={`md:flex flex flex-col md:flex-row gap-6 md:items-center ${!isMenu ? "hidden" : ""} `}>
+                <div className={`md:flex flex flex-col md:flex-row gap-6 md:items-center mb-4 md:mb-0 ${!isMenu ? "hidden" : ""} `}>
                     <ul className="flex flex-col md:flex-row items-start md:items-center gap-4 bg-green-900 md:bg-transparent text-white p-2 border-white border-1 md:border-0 rounded-md shadow-white shadow-md md:rounded-none md:shadow-none ">
                     <Link to="/" role="button" className="cursor-pointer">Home</Link>
                     <span className="border-1 w-full md:border-0"></span>

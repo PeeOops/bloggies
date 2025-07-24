@@ -11,6 +11,7 @@ import Details from './pages/Details'
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
 import User from './pages/User'
+import EditPost from './components/User/EditPost'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -25,6 +26,11 @@ createRoot(document.getElementById('root')).render(
       <Route path="/user/:username" element={
         <PrivateRoute>
           <User />
+        </PrivateRoute>
+      } />
+      <Route path="/user/post/edit/:id" element={
+        <PrivateRoute>
+          <EditPost />
         </PrivateRoute>
       } />
 
