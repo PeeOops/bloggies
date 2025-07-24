@@ -28,6 +28,7 @@ const User = () => {
 
    useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log(navigation)
 
     // Fetch user data
     const fetchUser = () => {
@@ -54,7 +55,7 @@ const User = () => {
         };
 
         fetchUser();
-    }, [username]);
+    }, [username, navigation]);
 
 
     // Handle click navigation
