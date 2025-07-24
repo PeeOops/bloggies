@@ -27,14 +27,27 @@ const EditPost = () => {
         const fetchData = async () => {
             try {
                 const response = await api.get(`/post/${id}`);
-                setPostData(response.data.post);
+                const data = response.data.post;
+
+                setPostData(data);
+
+                setForm({
+                    title: data.title,
+                    subtitle: data.subtitle,
+                    // featured_image: null,
+                    body: data.body,
+                    category_id: data.category_id,
+                    // tag_ids: data.tag_ids || [],
+                    // type: data.type,
+                    // author_id: data.author_id
+                });
             } catch (error) {
                 console.log("Error fetching data", error);
             }
         }
 
         fetchData();
-    },[id, form])
+    },[id])
 
     const handleChangeForm = (e) => {
         setForm({
@@ -74,12 +87,12 @@ const EditPost = () => {
                             {/* Title */}
                             <div className="flex flex-col gap-2">
                                 <label>Title</label>
-                                <input name="title" type="text" placeholder="Title" className="text-gray-600 border-2 border-black p-1" onChange={handleChangeForm} value={postData.title} required />
+                                <input name="title" type="text" placeholder="Title" className="text-gray-600 border-2 border-black p-1" onChange={handleChangeForm} value={form.title} required />
                             </div>
                             {/* Subtitle */}
                             <div className="flex flex-col gap-2">
                                 <label>Subtitle</label>
-                                <input name="subtitle" type="text" placeholder="Subtitle" className="text-gray-600 border-2 border-black p-1"  />
+                                <input name="subtitle" type="text" placeholder="Subtitle" onChange={handleChangeForm} value={form.subtitle} className="text-gray-600 border-2 border-black p-1"  />
                             </div>
                             {/* Featured image */}
                             <div className="flex flex-col gap-2">
@@ -103,8 +116,8 @@ const EditPost = () => {
                                 <label>Post</label>
                                 <div className="max-w-full overflow-auto">
                                     <SimpleMDE
-                                        value=""
-                                        onChange=""
+                                        value={form.body}
+                                        onChange={handleChangeForm}
                                         options={simpleMdeOptions}
                                     />
                                 </div>
@@ -114,7 +127,7 @@ const EditPost = () => {
                             {/* Category */}
                             <div className="flex flex-col gap-2">
                                 <label htmlFor="category">Category:</label>
-                                <select id="category" name="category_id" onChange="" className="border-2 p-1">
+                                <select id="category" name="category_id" value={form.category_id || ""} onChange={handleChangeForm} className="border-2 p-1">
                                     <option value="" hidden>Choose Category</option>
                                     {/* {
                                         categories.map((category) => (
