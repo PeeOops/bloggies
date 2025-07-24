@@ -1,11 +1,40 @@
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Navigation from "../Navigation";
 import TopBackground from "../../assets/images/background.jpg"
+import { useParams } from "react-router-dom";
+import api from "../../axios";
 
 
 const EditPost = () => {
+
+    // State declarations
+    const {id} = useParams();
+    const [postData, setPostData] = useState([]);
+    const [form, setForm] = useState({
+        "title" : "",
+        "subtitle" : "",
+        "featured_image" : null,
+        "body" : "",
+        "category_id" : null,
+        "tag_ids" : [],
+        "type" : "",
+        "author_id" : postData.author_id
+    })
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await api.get(`/post/${id}`);
+                setPostData(response.data.post);
+            } catch (error) {
+                console.log("Error fetching data", error);
+            }
+        }
+
+        fetchData();
+    },[id])
 
     // SimpleMDE markdown configuration
     const simpleMdeOptions = useMemo(() => ({
@@ -65,7 +94,7 @@ const EditPost = () => {
                             {/* Content */}
                             <div className="flex flex-col gap-2">
                                 <label>Post</label>
-                                <div className="max-w-xl overflow-auto">
+                                <div className="max-w-full overflow-auto">
                                     <SimpleMDE
                                         value=""
                                         onChange=""
