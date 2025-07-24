@@ -34,7 +34,14 @@ const EditPost = () => {
         }
 
         fetchData();
-    },[id])
+    },[id, form])
+
+    const handleChangeForm = (e) => {
+        setForm({
+            ...form,
+            [e.target.name] : e.target.value
+        })
+    }
 
     // SimpleMDE markdown configuration
     const simpleMdeOptions = useMemo(() => ({
@@ -67,7 +74,7 @@ const EditPost = () => {
                             {/* Title */}
                             <div className="flex flex-col gap-2">
                                 <label>Title</label>
-                                <input name="title" type="text" placeholder="Title" className="text-gray-600 border-2 border-black p-1" required />
+                                <input name="title" type="text" placeholder="Title" className="text-gray-600 border-2 border-black p-1" onChange={handleChangeForm} value={postData.title} required />
                             </div>
                             {/* Subtitle */}
                             <div className="flex flex-col gap-2">
