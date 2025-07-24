@@ -1,4 +1,16 @@
+import SimpleMDE from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
+import { useMemo } from "react";
+
+
 const EditPost = () => {
+
+    // SimpleMDE markdown configuration
+    const simpleMdeOptions = useMemo(() => ({
+            spellChecker: false,
+            lineWrapping: true,
+    }), []);
+
     return(
         <>
             {/* Add post form */}
@@ -23,7 +35,7 @@ const EditPost = () => {
                             }
                              */}
                         </div>    
-                        <input name="featured_image" type="file" onChange={handleChangeForm} id="file" className="hidden" />
+                        <input name="featured_image" type="file" onChange=" " id="file" className="hidden" />
                         <label
                             htmlFor="file"
                             className="text-sm inline-block bg-emerald-950 text-white px-4 py-2 rounded cursor-pointer hover:bg-white hover:text-emerald-950 hover:border-1 hover:border-emerald-950"
@@ -36,8 +48,8 @@ const EditPost = () => {
                         <label>Post</label>
                         <div className="max-w-xl overflow-auto">
                             <SimpleMDE
-                                value={form.body}
-                                onChange={handleMarkdownChange}
+                                value=""
+                                onChange=""
                                 options={simpleMdeOptions}
                             />
                         </div>
@@ -47,19 +59,19 @@ const EditPost = () => {
                     {/* Category */}
                     <div className="flex flex-col gap-2">
                         <label htmlFor="category">Category:</label>
-                        <select id="category" name="category_id" onChange={handleChangeForm} className="border-2 p-1">
+                        <select id="category" name="category_id" onChange="" className="border-2 p-1">
                             <option value="" hidden>Choose Category</option>
-                            {
+                            {/* {
                                 categories.map((category) => (
                                     <option key={category.id} value={category.id}>{category.name}</option>
                                 ))
-                            }
+                            } */}
                         </select>
                     </div>
                     {/* Type : News or Blog */}
                     <div className="flex flex-col gap-2">
                         <label htmlFor="type">Type:</label>
-                        <select name="type" id="type" onChange={handleChangeForm} className="border-2 p-1">
+                        <select name="type" id="type" className="border-2 p-1">
                             <option value="" hidden>Choose Type</option>
                             <option value="News">News</option>
                             <option value="Blog">Blog</option>
@@ -68,7 +80,7 @@ const EditPost = () => {
                     {/* Tags */}
                     <div className="flex flex-col gap-2">
                         <label>Tags:</label>
-                        {
+                        {/* {
                             tags.map((tag) => (
                                 <div key={tag.id} className="flex flex-row gap-2">
                                     <input id={`tag-${tag.id}`} name="tag_ids" type="checkbox" value={tag.id}
@@ -77,13 +89,13 @@ const EditPost = () => {
                                     <label htmlFor={`tag-${tag.id}`}>{tag.name}</label>
                                 </div>
                             ))
-                        }
+                        } */}
                         
                     </div>
                     {/* Author */}
                     <div className="flex flex-col gap-2">
                         <label for="category">Author:</label>
-                        <input type="text" value={userData.username} className="border-2 p-1"  disabled />
+                        <input type="text" value="" className="border-2 p-1"  disabled />
                     </div>
 
                     

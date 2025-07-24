@@ -111,7 +111,7 @@ const MyPosts = ({userData, setLoading, setProgress, setNavigation}) => {
                                 <h1 className="text-xl md:text-2xl line-clamp-2">{post.title}</h1>
                                 <h2 className="text-sm md:text-base text-gray-400 line-clamp-1">{post.subtitle}</h2>
                                 <Link to={`/post/${post.id}`} className="text-center bg-emerald-950 text-white border-2 border-emerald-950 hover:bg-white hover:text-emerald-950 mt-2 cursor-pointer">View</Link>
-                                <Link to={`/user/${userData.username}?nav=edit+post+${post.id}`} onClick={handleClickEditPost} className="bg-emerald-950 text-white border-2 border-emerald-950 hover:bg-white hover:text-emerald-950 mt-2 cursor-pointer">Edit</Link>
+                                <Link to={`/user/${userData.username}?nav=edit+post+${post.id}`} onClick={handleClickEditPost} className="text-center bg-emerald-950 text-white border-2 border-emerald-950 hover:bg-white hover:text-emerald-950 mt-2 cursor-pointer">Edit</Link>
                                 <button onClick={() => handleClickDeletePost(post.id)} className="bg-red-600 text-white border-2 border-red-600 hover:bg-white hover:text-red-600 mt-2 cursor-pointer">Delete</button>
                             </div>
                         </div>
