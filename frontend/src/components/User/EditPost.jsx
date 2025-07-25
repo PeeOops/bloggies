@@ -1,6 +1,6 @@
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Navigation from "../Navigation";
 import TopBackground from "../../assets/images/background.jpg"
 import { useParams } from "react-router-dom";
@@ -12,6 +12,8 @@ const EditPost = () => {
     // State declarations
     const {id} = useParams();
     const [postData, setPostData] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [tags, setTags] = useState([]);
     const [form, setForm] = useState({
         "title" : "",
         "subtitle" : "",
@@ -19,30 +21,33 @@ const EditPost = () => {
         "body" : "",
         "category_id" : null,
         "tag_ids" : [],
-        "type" : "",
-        "author_id" : postData.author_id
+        "type" : ""
     })
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await api.get(`/post/${id}`);
-                const data = response.data.post;
-
-                setPostData(data);
-
+                const [postAPI, categoriesAPI, tagsAPI] = await Promise.all([
+                    api.get(`/post/${id}`),
+                    api.get(`/categories`),
+                    api.get(`/tags`)
+                ])
+                const post = postAPI.data.post;
+                setPostData(post);
+                setCategories(categoriesAPI.data);
+                setTags(tagsAPI.data);
                 setForm({
-                    title: data.title,
-                    subtitle: data.subtitle,
-                    // featured_image: null,
-                    body: data.body,
-                    category_id: data.category_id,
-                    // tag_ids: data.tag_ids || [],
-                    // type: data.type,
-                    // author_id: data.author_id
+                    title: post.title,
+                    subtitle: post.subtitle,
+                    featured_image: post.featured_image_url,
+                    body: post.body,
+                    category_id: post.category_id,
+                    tag_ids: post.tag_ids || [],
+                    // type: post.type,
                 });
+
             } catch (error) {
-                console.log("Error fetching data", error);
+                
             }
         }
 
@@ -50,13 +55,35 @@ const EditPost = () => {
     },[id])
 
     const handleChangeForm = (e) => {
-        setForm({
-            ...form,
-            [e.target.name] : e.target.value
-        })
+        if(e.target.type === "file"){
+            setForm({
+                ...form,
+                [e.target.name] : e.target.files[0]
+            })
+        }else if (e.target.type === "checkbox" && e.target.name === "tag_ids") {
+            const tagId = parseInt(e.target.value); // convert string to number
+
+            setForm((prevForm) => ({
+            ...prevForm,
+            tag_ids: e.target.checked
+                ? [...prevForm.tag_ids, tagId]
+                : prevForm.tag_ids.filter((id) => id !== tagId)
+            }));
+        }else{
+            setForm({
+                ...form,
+                [e.target.name] : e.target.value
+            })
+        }
+        
     }
 
     // SimpleMDE markdown configuration
+    const handleMarkdownChange = useCallback((value) => {
+            setForm(prev => ({ ...prev, body: value }));
+        }, []);
+
+
     const simpleMdeOptions = useMemo(() => ({
             spellChecker: false,
             lineWrapping: true,
@@ -98,12 +125,25 @@ const EditPost = () => {
                             <div className="flex flex-col gap-2">
                                 <label>Featured image</label>
                                 <div className="flex flex-row gap-2 items-center">
-                                    {/* {
-                                        form.featured_image ? <span className="text-sm">File: <span className="text-sm">{form.featured_image.name}</span></span> : <span className="text-sm">No Upload</span>
-                                    }
-                                    */}
+                                    {
+                                        form.featured_image ? (
+                                            typeof form.featured_image === "string" ? (
+                                            <span className="text-sm">
+                                                File: <span className="text-sm">{form.featured_image}</span>
+                                            </span>
+                                            ) : (
+                                            <span className="text-sm">
+                                                File: <span className="text-sm">{form.featured_image.name}</span>
+                                            </span>
+                                            )
+                                        ) : (
+                                            <span className="text-sm">No Upload</span>
+                                        )
+                                        }
+
+                                   
                                 </div>    
-                                <input name="featured_image" type="file" onChange=" " id="file" className="hidden" />
+                                <input name="featured_image" type="file" onChange={handleChangeForm} id="file" className="hidden" />
                                 <label
                                     htmlFor="file"
                                     className="text-sm inline-block bg-emerald-950 text-white px-4 py-2 rounded cursor-pointer hover:bg-white hover:text-emerald-950 hover:border-1 hover:border-emerald-950"
@@ -117,7 +157,7 @@ const EditPost = () => {
                                 <div className="max-w-full overflow-auto">
                                     <SimpleMDE
                                         value={form.body}
-                                        onChange={handleChangeForm}
+                                        onChange={handleMarkdownChange}
                                         options={simpleMdeOptions}
                                     />
                                 </div>
@@ -129,11 +169,11 @@ const EditPost = () => {
                                 <label htmlFor="category">Category:</label>
                                 <select id="category" name="category_id" value={form.category_id || ""} onChange={handleChangeForm} className="border-2 p-1">
                                     <option value="" hidden>Choose Category</option>
-                                    {/* {
+                                    {
                                         categories.map((category) => (
                                             <option key={category.id} value={category.id}>{category.name}</option>
                                         ))
-                                    } */}
+                                    }
                                 </select>
                             </div>
                             {/* Type : News or Blog */}
@@ -148,24 +188,19 @@ const EditPost = () => {
                             {/* Tags */}
                             <div className="flex flex-col gap-2">
                                 <label>Tags:</label>
-                                {/* {
-                                    tags.map((tag) => (
-                                        <div key={tag.id} className="flex flex-row gap-2">
-                                            <input id={`tag-${tag.id}`} name="tag_ids" type="checkbox" value={tag.id}
-                                            checked={form.tag_ids.includes(tag.id)}
-                                            onChange={handleChangeForm} />
-                                            <label htmlFor={`tag-${tag.id}`}>{tag.name}</label>
-                                        </div>
-                                    ))
-                                } */}
-                                
+                                {tags.map(tag => (
+                                    <div key={tag.id} className="flex flex-row gap-2">
+                                    <input
+                                        id={`tag-${tag.id}`}
+                                        type="checkbox"
+                                        value={tag.id.toString()}
+                                        checked={form.tag_ids.includes(tag.id)}
+                                        onChange={handleChangeForm}
+                                    />
+                                    <label htmlFor={`tag-${tag.id}`}>{tag.name}</label>
+                                    </div>
+                                ))}
                             </div>
-                            {/* Author */}
-                            <div className="flex flex-col gap-2">
-                                <label for="category">Author:</label>
-                                <input type="text" value="" className="border-2 p-1"  disabled />
-                            </div>
-
                             
                         </div>
                         {/* Button */}
