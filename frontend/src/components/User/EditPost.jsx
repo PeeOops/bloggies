@@ -42,8 +42,8 @@ const EditPost = () => {
                     featured_image: post.featured_image_url,
                     body: post.body,
                     category_id: post.category_id,
-                    tag_ids: post.tag_ids || [],
-                    // type: post.type,
+                    tag_ids: post.tags.map((tag) => tag.id) || [],
+                    type: post.type,
                 });
 
             } catch (error) {
@@ -179,7 +179,7 @@ const EditPost = () => {
                             {/* Type : News or Blog */}
                             <div className="flex flex-col gap-2">
                                 <label htmlFor="type">Type:</label>
-                                <select name="type" id="type" className="border-2 p-1">
+                                <select name="type" id="type" value={form.type || ""} onChange={handleChangeForm} className="border-2 p-1">
                                     <option value="" hidden>Choose Type</option>
                                     <option value="News">News</option>
                                     <option value="Blog">Blog</option>
