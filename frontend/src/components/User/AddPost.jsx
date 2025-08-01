@@ -95,13 +95,13 @@ const AddPost = ({userData}) => {
             form.tag_ids.forEach(tagId => formData.append("tag_ids[]", tagId));
 
             if (form.featured_image) {
-            formData.append("featured_image", form.featured_image);
+                formData.append("featured_image", form.featured_image);
             }
 
             const response = await api.post("/post/store", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             });
 
             setMessage("Post added successfully");

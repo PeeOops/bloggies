@@ -5,6 +5,7 @@ import Navigation from "../Navigation";
 import TopBackground from "../../assets/images/background.jpg"
 import { useParams } from "react-router-dom";
 import api from "../../axios";
+import ModalMessage from "../Utils/ModalMessage";
 
 
 const EditPost = () => {
@@ -13,6 +14,7 @@ const EditPost = () => {
     const {id} = useParams();
     const [postData, setPostData] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [message, setMessage] = useState("");
     const [tags, setTags] = useState([]);
     const [form, setForm] = useState({
         "title" : "",
@@ -24,6 +26,7 @@ const EditPost = () => {
         "type" : ""
     })
 
+    // Fetch current post data
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -54,6 +57,7 @@ const EditPost = () => {
         fetchData();
     },[id])
 
+    // Handle change form
     const handleChangeForm = (e) => {
         if(e.target.type === "file"){
             setForm({
@@ -79,6 +83,38 @@ const EditPost = () => {
     }
 
     // Submit edit form
+    const handleClickSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const formData = new FormData();
+
+            formData.append("title", form.title);
+            formData.append("subtitle", form.subtitle);
+            formData.append("body", form.body);
+            formData.append("type", form.type);
+            formData.append("category_id", form.category_id);
+
+            // Append tags array properly
+            form.tag_ids.forEach(tagId => formData.append("tag_ids[]", tagId));
+
+            if (form.featured_image && typeof form.featured_image !== 'string') {
+                formData.append("featured_image", form.featured_image);
+            }
+
+            const response = await api.patch(`/post/${id}/update`, formData, {
+                headers : {
+                    "Content-Type": "multipart/form-data",
+                }
+            })
+
+
+            setMessage("Post updated successfully");
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // SimpleMDE markdown configuration
     const handleMarkdownChange = useCallback((value) => {
@@ -93,6 +129,10 @@ const EditPost = () => {
 
     return(
         <>  
+            {
+                message && <ModalMessage message={message} setMessage={setMessage} />
+            }
+
             {/* Header */}
             <div className="relative overflow-hidden">
 
@@ -111,7 +151,7 @@ const EditPost = () => {
                 <div className="bg-white text-emerald-950 px-4 py-2 shadow-gray-400 shadow-md">
                     <h1 className="text-xl mb-6">Edit Post</h1>
                     {/* Add post form */}
-                    <form onSubmit="" className="flex flex-col md:grid md:grid-cols-[3fr_1fr] gap-4">
+                    <form onSubmit={handleClickSubmit} className="flex flex-col md:grid md:grid-cols-[3fr_1fr] gap-4">
                         <div className="flex flex-col gap-4">
                             {/* Title */}
                             <div className="flex flex-col gap-2">
