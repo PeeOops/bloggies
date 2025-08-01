@@ -89,6 +89,7 @@ const EditPost = () => {
         try {
             const formData = new FormData();
 
+            formData.append("_method", "PATCH");
             formData.append("title", form.title);
             formData.append("subtitle", form.subtitle);
             formData.append("body", form.body);
@@ -102,11 +103,9 @@ const EditPost = () => {
                 formData.append("featured_image", form.featured_image);
             }
 
-            const response = await api.patch(`/post/${id}/update`, formData, {
-                headers : {
-                    "Content-Type": "multipart/form-data",
-                }
-            })
+            const response = await api.post(`/post/${id}/update`, formData);
+
+            console.log(response.data.post.title);
 
 
             setMessage("Post updated successfully");
@@ -156,6 +155,7 @@ const EditPost = () => {
                             {/* Title */}
                             <div className="flex flex-col gap-2">
                                 <label>Title</label>
+                                <p>{form.type}</p>
                                 <input name="title" type="text" placeholder="Title" className="text-gray-600 border-2 border-black p-1" onChange={handleChangeForm} value={form.title} required />
                             </div>
                             {/* Subtitle */}
@@ -235,7 +235,7 @@ const EditPost = () => {
                                     <input
                                         id={`tag-${tag.id}`}
                                         type="checkbox"
-                                        value={tag.id.toString()}
+                                        value={tag.id}
                                         checked={form.tag_ids.includes(tag.id)}
                                         onChange={handleChangeForm}
                                     />

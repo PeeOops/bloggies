@@ -136,6 +136,9 @@ class PostController extends Controller
             ], 403);
         }
 
+        Log::info('Request input:', $request->all());
+        Log::info('Request files:', $request->files->all());
+
         $validated = $request->validate([
             "title" => [
                 "sometimes",
@@ -163,13 +166,13 @@ class PostController extends Controller
             ],
             "category_id" => [
                 "sometimes",
-                "exists:category_id"
+                "exists:categories,id"
             ],
             "tag_ids" => [
                 "nullable",
                 "array"
             ],
-            "tag_ids*" => [
+            "tag_ids.*" => [
                 "exists:tags,id"
             ]
         ]);
@@ -190,7 +193,10 @@ class PostController extends Controller
             $post->featured_image_url = $request->file("featured_image")->store("featured_images","public");
         }
 
+        Log::info('Validated Input:', $validated);
+
         $post->save();
+
 
         if(array_key_exists("tag_ids", $validated)){
             $post->tags()->sync($validated["tag_ids"] ?? []);
