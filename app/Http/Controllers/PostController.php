@@ -135,9 +135,14 @@ class PostController extends Controller
                 "message" => "Unauthorized"
             ], 403);
         }
+        
+        if ($request->has('tag_ids')) {
+            $request->merge([
+                'tag_ids' => array_map('intval', $request->input('tag_ids'))
+            ]);
+        }
 
-        Log::info('Request input:', $request->all());
-        Log::info('Request files:', $request->files->all());
+        Log::info('Request all input:', $request->all());
 
         $validated = $request->validate([
             "title" => [

@@ -99,6 +99,7 @@ const EditPost = () => {
             // Append tags array properly
             form.tag_ids.forEach(tagId => formData.append("tag_ids[]", tagId));
 
+
             if (form.featured_image && typeof form.featured_image !== 'string') {
                 formData.append("featured_image", form.featured_image);
             }
@@ -235,6 +236,7 @@ const EditPost = () => {
                                     <input
                                         id={`tag-${tag.id}`}
                                         type="checkbox"
+                                        name="tag_ids"
                                         value={tag.id}
                                         checked={form.tag_ids.includes(tag.id)}
                                         onChange={handleChangeForm}
