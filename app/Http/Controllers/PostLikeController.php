@@ -30,6 +30,10 @@ class PostLikeController extends Controller
         ]);
     }
 
+    public function update(Request $request){
+        $user = $request->user();
+    }
+
     public function likedPosts(Request $request)
     {   
         $user = $request->user();

@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
@@ -128,6 +127,88 @@ class PostController extends Controller
         ]);
     }
 
+    public function update(Request $request, Post $post){
+        $user = $request->user();
+
+        if($post->author_id !== $user->id){
+            return response()->json([
+                "message" => "Unauthorized"
+            ], 403);
+        }
+
+        $validated = $request->validate([
+            "title" => [
+                "sometimes",
+                "string",
+                "max:50"
+            ],
+            "subtitle" => [
+                "sometimes",
+                "string",
+                "max:255"
+            ],
+            "featured_image" => [
+                "sometimes",
+                "image",
+                "mimes:jpeg,png,jpg,gif,svg",
+                "max:4096"
+            ],
+            "body" => [
+                "sometimes",
+                "string"
+            ],
+            "type" => [
+                "sometimes",
+                "string"
+            ],
+            "category_id" => [
+                "sometimes",
+                "exists:category_id"
+            ],
+            "tag_ids" => [
+                "nullable",
+                "array"
+            ],
+            "tag_ids*" => [
+                "exists:tags,id"
+            ]
+        ]);
+
+        $post->fill($request->only([
+            "title",
+            "subtitle",
+            "body",
+            "type",
+            "category_id",
+        ]));
+
+        if($request->hasFile("featured_image")){
+            if($post->featured_image_url && Storage::disk('public')->exists($post->featured_image_url)){
+                Storage::disk('public')->delete($post->featured_image_url);
+            }
+
+            $post->featured_image_url = $request->file("featured_image")->store("featured_images","public");
+        }
+
+        $post->save();
+
+        if(array_key_exists("tag_ids", $validated)){
+            $post->tags()->sync($validated["tag_ids"] ?? []);
+        }
+
+        $post->load("tags","category","author");
+
+        if($post->featured_image_url){
+            $post->featured_image_url = asset("storage/" . $post->featured_image_url);
+        }
+
+        return response()->json([
+            "message" => "Post updated successfully",
+            "post" => $post
+        ]);
+    }
+
+
     public function delete(Post $post, Request $request){
         $user = $request->user();
 
@@ -149,3 +230,5 @@ class PostController extends Controller
         ]);
     }
 }
+
+

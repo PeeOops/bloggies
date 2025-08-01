@@ -37,5 +37,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/post/store',[PostController::class,'store']);
     Route::post('/post/{post}/like', [PostLikeController::class, 'toggleLike']);
     Route::delete('/post/{post}/delete', [PostController::class, 'delete']);
+    Route::patch('/post/{post}/update',[PostController::class,"update"]);
     Route::get('/user/liked-posts', [PostLikeController::class, 'likedPosts']);
 });

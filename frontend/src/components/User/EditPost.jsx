@@ -78,6 +78,8 @@ const EditPost = () => {
         
     }
 
+    // Submit edit form
+
     // SimpleMDE markdown configuration
     const handleMarkdownChange = useCallback((value) => {
             setForm(prev => ({ ...prev, body: value }));
