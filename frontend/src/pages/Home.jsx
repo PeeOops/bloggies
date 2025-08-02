@@ -121,7 +121,8 @@ const Home = () => {
 
     const handleClickFilterTags = (id) => {
         let updatedTags;
-        // Tag exist?
+
+        // Tag exist check and uncheck
         if(selectedTags.includes(id)){
             updatedTags = selectedTags.filter((tag) => tag !== id);
         }else{
@@ -150,7 +151,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        // Fetch data
+        // Fetch API
         const fetchData = async () => {
             setLoading(true);
             setProgress(0);
@@ -192,6 +193,7 @@ const Home = () => {
 
     return (
         <>
+            {/* Loading bar */}
             <LoadingBar loading={loading} progress={progress} />
             
             {/* Header */}
@@ -212,9 +214,10 @@ const Home = () => {
                     <p className="text-md md:text-lg">Discover the latest in gaming news and articles.</p>
                 </section>
             </div>
-            {/* Articles */}
+
+            {/* Main */}
             <div className="flex flex-col md:grid md:grid-cols-[1fr_3fr] bg-emerald-950 border-t-2 border-white gap-16 px-4 md:px-24 pt-8 md:pb-16 md:pt-16">
-                {/* Left main */}
+                {/* Left panel */}
                 <div className="flex flex-col gap-6 text-white">
                     <h1 className="text-lg md:hidden">Filters:</h1>
                     {/* Search */}
@@ -263,7 +266,7 @@ const Home = () => {
                     </div>
                 </div>
                 <span className="border-5 md:hidden border-white border-double"></span>
-                {/* Right main */}
+                {/* Right panel */}
                 <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
                         {
@@ -302,7 +305,7 @@ const Home = () => {
                             </div>
                         }
                     </div>
-                    {/* Paginations */}
+                    {/* Pagination buttons */}
                     <div className="flex flex-row items-center justify-between text-white mb-4">
                         <div role="button" className={`flex flex-row items-center gap-2 cursor-pointer ${currentPage === 1 || latestPosts.length === 0 ? "invisible" : "visible"} `} onClick={() => handleClickPrevPage()}>
                             <FontAwesomeIcon icon={faArrowLeft} />
