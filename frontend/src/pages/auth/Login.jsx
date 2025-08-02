@@ -8,13 +8,16 @@ import LoadingBar from "../../components/Utils/LoadingBar.jsx";
 
 const Login = () => {
 
-    // Navigation
+    // State declarations
     const navigate = useNavigate();
-
-    // Status messages
     const [statusMessages, setStatusMessages] = useState([]);
+    const [showPassword, setShowPassword] = useState(false);
+    const [form, setForm] = useState({
+        username : "",
+        password : ""
+    })
 
-    // Loading bar logic
+    // Loading bar
     const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState(0);
 
@@ -33,14 +36,6 @@ const Login = () => {
         return interval;
     }
 
-    // Input Form
-    const [form, setForm] = useState({
-        username : "",
-        password : ""
-    })
-
-    const [showPassword, setShowPassword] = useState(false);
-
     // Handle change logic
     const handleChangeShowPassword = () => {
         setShowPassword(prev => !prev);
@@ -56,7 +51,6 @@ const Login = () => {
 
         setLoading(true);
         setProgress(0);
-
         const progressInterval = simulateProgress();
 
         api.post("/login", form)
@@ -91,7 +85,10 @@ const Login = () => {
 
     return(
         <>
+            {/* Loading bar */}
             <LoadingBar loading={loading} progress={progress} />
+
+
             <div className="flex flex-col md:flex-row md:h-screen">
                 <div className="flex flex-col justify-between  md:justify-evenly w-full md:w-1/2 h-64 md:h-full rounded-bl-4xl rounded-br-4xl md:rounded-bl-none md:rounded-br-4xl md:rounded-tr-4xl p-8 text-white" style={{ backgroundImage: `url(${TopBackground})` }}>
                     <Link to="/" className="text-xl md:text-3xl">Bloggies</Link>
@@ -113,6 +110,8 @@ const Login = () => {
                             )) : ""
                         }
                     </div>
+
+                    {/* Login form */}
                     <form onSubmit={handleSubmitForm} className="flex flex-col gap-4 md:gap-6 md:text-base">
                         <div className="flex flex-col">
                             <label>Username</label>
@@ -122,7 +121,7 @@ const Login = () => {
                             <label>Password</label>
                             <input name="password" value={form.password} type={showPassword ? "text" : "password"} placeholder="password" className="bg-transparent text-emerald-950 p-2 border-2 border-emerald-950 rounded-md focus:outline-none focus:border-b-2 focus:border-b-emerald-950" onPaste={(e) => e.preventDefault()} onChange={handleChangeForm} required />
                             <div className="mt-2 flex flex-row gap-2 items-center">
-                                <input type="checkbox" onChange={() => handleChangeShowPassword()} checked={showPassword ? true : false} />
+                                <input type="checkbox" onChange={handleChangeShowPassword} checked={showPassword} />
                                 <p className="text-sm">Show password</p>
                             </div>
                         
