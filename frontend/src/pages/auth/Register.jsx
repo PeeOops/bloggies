@@ -7,13 +7,18 @@ import api from "../../axios.js";
 import LoadingBar from "../../components/Utils/LoadingBar.jsx";
 
 const Register = () => {
-    // Navigation
+
+    // State declarations
     const navigate = useNavigate();
-
-    // Status message
     const [statusMessages, setStatusMessages] = useState([]);
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [form,setForm] = useState({
+        username: "",
+        email: "",
+        password: ""
+    });
 
-    // LoadingBar logic
+    // Loading Bar
     const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState(0);
 
@@ -32,17 +37,6 @@ const Register = () => {
         return interval;
     }
 
-    // Register form
-    const [form,setForm] = useState({
-        username: "",
-        email: "",
-        password: ""
-    });
-
-    const [confirmPassword, setConfirmPassword] = useState("");
-
-
-
     // Handle change functions
     const handleChangeForm = (e) => {
         setForm({
@@ -55,9 +49,8 @@ const Register = () => {
         setConfirmPassword(e.target.value)
     }
 
-
+    // Check matching password
     useEffect(() => {
-        // Check match password
         const handleChangeMatchPassword = () => {
             if(confirmPassword && form.password !== confirmPassword){
                 if(!statusMessages.includes("Passwords do not match!")){
@@ -83,10 +76,9 @@ const Register = () => {
 
         setLoading(true);
         setProgress(0);
-
         const progressInterval = simulateProgress();
 
-        // Register API
+        // Register
         api.post("/register", form)
         .then((res) => {
             setStatusMessages([]);
@@ -115,7 +107,9 @@ const Register = () => {
 
     return(
         <>  
+            {/* Loading bar */}
             <LoadingBar loading={loading} progress={progress} />
+
             <div className="flex flex-col md:flex-row md:h-screen">
                 <div className="flex flex-col justify-between  md:justify-evenly w-full md:w-1/2 h-64 md:h-full rounded-bl-4xl rounded-br-4xl md:rounded-bl-none md:rounded-br-4xl md:rounded-tr-4xl p-8 text-white" style={{ backgroundImage: `url(${TopBackground})` }}>
                     <Link to="/" className="text-xl md:text-3xl">Bloggies</Link>
@@ -139,6 +133,7 @@ const Register = () => {
                         }
                     </div>
                     
+                    {/* Register form */}
                     <form onSubmit={handleSubmitForm} className="flex flex-col gap-4 md:gap-6 md:text-base">
                         <div className="flex flex-col">
                             <label>Email</label>
