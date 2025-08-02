@@ -8,11 +8,11 @@ import LoadingBar from "./Utils/LoadingBar.jsx";
 const Navigation = () => {
 
     // State declarations
-    const [isMenu, setIsMenu] = useState(false);
     const navigate = useNavigate();
+    const [isMenu, setIsMenu] = useState(false);
     const [user, setUser] = useState({});
 
-    // Check if auth token exist 
+    // Auth token
     const token = localStorage.getItem("token");
 
     // Loading bar
@@ -36,7 +36,7 @@ const Navigation = () => {
 
     }
 
-    // Fetch user data for username
+    // Fetch user API
     useEffect(() => {
         const fetchUser = () => {
             if(token){
@@ -63,9 +63,7 @@ const Navigation = () => {
 
         setLoading(true);
         setProgress(0);
-
         const progressInterval = simulateProgress();
-
 
         api.post("/logout")
         .then((res) => {
@@ -92,12 +90,13 @@ const Navigation = () => {
             {/* Loading bar */}
             <LoadingBar loading={loading} progress={progress} />
 
+            {/* Nav */}
             <div className="flex flex-col md:flex-row md:justify-between md:items-center text-white mx-4 md:mx-24 md:text-base">
                 <div className="flex flex-row items-center justify-between">
                     <FontAwesomeIcon onClick={() => handleClickNav()} role="button" icon={faBars} className="text-xl md:invisible cursor-pointer" />
                     <Link to="/" role="button" className="text-xl md:text-md text-center md:text-left my-4">Bloggies</Link>
                 </div>
-                <div className={`md:flex flex flex-col md:flex-row gap-6 md:items-center mb-4 md:mb-0 ${!isMenu ? "hidden" : ""} `}>
+                <div className={`md:flex flex flex-col md:flex-row gap-6 md:items-center mb-4 md:mb-0 ${!isMenu && "hidden"} `}>
                     <ul className="flex flex-col md:flex-row items-start md:items-center gap-4 bg-green-900 md:bg-transparent text-white p-2 border-white border-1 md:border-0 rounded-md shadow-white shadow-md md:rounded-none md:shadow-none ">
                     <Link to="/" role="button" className="cursor-pointer">Home</Link>
                     <span className="border-1 w-full md:border-0"></span>
