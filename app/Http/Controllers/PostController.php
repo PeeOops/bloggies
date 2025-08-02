@@ -142,7 +142,7 @@ class PostController extends Controller
             ]);
         }
 
-        Log::info('Request all input:', $request->all());
+        // Log::info('Request tag ids input:', $request->input('tag_ids'));
 
         $validated = $request->validate([
             "title" => [
@@ -182,6 +182,8 @@ class PostController extends Controller
             ]
         ]);
 
+        Log::info('Validated Input:', $validated);
+
         $post->fill($request->only([
             "title",
             "subtitle",
@@ -198,7 +200,7 @@ class PostController extends Controller
             $post->featured_image_url = $request->file("featured_image")->store("featured_images","public");
         }
 
-        Log::info('Validated Input:', $validated);
+
 
         $post->save();
 

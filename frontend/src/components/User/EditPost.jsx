@@ -45,9 +45,10 @@ const EditPost = () => {
                     featured_image: post.featured_image_url,
                     body: post.body,
                     category_id: post.category_id,
-                    tag_ids: post.tags.map((tag) => tag.id) || [],
+                    tag_ids: post.tags.map((tag) => tag.id),
                     type: post.type,
                 });
+
 
             } catch (error) {
                 
@@ -97,22 +98,25 @@ const EditPost = () => {
             formData.append("category_id", form.category_id);
 
             // Append tags array properly
-            form.tag_ids.forEach(tagId => formData.append("tag_ids[]", tagId));
+            form.tag_ids.forEach((tagId, index) => {
+                formData.append(`tag_ids[${index}]`, tagId);
+            });
 
 
             if (form.featured_image && typeof form.featured_image !== 'string') {
                 formData.append("featured_image", form.featured_image);
             }
 
-            const response = await api.post(`/post/${id}/update`, formData);
-
-            console.log(response.data.post.title);
-
+            const response = await api.post(`/post/${id}/update`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
 
             setMessage("Post updated successfully");
 
         } catch (error) {
-            console.log(error);
+            console.log("Fetch data failed", error);
         }
     }
 
@@ -155,8 +159,7 @@ const EditPost = () => {
                         <div className="flex flex-col gap-4">
                             {/* Title */}
                             <div className="flex flex-col gap-2">
-                                <label>Title</label>
-                                <p>{form.type}</p>
+                                <label>Title</label>    
                                 <input name="title" type="text" placeholder="Title" className="text-gray-600 border-2 border-black p-1" onChange={handleChangeForm} value={form.title} required />
                             </div>
                             {/* Subtitle */}

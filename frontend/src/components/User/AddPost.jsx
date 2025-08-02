@@ -92,7 +92,9 @@ const AddPost = ({userData}) => {
             formData.append("author_id", form.author_id);
 
             // Append tags array properly
-            form.tag_ids.forEach(tagId => formData.append("tag_ids[]", tagId));
+            form.tag_ids.forEach((tagId, index) => {
+                formData.append(`tag_ids[${index}]`, tagId);
+            });
 
             if (form.featured_image) {
                 formData.append("featured_image", form.featured_image);
