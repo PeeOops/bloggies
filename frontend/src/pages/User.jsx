@@ -137,10 +137,10 @@ const User = () => {
                         </div>
                         
                         <div className="flex flex-col gap-4">
-                            <p onClick={() => handleClickNavigate("profile")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "profile" ? "border-l-3 bg-gray-200" : ""}`} role="button">Profile</p>
-                            <p onClick={() => handleClickNavigate("add post")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "add post" ? "border-l-3 bg-gray-200" : ""}`} role="button">Add Post</p>
-                            <p onClick={() => handleClickNavigate("my posts")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "my posts" ? "border-l-3 bg-gray-200" : ""}`} role="button">My posts</p>
-                            <p onClick={() => handleClickNavigate("liked posts")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "liked posts" ? "border-l-3 bg-gray-200" : ""}`} role="button">Liked posts</p>
+                            <p onClick={() => handleClickNavigate("profile")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "profile" && "border-l-3 bg-gray-200"}`} role="button">Profile</p>
+                            <p onClick={() => handleClickNavigate("add post")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "add post" && "border-l-3 bg-gray-200"}`} role="button">Add Post</p>
+                            <p onClick={() => handleClickNavigate("my posts")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "my posts" && "border-l-3 bg-gray-200"}`} role="button">My posts</p>
+                            <p onClick={() => handleClickNavigate("liked posts")} className={`p-2 hover:border-l-3 hover:bg-gray-200 cursor-pointer ${navigation === "liked posts" && "border-l-3 bg-gray-200"}`} role="button">Liked posts</p>
                         </div>
                     </div>
 
