@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TopBackground from "../assets/images/background.jpg"
-import Thumbnail from "../assets/images/thumbnails/mirage.png"
 import Navigation from "../components/Navigation";
 import { faAnglesRight, faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faReddit, faTiktok, faTwitch, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
@@ -15,6 +14,37 @@ const News = () => {
     // State declarations
     const [recentNewsPosts, setRecentNewsPosts] = useState([]);
     const [popularNewsPosts, setPopularNewsPosts] = useState([]);
+    const socialMedia = [
+        {
+            "icon" : faFacebook,
+            "link" : "https://www.facebook.com/"
+        },
+        {
+            "icon" : faInstagram,
+            "link" : "https://www.instagram.com/"
+        },
+        {
+            "icon" : faReddit,
+            "link" : "https://www.reddit.com/"
+        },
+        {
+            "icon" : faTiktok,
+            "link" : "https://www.tiktok.com/"
+        },
+        {
+            "icon" : faTwitch,
+            "link" : "https://www.twitch.tv/"
+        },
+        {
+            "icon" : faTwitter,
+            "link" : "https://www.twitter.com/"
+        },
+        {
+            "icon" : faYoutube,
+            "link" : "https://www.youtube.com/"
+        }
+
+    ];
 
     // Loading bar
     const [loading, setLoading] = useState(false);
@@ -38,10 +68,10 @@ const News = () => {
     }
 
     useEffect(() => {
+        // Fetch posts
         const fetchData = async () => {
             setLoading(true);
             setProgress(0);
-
             const progressInterval = simulateProgress();
 
             try {
@@ -53,7 +83,7 @@ const News = () => {
                 setPopularNewsPosts(popularNewsAPI.data.posts.slice(0,5));
 
             } catch (error) {
-                
+                console.log("Fetch data failed", error);
             } finally{
                 clearInterval(progressInterval);
                 setProgress(100);
@@ -93,7 +123,7 @@ const News = () => {
                     {/* Newest */}
                     {
                         recentNewsPosts.slice(0,1).map((post) => (
-                            <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
+                            <Link key={post.id} to={`/post/${post.id}`}  role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
                                 <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-full h-48 md:h-96 object-cover" />
                                 <div className="p-4 md:p-6">
                                     {/* Published date and author */}
@@ -126,7 +156,7 @@ const News = () => {
                     <div className="grid grid-cols-2 gap-2 md:gap-4">
                         {
                             recentNewsPosts.slice(1,5).map((post) => (
-                                <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
+                                <Link key={post.id} to={`/post/${post.id}`}  role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
                                     <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-full h-48 object-cover" />
                                     <div className="p-4 md:p-6">
                                         {/* Published date and author */}
@@ -164,8 +194,8 @@ const News = () => {
                     <div className="flex flex-col gap-4">
                         {
                             popularNewsPosts.map((post) => (
-                                <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
-                                    <img  src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-36 md:w-64 h-auto rounded-md" />
+                                <Link key={post.id} to={`/post/${post.id}`}  role="button" className="flex flex-row gap-2 bg-emerald-950 p-2 shadow-white shadow-sm rounded-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none">
+                                    <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-36 md:w-64 h-auto rounded-md" />
                                     <div className="flex flex-col justify-between">
                                         <h1 className="text-sm md:text-xl">{post.title}</h1>
                                         <p className="text-xs md:text-lg text-gray-400">{post.created_at}</p>
@@ -180,19 +210,18 @@ const News = () => {
                     <div className="flex flex-col gap-4">
                         <h1 className="text-xl md:text-xl mt-6">Follow Us</h1>
                         <div className="flex flex-row justify-between md:gap-8 p-4 border-2 border-white text-xl rounded-md md:text-2xl w-full">
-                            <a href="https://facebook.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faFacebook} /></a>
-                            <a href="https://instagram.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faInstagram} /></a>
-                            <a href="https://x.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitter} /></a>
-                            <a href="https://twitch.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitch} /></a>
-                            <a href="https://reddit.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faReddit} /></a>
-                            <a href="https://youtube.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faYoutube} /></a>
-                            <a href="https://tiktok.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTiktok} /></a>
+                            {
+                                socialMedia.map((icon, index) => (
+                                    <a key={index} href={icon.link} target="_blank" aria-label="Follow us on social media" ><FontAwesomeIcon role="button" className="cursor-pointer" icon={icon.icon} /></a>
+                                ))
+                            }
+                            
                         </div>
                         <h1 className="text-xl md:text-xl mt-6 border-l-4 border-white pl-4">Highlights</h1>
                         <ol className="flex flex-col gap-4 list-decimal pl-4">
                             {
                                 recentNewsPosts.slice(-5).map((post) => (
-                                    <Link to={`/post/${post.id}`} key={post.id} role="button" className="line-clamps-3 border-b-1 border-gray-400 pl-4 pb-4 last:border-0 last:pb-0"><li>{post.title}</li></Link>
+                                    <Link key={post.id} to={`/post/${post.id}`} role="button" className="line-clamps-3 border-b-1 border-gray-400 pl-4 pb-4 last:border-0 last:pb-0"><li>{post.title}</li></Link>
                                 ))
                             }
                             
@@ -202,12 +231,12 @@ const News = () => {
             </div>
             {/* More News */}
             <div className="flex flex-col gap-4 bg-emerald-950 py-8 px-4 md:px-24 text-white">
-                <h1 className="text-xl md:text-3xl">{recentNewsPosts.slice(6,10).length > 0 ? "More news" : ""}</h1>
+                <h1 className="text-xl md:text-3xl">{recentNewsPosts.slice(6,10).length > 0 && "More news"}</h1>
                 <div className="grid grid-cols-2 gap-2 md:gap-4">
                     {
-                        recentNewsPosts.slice(6,10).length > 0 ?
+                        recentNewsPosts.slice(6,10).length > 0 &&
                         recentNewsPosts.slice(6,10).map((post) => (
-                            <Link to={`/post/${post.id}`} key={post.id} role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
+                            <Link key={post.id} to={`/post/${post.id}`}  role="button" className="flex flex-col bg-emerald-950 border-1 border-white shadow-white shadow-md cursor-pointer transition transform duration-150 active:scale-90 hover:scale-105 focus:outline-none text-white">
                                 <img src={post.featured_image_url !== null ? `http://localhost:8000/storage/${post.featured_image_url}` : `http://localhost:8000/storage/featured_images/noimage.jpg`} alt={post.title} className="w-full h-48 object-cover" />
                                 <div className="p-4 md:p-6">
                                     {/* Published date and author */}
@@ -233,7 +262,7 @@ const News = () => {
                                     </div>
                                 </div>
                             </Link>
-                        )) : ""
+                        ))
                     }
                     
                 </div>
