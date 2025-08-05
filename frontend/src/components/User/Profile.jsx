@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = ({userData, setUserData}) => {
 
+    // State declarations
     const navigate = useNavigate();
     const [editing, setEditing] = useState(false);
     const [message, setMessage] = useState("");
@@ -15,6 +16,7 @@ const Profile = ({userData, setUserData}) => {
         bio : userData.bio,
     })
 
+    // Handle click
     const handleClickEdit = () => {
         setEditing(prev => !prev);
         setForm({
@@ -85,9 +87,9 @@ const Profile = ({userData, setUserData}) => {
                 <input name="bio" type="text" className="text-gray-600 border-2 border-black p-1" onChange={handleChangeForm} value={form.bio} disabled={!editing} required />
             </div>
             <div className="flex flex-row gap-2">
-                <button type="button" onClick={() => handleClickEdit()} className={`${editing ? "hidden" : ""} bg-emerald-950 text-white text-sm rounded-sm cursor-pointer py-1 px-2`}>Edit</button>
-                <button type="submit" className={`${editing ? "" : "hidden"} bg-emerald-950 text-white text-sm rounded-sm cursor-pointer py-1 px-2`}>Save</button>
-                <button type="button" onClick={() => handleClickEdit()} className={`${editing ? "" : "hidden"} bg-red-600 text-white text-sm rounded-sm cursor-pointer py-1 px-2`}>Cancel</button>
+                <button type="button" onClick={() => handleClickEdit()} className={`${editing && "hidden"} bg-emerald-950 text-white text-sm rounded-sm cursor-pointer py-1 px-2`}>Edit</button>
+                <button type="submit" className={`${!editing && "hidden"} bg-emerald-950 text-white text-sm rounded-sm cursor-pointer py-1 px-2`}>Save</button>
+                <button type="button" onClick={() => handleClickEdit()} className={`${!editing && "hidden"} bg-red-600 text-white text-sm rounded-sm cursor-pointer py-1 px-2`}>Cancel</button>
             </div>
         </form>
     )
