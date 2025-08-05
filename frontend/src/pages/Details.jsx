@@ -23,6 +23,37 @@ const Details = () => {
     const [liked, setLiked] = useState(false);
     const [likesCount, setLikesCount] = useState("");
     const [message, setMessage] = useState("");
+    const socialMedia = [
+        {
+            "icon" : faFacebook,
+            "link" : "https://www.facebook.com/"
+        },
+        {
+            "icon" : faInstagram,
+            "link" : "https://www.instagram.com/"
+        },
+        {
+            "icon" : faReddit,
+            "link" : "https://www.reddit.com/"
+        },
+        {
+            "icon" : faTiktok,
+            "link" : "https://www.tiktok.com/"
+        },
+        {
+            "icon" : faTwitch,
+            "link" : "https://www.twitch.tv/"
+        },
+        {
+            "icon" : faTwitter,
+            "link" : "https://www.twitter.com/"
+        },
+        {
+            "icon" : faYoutube,
+            "link" : "https://www.youtube.com/"
+        }
+
+    ];
 
     // Loading bar
     const [loading, setLoading] = useState(false);
@@ -69,7 +100,7 @@ const Details = () => {
         })
     }
 
-    // Share Post
+    // S    
     const handleClickShare = () => {
         navigator.clipboard.writeText(window.location.href)
         .then(() => {
@@ -91,7 +122,6 @@ const Details = () => {
 
             setLoading(true);
             setProgress(0);
-
             const progressInterval = simulateProgress();
 
             try {
@@ -150,9 +180,8 @@ const Details = () => {
 
             {/* Modal */}
             {
-                message ? 
-                <ModalMessage message={message} setMessage={setMessage} /> :
-                ""
+                message && 
+                <ModalMessage message={message} setMessage={setMessage} />
             }
 
             {/* Header */}
@@ -185,14 +214,14 @@ const Details = () => {
                         <span>-</span>
                         <div className="flex flex-row gap-1 items-center">
                             <p>{likesCount > 0 ? likesCount : ""}</p>
-                            <FontAwesomeIcon onClick={() => handleClickLike()} className={`cursor-pointer ${liked ? "text-red-400" : "text-white"}`} icon={liked ? faHeart : faHeartBroken} />
+                            <FontAwesomeIcon onClick={handleClickLike} className={`cursor-pointer ${liked ? "text-red-400" : "text-white"}`} icon={liked ? faHeart : faHeartBroken} />
                         </div>
-                        <FontAwesomeIcon onClick={() => handleClickShare()} className="cursor-pointer text-white" icon={faShare} />
+                        <FontAwesomeIcon onClick={handleClickShare} className="cursor-pointer text-white" icon={faShare} />
                     </div>
                     {/* Featured image */}
                     {
-                        postData.featured_image_url !== null ?
-                        <img src={`http://localhost:8000/storage/${postData.featured_image_url}`} alt={postData.title} className="w-full" /> : ""
+                        postData.featured_image_url !== null &&
+                        <img src={`http://localhost:8000/storage/${postData.featured_image_url}`} alt={postData.title} className="w-full" />
                     }
                     {/* Sub title */}
                     <h3 className="italic text-gray-400 text-base md:text-lg">{postData.subtitle}</h3>
@@ -217,13 +246,11 @@ const Details = () => {
                     <div className="flex flex-col gap-4">
                         <p className="border-l-3 border-white pl-2 md:text-lg">Follow Us</p>
                         <div className="flex flex-wrap gap-4 text-lg">
-                            <a href="https://facebook.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faFacebook} /></a>
-                            <a href="https://instagram.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faInstagram} /></a>
-                            <a href="https://twitter.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faXTwitter} /></a>
-                            <a href="https://twitch.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTwitch} /></a>
-                            <a href="https://reddit.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faReddit} /></a>
-                            <a href="https://youtube.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faYoutube} /></a>
-                            <a href="https://tiktok.com" target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={faTiktok} /></a>
+                            {
+                                socialMedia.map((icon,index) => (
+                                    <a key={index} href={icon.link}target="_blank"><FontAwesomeIcon role="button" className="cursor-pointer" icon={icon.icon} /></a>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>
@@ -232,17 +259,16 @@ const Details = () => {
                 <div className="flex flex-col gap-4">
                     {/* Similar posts */}
                     {
-                        similarPosts.length > 0 ?
-                        <p className="border-l-3 border-white pl-2 md:text-lg">Similar posts</p> :
-                        ""
+                        similarPosts.length > 0 &&
+                        <p className="border-l-3 border-white pl-2 md:text-lg">Similar posts</p>
                     }
                     
                     <ol className="flex flex-col gap-4 list-decimal pl-4 text-base">
                         {
-                            similarPosts.length > 0 ?
+                            similarPosts.length > 0 &&
                             similarPosts.slice(0,5).map((post) => (
                                 <Link key={post.id} to={`/post/${post.id}`} className="line-clamps-3 border-b-1 last:border-b-0 border-gray-400 pb-4"><li  role="button" >{post.title}</li></Link>
-                            )) : ""
+                            ))
                         }
                     </ol>
                 </div>
