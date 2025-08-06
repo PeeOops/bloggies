@@ -131,16 +131,10 @@ const Details = () => {
                     api.get("/post/index"),
                     api.get(`/post/${id}/like`)
                 ])
-                // Id params check
-                const checkedId = allPostAPI.data.posts.map((post) => post.id);
-                if(!checkedId.includes(parseInt(id))){
-                    navigate("/404");
-                }else{
-                    setPostData(postDataAPI.data.post);
-                    setPostTags(postDataAPI.data.post.tags);
-                    setLiked(likeStatusAPI.data.liked);
-                    setLikesCount(likeStatusAPI.data.likes_count);
-                }
+                setPostData(postDataAPI.data.post);
+                setPostTags(postDataAPI.data.post.tags);
+                setLiked(likeStatusAPI.data.liked);
+                setLikesCount(likeStatusAPI.data.likes_count);
 
                 const currentPostTags = postDataAPI.data.post.tags.map((tag) => tag.id);
 
@@ -158,7 +152,11 @@ const Details = () => {
                 setReadingTime(Math.ceil(wordsLength/readingPerMin));
                                 
             } catch (error) {
-                console.log("Failed fetching data", error);
+                if(error.status === 404){
+                    navigate("/404");
+                }else{
+                    console.log("Failed fetching data", error);
+                }
             } finally{
                 clearInterval(progressInterval);
                 setProgress(100);
