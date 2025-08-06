@@ -6,6 +6,7 @@ import ModalMessage from "../Utils/ModalMessage";
 
 const AddPost = ({userData}) => {
 
+    // State declarations
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [form, setForm] = useState({
@@ -22,28 +23,22 @@ const AddPost = ({userData}) => {
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        // Fetch categories
-        const fetchCategories = async () => {
+        // Fetch data
+        const fetchData = async () => {
             try {
-                const response = await api.get("/categories");
-                setCategories(response.data);
+                const [categoriesAPI, tagsAPI] = await Promise.all([
+                    api.get("/categories"),
+                    api.get("/tags")
+                ])
+                setCategories(categoriesAPI.data);
+                setTags(tagsAPI.data);
             } catch (error) {
-                console.log("Error fetching categories", error);
+                console.log("Failed fetching data",error);
             }
+            
         }
 
-        // Fetch tags
-        const fetchTags = async () => {
-            try {
-                const response = await api.get("/tags");
-                setTags(response.data);
-            } catch (error) {
-                console.log("Error fetching tags", error);
-            }
-        }
-
-        fetchCategories();
-        fetchTags();
+        fetchData();
     },[])
 
 
@@ -80,7 +75,6 @@ const AddPost = ({userData}) => {
             setMessage("Post content is required!");
         }
 
-        
         try {
             const formData = new FormData();
 
@@ -129,8 +123,8 @@ const AddPost = ({userData}) => {
         <>
             {/* Modal message */}
             {
-                message ?
-                <ModalMessage message={message} setMessage={setMessage}/> : ""
+                message &&
+                <ModalMessage message={message} setMessage={setMessage}/>
             }
 
             {/* Add post form */}
@@ -214,7 +208,7 @@ const AddPost = ({userData}) => {
                     </div>
                     {/* Author */}
                     <div className="flex flex-col gap-2">
-                        <label for="category">Author:</label>
+                        <label htmlFor="category">Author:</label>
                         <input type="text" value={userData.username} className="border-2 p-1"  disabled />
                     </div>
 
@@ -225,8 +219,6 @@ const AddPost = ({userData}) => {
                     <button type="submit" className="cursor-pointer bg-emerald-950 py-1 px-2 text-white rounded-sm">Save</button>
                     <button type="reset" className="cursor-pointer bg-red-600 py-1 px-2 text-white rounded-sm">Cancel</button>
                 </div>
-                    
-
             </form>
         </>
         
