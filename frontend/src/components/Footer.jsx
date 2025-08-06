@@ -56,7 +56,10 @@ const Footer = () => {
             }
         }
 
-        fetchUser();
+        if(token){
+            fetchUser();
+        }
+        
     },[])
 
     return(

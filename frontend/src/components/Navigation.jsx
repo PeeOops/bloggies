@@ -39,18 +39,19 @@ const Navigation = () => {
     // Fetch user API
     useEffect(() => {
         const fetchUser = () => {
-            if(token){
-                api.get("/me")
-                .then((res) => {
-                    setUser(res.data);
-                })
-                .catch((error) => {
-                    console.log("Error fetching user data: ", error);
-                })
-            }
+            api.get("/me")
+            .then((res) => {
+                setUser(res.data);
+            })
+            .catch((error) => {
+                console.log("Error fetching user data: ", error);
+            })
         }
 
-        fetchUser();
+        if(token){
+            fetchUser();
+        }
+        
     },[])
 
     // Handle click nav

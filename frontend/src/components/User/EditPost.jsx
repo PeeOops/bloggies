@@ -48,10 +48,8 @@ const EditPost = () => {
                     tag_ids: post.tags.map((tag) => tag.id),
                     type: post.type,
                 });
-
-
             } catch (error) {
-                
+                console.log("Failed fetching data", error);
             }
         }
 
@@ -66,7 +64,7 @@ const EditPost = () => {
                 [e.target.name] : e.target.files[0]
             })
         }else if (e.target.type === "checkbox" && e.target.name === "tag_ids") {
-            const tagId = parseInt(e.target.value); // convert string to number
+            const tagId = parseInt(e.target.value);
 
             setForm((prevForm) => ({
             ...prevForm,
@@ -133,6 +131,7 @@ const EditPost = () => {
 
     return(
         <>  
+            {/* Modal message */}
             {
                 message && <ModalMessage message={message} setMessage={setMessage} />
             }
@@ -250,7 +249,7 @@ const EditPost = () => {
                             </div>
                             
                         </div>
-                        {/* Button */}
+                        {/* Buttons */}
                         <div className="flex flex-row gap-2">
                             <button type="submit" className="cursor-pointer bg-emerald-950 py-1 px-2 text-white rounded-sm">Save</button>
                             <button type="reset" className="cursor-pointer bg-red-600 py-1 px-2 text-white rounded-sm">Cancel</button>
