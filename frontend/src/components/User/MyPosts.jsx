@@ -4,7 +4,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import ModalMessage from "../Utils/ModalMessage";
 
 
-const MyPosts = ({userData, setLoading, setProgress, setNavigation}) => {
+const MyPosts = ({userData, setLoading, setProgress}) => {
 
     // State declarations
     const [posts, setPosts] = useState([]);
@@ -59,10 +59,10 @@ const MyPosts = ({userData, setLoading, setProgress, setNavigation}) => {
     }
 
     useEffect(() => {
+        // Fetch posts
         const fetchPosts = async () => {
             setLoading(true);
             setProgress(0);
-
             const progressInterval = simulateProgress();
             
             try {
@@ -89,11 +89,11 @@ const MyPosts = ({userData, setLoading, setProgress, setNavigation}) => {
         <>
             {/* Modal message */}
             {
-                message ?
+                message &&
                 <ModalMessage message={message} />
-                : ""
             }
             
+            {/* Posts */}
             <div className="flex flex-col gap-5">
                 {   
                     posts.length > 0 ?
@@ -113,9 +113,11 @@ const MyPosts = ({userData, setLoading, setProgress, setNavigation}) => {
                         <p className="md:text-xl text-center m-auto">Looks like you haven't added any posts yet. Go create your first one!</p>
                     </div>
                 }
+
+                {/* Paginations button */}
                 <div className="flex flex-row justify-between">
-                    <p className={`cursor-pointer ${currentPage === 1 || posts.length === 0 ? "invisible" : "visible"}`} onClick={() => handleClickPrevious()} >Prev</p>
-                    <p className={`cursor-pointer ${currentPage === Math.ceil(posts.length / itemsPerPage) || posts.length === 0 ? "invisible" : "visible"}`} onClick={() => handleClickNext()}>Next</p>
+                    <p className={`cursor-pointer ${currentPage === 1 || posts.length === 0 ? "invisible" : "visible"}`} onClick={handleClickPrevious} >Prev</p>
+                    <p className={`cursor-pointer ${currentPage === Math.ceil(posts.length / itemsPerPage) || posts.length === 0 ? "invisible" : "visible"}`} onClick={handleClickNext}>Next</p>
                 </div>
                 
                 
