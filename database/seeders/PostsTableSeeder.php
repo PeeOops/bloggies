@@ -58,7 +58,7 @@ class PostsTableSeeder extends Seeder
 
                 ### 📸 Visual Sneak Peek
 
-                ![Copper Golem and Copper Chest in Minecraft](https://example.com/copper-golem-screenshot.png)  
+                ![Copper Golem and Copper Chest in Minecraft](https://cdn2.steamgriddb.com/hero/3d2c7bb8be9ea80c1477b6778fbd2cf6.jpg)  
 
                 *(Note: Image is for illustration — update visuals may vary in-game.)*
 
@@ -112,7 +112,7 @@ class PostsTableSeeder extends Seeder
 
                 ### 🎥 First Look
 
-                ![Age of Empires IV Korean fortress and Trưng Sisters campaign](https://example.com/aoe4-dynasties-screenshot.png)
+                ![Age of Empires IV Korean fortress and Trưng Sisters campaign](https://cdn2.steamgriddb.com/hero/bde4a681eceb6f2c6d01c533b80a7a6e.png)
 
                 ---
 
@@ -157,7 +157,7 @@ class PostsTableSeeder extends Seeder
 
                 ### 📸 Screenshot Preview
 
-                ![Custom spell interface and dragon raid attack in Whiterun](https://example.com/skyrim-spellcraft-dragon-raid.png)
+                ![Custom spell interface and dragon raid attack in Whiterun](https://cdn2.steamgriddb.com/hero/14e19d3d73ca4e39b42feb61ae4d1ab3.png)
 
                 ---
 
@@ -217,7 +217,7 @@ class PostsTableSeeder extends Seeder
 
                 ### 🎮 Screenshot Sneak Peek
 
-                ![Witcher fighting enhanced Leshen with new particle effects](https://example.com/witcher3-ai-overhaul.png)
+                ![Witcher fighting enhanced Leshen with new particle effects](https://cdn2.steamgriddb.com/hero/310ce61c90f3a46e340ee8257bc70e93.png)
 
                 ---
 
