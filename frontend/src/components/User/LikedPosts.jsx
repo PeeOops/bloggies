@@ -10,7 +10,6 @@ const LikedPost = ({setLoading, setProgress}) => {
     const [itemsPerPage, setItemsPerPage] = useState(5);
 
     // Paginations
-
     const currentPage = parseInt(searchParams.get("page")) || 1;
     const lastIndex = currentPage * itemsPerPage;
     const firstIndex = lastIndex - itemsPerPage;
@@ -50,7 +49,6 @@ const LikedPost = ({setLoading, setProgress}) => {
         const fetchData = async () => {
             setLoading(true);
             setProgress(0);
-
             const progressInterval = simulateProgress();
 
             try {
@@ -73,6 +71,7 @@ const LikedPost = ({setLoading, setProgress}) => {
 
     return (
         <>
+            {/* Posts */}
             <div className="flex flex-col gap-5">
                 {   
                     likedPosts.length > 0 ?
@@ -90,9 +89,11 @@ const LikedPost = ({setLoading, setProgress}) => {
                         <p className="md:text-xl text-center m-auto">Looks like you don't have any liked posts yet.</p>
                     </div>
                 }
+
+                {/* Pagination buttons */}
                 <div className="flex flex-row justify-between">
-                    <p className={`cursor-pointer ${currentPage === 1 || likedPosts.length === 0 ? "invisible" : "visible"}`} onClick={() => handleClickPrevious()} >Prev</p>
-                    <p className={`cursor-pointer ${currentPage === Math.ceil(likedPosts.length / itemsPerPage) || likedPosts.length === 0 ? "invisible" : "visible"}`} onClick={() => handleClickNext()}>Next</p>
+                    <p className={`cursor-pointer ${currentPage === 1 || likedPosts.length === 0 ? "invisible" : "visible"}`} onClick={handleClickPrevious} >Prev</p>
+                    <p className={`cursor-pointer ${currentPage === Math.ceil(likedPosts.length / itemsPerPage) || likedPosts.length === 0 ? "invisible" : "visible"}`} onClick={handleClickNext}>Next</p>
                 </div>
                 
                 
