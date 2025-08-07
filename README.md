@@ -106,6 +106,7 @@ php artisan storage:link
 php artisan serve
 ```
 By default, your API will run at http://127.0.0.1:8000
+
 7. Install node dependencies
 ```bash
 cd frontend
