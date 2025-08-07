@@ -33,28 +33,28 @@ Features:
 ## Screenshots
 
 ### Register Page
-![Register](storage/app/public/readme_images/register.png)
+![Register](https://raw.githubusercontent.com/PeeOops/bloggies/main/storage/app/public/readme_images/register.png)
 
 ### Login Page
-![Login](storage/app/public/readme_images/login.png)
+![Login](https://raw.githubusercontent.com/PeeOops/bloggies/main/storage/app/public/readme_images/login.png)
 
 ### Home Page
-![Home](storage/app/public/readme_images/home.png)
+![Home](https://raw.githubusercontent.com/PeeOops/bloggies/main/storage/app/public/readme_images/home.png)
 
 ### News Page
-![News](storage/app/public/readme_images/news.png)
+![News](https://raw.githubusercontent.com/PeeOops/bloggies/main/storage/app/public/readme_images/news.png)
 
 ### Blogs Page
-![Blogs](storage/app/public/readme_images/blogs.png)
+![Blogs](https://raw.githubusercontent.com/PeeOops/bloggies/main/storage/app/public/readme_images/blogs.png)
 
 ### Profile Page
-![Profile](storage/app/public/readme_images/profile.png)
+![Profile](https://raw.githubusercontent.com/PeeOops/bloggies/main/storage/app/public/readme_images/profile.png)
 
 ### Add Post Page
-![AddPost](storage/app/public/readme_images/addpost.png)
+![AddPost](https://raw.githubusercontent.com/PeeOops/bloggies/main/storage/app/public/readme_images/addpost.png)
 
 ### My Posts Page
-![MyPosts](storage/app/public/readme_images/mypost.png)
+![MyPosts](https://raw.githubusercontent.com/PeeOops/bloggies/main/storage/app/public/readme_images/mypost.png)
 
 ---
 
