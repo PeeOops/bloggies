@@ -2,3 +2,5 @@
 !.gitignore
 !featured_images/
 !featured_images/*
+!readme_images
+!readme_images/*
