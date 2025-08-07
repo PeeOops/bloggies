@@ -33,28 +33,28 @@ Features:
 ## Screenshots
 
 ### Register Page
-![Register](/storage/app/public/readme_images/register.png)
+![Register](storage/app/public/readme_images/register.png)
 
 ### Login Page
-![Login](/storage/app/public/readme_images/login.png)
+![Login](storage/app/public/readme_images/login.png)
 
 ### Home Page
-![Home](/storage/app/public/readme_images/home.png)
+![Home](storage/app/public/readme_images/home.png)
 
 ### News Page
-![News](/storage/app/public/readme_images/news.png)
+![News](storage/app/public/readme_images/news.png)
 
 ### Blogs Page
-![Blogs](/storage/app/public/readme_images/blogs.png)
+![Blogs](storage/app/public/readme_images/blogs.png)
 
 ### Profile Page
-![Profile](/storage/app/public/readme_images/profile.png)
+![Profile](storage/app/public/readme_images/profile.png)
 
 ### Add Post Page
-![AddPost](/storage/app/public/readme_images/addpost.png)
+![AddPost](storage/app/public/readme_images/addpost.png)
 
 ### My Posts Page
-![MyPosts](/storage/app/public/readme_images/mypost.png)
+![MyPosts](storage/app/public/readme_images/mypost.png)
 
 ---
 
@@ -71,49 +71,49 @@ Features:
 ### Steps
 1. Clone the repository
 ```bash
-    git clone https://github.com/PeeOops/bloggies.git
+git clone https://github.com/PeeOops/bloggies.git
 ```
 2. Install PHP dependencies
 ```bash
-    cd bloggies
-    composer install
+cd bloggies
+composer install
 ```
 3. Configure the .env file
 ```bash
-    cp .env.example .env
+cp .env.example .env
 ```
 Update your .env file to match your **PostgreSQL** database credentials:
 ```bash
-    DB_CONNECTION=pgsql
-    DB_HOST=127.0.0.1
-    DB_PORT=5432
-    DB_DATABASE=your_database_name
-    DB_USERNAME=your_db_user
-    DB_PASSWORD=your_db_password
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=your_database_name
+DB_USERNAME=your_db_user
+DB_PASSWORD=your_db_password
 ```
 4. Generate App Key and run migrations
 ```bash
-    php artisan key:generate
-    php artisan migrate
-    php artisan db:seed 
+php artisan key:generate
+php artisan migrate
+php artisan db:seed 
 ```
 5. Link storage for images
 ```bash
-    php artisan storage:link
+php artisan storage:link
 ```
 6. Serve backend
 ```bash
-    php artisan serve
+php artisan serve
 ```
 By default, your API will run at http://127.0.0.1:8000
 7. Install node dependencies
 ```bash
-    cd frontend
-    npm install
+cd frontend
+npm install
 ```
 8. Start frontend server
 ```bash
-    npm run dev
+npm run dev
 ```
 Your React app should be running at http://localhost:5173
 
